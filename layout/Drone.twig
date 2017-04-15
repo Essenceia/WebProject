@@ -1,0 +1,47 @@
+<br/><br/>
+<div class = title ><h1>Mon Drone</h1></div>
+<br/><br/>
+En juin dernier, après la coupe de France de robotique, j'ai eu un peu plus de temps qu'à l'habituelle (n'ayant plus les exigences de l'avant coupe).
+<br/><br/>
+Ayant reçu durant la coupe une board de développement STM, et un shield de senseurs (accéléromètre, gyromètre, capteurs de pression et température), j'ai entrepris de concevoir mon propre drone à partir de cette base.
+<br/><br/>
+J'ai acheté des moteurs, et fait une première mécanique avec ma fidèle imprimante 3D. J'ai ensuite utilisé l’éditeur de code en ligne de mBed pour coder un contrôleur basique.
+<br/><br/>
+<img src="/layout/img/DRONE_MECA_V0.jpg" class="picture">
+<br/><br/>
+Après quelques tests, je me suis aperçu que ma mécanique posait quelques problèmes :
+- Les supports de moteurs étant trop fins, ils se pliaient et les moteurs pouvaient légèrement bouger par rapport à la structure;
+- Le centre de gravité du robot était au dessus des pales, ce qui rendait très instable son équilibre en vol.
+<br/><br/>
+Ceci résultait en un asservissement impossible à tester (le peu de tests réalisés furent très drôles à regarder !!)
+<br/><br/>
+J'ai donc entrepris de refaire la mécanique. J'ai épaissi les supports des moteurs, et les ai creusés en triangle pour plus de légèreté.
+<br/><br/>
+<img src="/layout/img/DRONE_MECA_V10.JPG" class="picture">
+<br/><br/>
+J'ai relevé les pales par rapport au centre de gravité (conditionné majoritairement par la position de la pile).
+J'ai ensuite monté et remis l’électronique, ce qui a donné un résultat moins flexible qu'auparavant.
+<br/><br/>
+<img src="/layout/img/DRONE_MECA_V1.jpg" class="picture">
+<br/><br/>
+J'ai en parallèle cherché à refaire le système d'asservissement.
+<br/><br/>
+J'avais fait le système d'asservissement en me basant sur la doc que j'avais lu.
+Il y avait un asservissement pour chacun des paramètres (roulis, tangage, lacet, puissance). Le problème résidais dans la détermination des angles de roulis et de tangage.
+<br/><br/>
+PHOTO + source
+<br/><br/>
+Ces angles, définis comme les angles du projeté de la gravité sur deux plans, ont un sens lorsqu’ils sont proches de zéro. Mais plus la gravité se rapproche du plan oXY, moins les angles portent d'information, et plus ils sont corrélés :
+Dès que la gravité est dans le plan oXY, le tangage et le lacet valent plus ou moins pi/2. On ne peut plus de repérer.
+<br/><br/>
+Quand le drone est asservi sur l'horizontale, cela ne pose pas de problème quand l'asservissement est stable.  Par contre, cela risque de poser problème si on cherche à asservir le drone sur des angles de roulis ou tangage non nuls. Plus on rapprochera ces angles de pi/2, moins le drone saura son orientation.
+<br/><br/>
+La solution alors, est de calculer ces angles de roulis et tangage par rapport au plan de consigne, et d'asservir le drone sur des angles toujours nuls. De cette manière, l'incertitude que le drone aura sur son orientation ne dépendra pas du plan consigne.
+<br/><br/>
+Deux choses à trouver pour mettre en œuvre cet asservissement :
+Trouver un système de coordonnées adapté pour définir le plan de consigne
+Trouver les formules permettant de calculer les angles de roulis et tangage par rapport au plan de consigne.
+<br/><br/>
+Ce projet a été momentanément mis de coté car je me suis consacré à LowLevel depuis la rentrée, mais j'ai cependant trouvé le système de coordonnées adapté et les formules de passage.
+<br/><br/>
+Il me manque actuellement du temps pour tester, et aussi et SURTOUT un IDE potable, parce que l'IDE de MBed en ligne, il est VRAIMENT nul!

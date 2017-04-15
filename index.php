@@ -1,0 +1,57 @@
+<?php
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+require 'vendor/autoload.php';
+
+$app = new \Slim\App;
+
+// Get container
+$container = $app->getContainer();
+
+// Register component on container
+$container['view'] = function ($container) {
+    $view = new \Slim\Views\Twig('layout', [
+    ]);
+
+    // Instantiate and add Slim specific extension
+    $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
+    $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+
+    return $view;
+
+};
+
+$app->get('/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "Intro.twig"]);
+});
+
+$app->get('/Fonderie/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "Fonderie.twig"]);
+});
+
+$app->get('/LowLevel/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "NATEC.twig"]);
+});
+
+$app->get('/Monitor/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "Monitor.twig"]);
+});
+
+$app->get('/Drone/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "Drone.twig"]);
+});
+
+$app->get('/MeshVisu/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "MeshView.twig"]);
+});
+
+$app->get('/OrdBot/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "OrdBot.twig"]);
+});
+
+$app->get('/Coupe2016/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "Coupe2016.twig"]);
+});
+
+$app->run();
