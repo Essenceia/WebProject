@@ -1,0 +1,2 @@
+INSERT INTO webapp.amis (user1, user2, status, date) VALUES ('desmazes', 'm.champalier', true, '2017-04-15 10:59:25');
+INSERT INTO webapp.amis (user1, user2, status, date) VALUES ('tiercelin', 'desmazes', false, '2016-04-16 10:59:50');

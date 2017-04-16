@@ -11,5 +11,25 @@
       <user-name>root</user-name>
       <resolve-scope>information_schema:|mysql:</resolve-scope>
     </data-source>
+    <data-source name="MariabDB - webapp@localhost" uuid="1054d8d7-cb36-4dbe-8041-236e5088c24f">
+      <database-info product="MySQL" version="10.1.22-MariaDB-" jdbc-version="4.0" driver-name="MariaDB connector/J" driver-version="1.5.9">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>julia</user-name>
+      <resolve-scope>:</resolve-scope>
+    </data-source>
+    <data-source name="MariabDB - webapp@localhost [2]" uuid="4d658281-9317-4224-bea4-51052e84a79e">
+      <database-info product="MySQL" version="10.1.22-MariaDB-" jdbc-version="4.0" driver-name="MariaDB connector/J" driver-version="1.5.9">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>julia</user-name>
+      <resolve-scope>webapp:</resolve-scope>
+    </data-source>
   </component>
 </project>
