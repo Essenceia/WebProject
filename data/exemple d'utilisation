@@ -1,0 +1,13 @@
+Ce fichier contien des exmple pour l'utilisation de fonction pour interagire avec la base de donner
+
+Attention : il faut obligatoirement avoir au prealable inclu le fichier "databaseutility.php" au prealable.
+
+Demander une liste de tout les profiles utilisateurs dans la base :
+
+$res = get_user_list($db);
+        for($i = 0 ; $i<sizeof($res); $i++){
+            $tmp = $res[$i];
+            echo $tmp["email"]."tout les autres champs qui nous interssent ... <br>";
+        }
+etat: tester , fonctionne
+
