@@ -7,6 +7,7 @@
 
             //Récupère la liste des utilisateurs dans la bdd et la renvoie sous forme d'un tableau
             $list = get_user_list();
+            logger("called user list");
             foreach($list as $unit){
                // echo $unit;
                 echo $unit['email']." ". $unit['nom']." ". $unit['pseudo'] ."<br>";
@@ -18,7 +19,7 @@
             $email=$_POST['emailadd'];
             $pseudo=$_POST['pseudo'];
             $nom=$_POST['nom'];
-
+            add_user($email,$nom,$pseudo);
             echo "Utilisateur ajouté";    
 
         }
@@ -26,7 +27,8 @@
         function deleteuser(){
             //On récupète les informations envoyées
             $email=$_POST['emaildel'];   
-            echo "Utilisateur supprimé";  
+            echo "Utilisateur supprimé";
+            delet_user($email);
         }
 
         if(isset($_POST['emailadd']) && isset($_POST['pseudo']) && isset($_POST['nom'])){
@@ -47,4 +49,3 @@
 
         */
 
-?>
