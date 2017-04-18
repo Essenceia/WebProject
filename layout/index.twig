@@ -3,15 +3,16 @@
 <head class = top>
     <meta charset="utf-8">
     <title>Anti-Social</title>
-
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="layout/styles.css" />
 </head>
 <body>
 
 
 <div id = "menuH">
     {% include "menu.twig" %}
+
 </div>
+<h1> Userame is : {{ user_name }}</h1>
 <div class = "page">
     {{ include(name) }}
 </div>

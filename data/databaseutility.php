@@ -137,7 +137,9 @@ function delet_user($email)
  * 1 - sucees
  * fonctionne
  */
-function friend_request($db,$fromuser,$touser){
+function friend_request($db,$touser){
+    if (!$_COOKIE['user']){
+    $fromuser = $_COOKIE['user'];
     $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' 
             OR user2='$fromuser' AND user1='$touser' ";
     $res = mysqli_query($db,$sql);
@@ -158,12 +160,15 @@ function friend_request($db,$fromuser,$touser){
             return 0;
         }
     }
-}
+}else{
+        logger("erreur de cokkie de sesion");
+    }}
 /*
  * accepter une demande en amie d'un utilisateur:
  * l'utilisateur qui accept la demande est touser le recepteur de la demande
  */
 function accept_friend_request($db,$fromuser,$touser){
+    if($_COOKIE['user']){
     $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' AND amis.status=0";
     $res = mysqli_query($db,$sql);
     if (mysqli_num_rows($res) == 1) {
@@ -175,7 +180,8 @@ function accept_friend_request($db,$fromuser,$touser){
             logger("erreur - update accept la demande d'amie avec les parametres :".$fromuser. " ".$touser." 1 ");
         }
     }else {logger("error , nombre de ligne invalide");}
-}
+}else{
+        logger("erreur de cokkie de sesion");}}
 /*
  * Fonction pour cree un nouveau post , type de postes :
  *  0 - post ecrit : le text sera stoquer dans legende

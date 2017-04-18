@@ -1,9 +1,10 @@
 <?php
 //use \Psr\Http\Message\ServerRequestInterface as Request;
 //use \Psr\Http\Message\ResponseInterface as Response;
-
-require 'vendor\autoload.php';
-require_once'data\databaseutility.php';
+require "settingspath_root.php";
+require "vendor".SLASH."autoload.php";
+require_once "data".SLASH."databaseutility.php";
+require "data".SLASH."cookiemonster.php";
 
 $app = new \Slim\App([
     'settings' => [
@@ -26,18 +27,25 @@ $container['db']= function(){
     $db = connect_db();
     return $db;
 };
+
+$container['username']= function (){
+
+  connect("m.champalier","ooo");
+  //TODO revoyer les paramtres de connection effectif, a faire quand on aura une page de connection
+  return "m.champalier";
+};
 $app->get('/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
+    return $this->view->render($response, 'index.twig', ["name" => "Publication.twig","user_name" => $this->username]);
 });
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
     $data = get_user_list($this->db);
-    return $this->view->render($response, 'UserTest.twig', ["users" => $data, "basededonner" => $this->db]);
+    return $this->view->render($response, 'UserTest.twig', ["users" => $data]);
 });
 $app->get('/Configuration/', function ($request, $response, $args) {
-    return $this->view->render($response, 'Configuration.twig', ["name" => "Configuration.twig"]);
+    return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
-    return $this->view->render($response, 'Publication.twig', ["name" => "Publication.twig"]);
+    return $this->view->render($response, 'index.twig', ["name" => "Publication.twig" ,"user_name" =>$this->username]);
 });
 $app->run();
