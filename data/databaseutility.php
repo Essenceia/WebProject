@@ -41,6 +41,7 @@ function friend_list($userid,$db){
 function get_user_list(){
     $db = connect_db();
     $res = [];
+    //ceci est une diff
     if($db->ping()) {
 
         $sql = "SELECT * FROM webapp.user";
