@@ -1,6 +1,6 @@
 <?php
 
-    require __DIR__."/../data/databaseutility.php";
+    require __DIR__."\..\data\databaseutility.php";
 
 
         function getusers(){
@@ -10,7 +10,7 @@
             logger("called user list");
             foreach($list as $unit){
                // echo $unit;
-                echo $unit['email']." ". $unit['nom']." ". $unit['pseudo'] ."<br>";
+                echo $unit['email']."-".$unit['email']."@edu.ece.fr ". $unit['nom']." ". $unit['pseudo'] .";";
         }}
 
         function adduser(){
@@ -19,16 +19,21 @@
             $email=$_POST['emailadd'];
             $pseudo=$_POST['pseudo'];
             $nom=$_POST['nom'];
-            add_user($email,$nom,$pseudo);
-            echo "Utilisateur ajouté";    
+            $res = add_user($email,$nom,$pseudo);
+            if($res == 1) echo "Utilisateur ajouté"; 
+            else if($res== 0) echo "L'utilisateur existe déjà";
+            else if($res== 2) echo "Connexion impossible";
+
 
         }
 
         function deleteuser(){
             //On récupète les informations envoyées
             $email=$_POST['emaildel'];   
-            echo "Utilisateur supprimé";
-            delet_user($email);
+            $res = delete_user($email);
+            if($res == 1) echo "Utilisateur supprimé";
+            else if($res == 0) echo "L'utilisateur n'existe pas"; 
+            else if($res == 2) echo "Connexion impossible"; 
         }
 
         if(isset($_POST['emailadd']) && isset($_POST['pseudo']) && isset($_POST['nom'])){

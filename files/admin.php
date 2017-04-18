@@ -26,8 +26,11 @@
             <input type="submit" value="Valider"/>
         </form>
         
-        <div id="userlist">
-        
+        <div>
+            <h2>Liste des utilisateurs</h2>
+            <div id="userlist">
+
+            </div>
         </div>
     </body>
 </html>

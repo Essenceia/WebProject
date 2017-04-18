@@ -4,18 +4,28 @@ $(document).ready(function () {
     $(".supprimer").hide();
     $(".ajouter").hide();
     
-    //Affiche la liste des utilisateurs
-    $.ajax({
-        url: 'admintraitement.php',
-        method: 'GET',
-        success: function (msg) {
-            var users = msg.split(";");
-            users.forEach(function (element) {
-                alert(element);
-                $('#userlist').innerHTML = element + "</br>";
-            }); 
-        }
-    });
+    var i;
+    function afficheusers() {
+        //Affiche la liste des utilisateurs
+        $.ajax({
+            url: 'admintraitement.php',
+            method: 'GET',
+            success: function (msg) {
+                var users = msg.split(";");
+                for (i = 0; i < users.length; i++) {
+                    $temp = $users[i].split("-");
+                    $.each(temp, function ( index, value ){
+                        if(i==0)
+                            $('#userlist').html("<img src={{ '/../userdata/'"+ temp[0] +"'/icon.png'}} alt=&quot;Icon&quot; height=&quot;128&quot; width=&quot;128&quot;>"+ temp[1] +"<br/>");
+
+                        else $('#userlist').append("<img src={{ '/../userdata/'"+ temp[0] +"'/icon.png'}} alt=&quot;Icon&quot; height=&quot;128&quot; width=&quot;128&quot;>"+ temp[1] +"<br/>");
+                    }); 
+                }
+            }
+        }); 
+     };
+    
+    afficheusers();
     
     //Affiche le champ pour rentrer les infos de l'utilisateur à ajouter
     $("#ajouterButton").click(function () {
@@ -45,7 +55,8 @@ $(document).ready(function () {
                 url: 'admintraitement.php',
                 method: 'POST',
                 success: function(msg) {
-                    alert(msg);                    
+                    alert(msg);   
+                    afficheusers();
                 }
             });
         }
@@ -68,6 +79,7 @@ $(document).ready(function () {
                 method: 'POST',
                 success: function(msg) {
                     alert(msg);
+                    afficheusers();
                 }
             });
         }
