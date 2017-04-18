@@ -1,6 +1,6 @@
 <?php
 
-    require __DIR__."/../data/databaseutility.php";
+    require __DIR__."\..\data\databaseutility.php";
 
 
         function getusers(){

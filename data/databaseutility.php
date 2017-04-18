@@ -7,7 +7,7 @@
  */
 
 require "filemanger.php";
-require __DIR__."/../log/looger.php";
+require __DIR__."\..\log\looger.php";
 require "connection.php";
 
 function get_email($prefix){
