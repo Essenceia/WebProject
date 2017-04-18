@@ -2,8 +2,8 @@
 //use \Psr\Http\Message\ServerRequestInterface as Request;
 //use \Psr\Http\Message\ResponseInterface as Response;
 
-require 'vendor/autoload.php';
-require_once'data/databaseutility.php';
+require 'vendor\autoload.php';
+require_once'data\databaseutility.php';
 
 $app = new \Slim\App([
     'settings' => [
@@ -27,25 +27,7 @@ $container['db']= function(){
     return $db;
 };
 $app->get('/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Intro.twig"]);
-});
-$app->get('/Fonderie/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Fonderie.twig"]);
-});
-$app->get('/LowLevel/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "NATEC.twig"]);
-});
-$app->get('/Monitor/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Monitor.twig"]);
-});
-$app->get('/Drone/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Drone.twig"]);
-});
-$app->get('/MeshVisu/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "MeshView.twig"]);
-});
-$app->get('/OrdBot/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "OrdBot.twig"]);
+    return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
 });
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");

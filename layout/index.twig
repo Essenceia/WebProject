@@ -2,30 +2,21 @@
 <html lang="en">
 <head class = top>
     <meta charset="utf-8">
-    <title>DarwinLab</title>
-    <link rel="stylesheet" type="text/css" href="/layout/css/styles.css">
+    <title>Anti-Social</title>
+
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body background="/layout/img/bg_4.jpg">
-<link rel="icon" href="/layout/img/icon.jpg">
-<div class="header">
-    <div id="banner">
-        <center>
-            <a target="banner" href="/index.php" >
-                <img src="/layout/img/SUUS3.jpg" class="picture" border="0" alt="">
-            </a>
-        </center>
-    </div>
+<body>
+
+
+<div id = "menuH">
+    {% include "menu.twig" %}
 </div>
-<div id="body">
-    <div class = "left">
-        {% include "menu.twig" %}
-    </div>
-    <div class = "page">
-        {{ include(name) }}
-    </div>
-    <div class="footer">
-        La loi m'oblige à vous informer de la non présence de cookies sur ce site. En poursuivant la navigation sur ce site, vous acceptez (sans broncher en plus!) l'utilisation des cookies dont l'existence reste encore à déterminer.<br/>
-        La lecture de petits caractères peut, à terme, endommager la vue. Si les symptômes persistent, consulter un informaticien.
-    </div>
+<div class = "page">
+    {{ include(name) }}
 </div>
+<div id="footer">
+    Anti-Social, le réseau social de l'ECE
+</div>
+
 </body>
