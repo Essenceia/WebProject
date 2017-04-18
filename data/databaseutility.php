@@ -5,14 +5,18 @@
  * Date: 4/15/17
  * Time: 11:48 AM
  */
+
 require "filemanger.php";
 require __DIR__."/../log/looger.php";
 function connect_db() {
     $server = 'localhost'; // this may be an ip address instead
-    $user = 'julia';
-    $pass = 'julia';
+    $user = 'root';
+    $pass = '';
     $database = 'webapp';
-    $connection = new mysqli($server, $user, $pass,$database);
+    
+    $db_handle =  mysqli_connect($server, $user, $pass);
+    $connection = mysqli_select_db($db_handle, $database );
+    
     // Check connection
     if(!$connection){
         //logger("erreur de connection a la base de donne");

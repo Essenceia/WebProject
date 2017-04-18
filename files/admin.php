@@ -13,7 +13,7 @@
         <input type="button" id="ajouterButton" value="Ajouter un utilisateur"/>
  
         <form class="hidden ajouter" method="post" id="ajouterAction">
-            Email : <input type="text" name="emailadd" id="emailadd"/>
+            Email : <input type="text" name="emailadd" id="emailadd"/> @edu.ece.fr         
             Pseudo : <input type="text" name="pseudo" id="pseudo"/>
             Nom : <input type="text" name="nom" id="nom"/>
             <input type="submit" value="Valider"/>
@@ -22,7 +22,7 @@
         <input type="button" id="supprimerButton" value="Supprimer un utilisateur"/>
  
         <form class="hidden supprimer" id="supprimerAction" method="post">
-            Email : <input type="text" name="emaildel" id="emaildel"/>
+            Email : <input type="text" name="emaildel" id="emaildel"/> @edu.ece.fr 
             <input type="submit" value="Valider"/>
         </form>
         
