@@ -42,6 +42,14 @@
             </tr>
             {% endfor %}
         </table>
+
+        <!-- test de methode pour posster un truc-->
+        <form name="formulaire" action="../postcomment.php" method="post">
+            Entrez votre commentaire:
+            <textarea name="requete" value="" cols="40" rows=7></textarea>
+              <input type="submit" value="Envoyer"/>
+        </form>
+
     </div>
     <div class="footer">
         La loi m'oblige à vous informer de la non présence de cookies sur ce site. En poursuivant la navigation sur ce site, vous acceptez (sans broncher en plus!) l'utilisation des cookies dont l'existence reste encore à déterminer.<br/>

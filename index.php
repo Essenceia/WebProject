@@ -51,6 +51,6 @@ $app->get('/OrdBot/', function ($request, $response, $args) {
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
     $data = get_user_list($this->db);
-    return $this->view->render($response, 'UserTest.twig', ["users" => $data]);
+    return $this->view->render($response, 'UserTest.twig', ["users" => $data, "basededonner" => $this->db]);
 });
 $app->run();

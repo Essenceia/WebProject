@@ -127,3 +127,40 @@ function accept_friend_request($db,$fromuser,$touser){
         }
     }else {logger("error , nombre de ligne invalide");}
 }
+/*
+ * Fonction pour cree un nouveau post , type de postes :
+ *  0 - post ecrit : le text sera stoquer dans legende
+ *  1 - photo : il peut y avoir une legende et un idalbum ( pas obligatoire pour les deux) - $contenu a la path vers le fichier selectionner par l'utilisateur
+ *  2 - video : meme que photo
+ */
+function create_post($db,$email,$typepost,$legende,$idalbum,$contenu){
+    //blindage
+    $sql ="";
+    if ( $typepost >= 0 and $typepost < 3){
+        switch ($typepost){
+            case 0: $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
+            break;
+            case 1 && 2: if ($idalbum!=0)$sql = "INSERT INTO webapp.post (user, type, legende,idalbum)  VALUES ('$email','$typepost','$legende','$idalbum')";
+            else $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
+            break;
+        }
+        $sql .= " WHERE user='$email' ";
+        $res = mysqli_query($db,$sql);
+        if($res){
+            //creation reussi
+
+            $row = mysqli_fetch_assoc($res);
+            $idpost = $row["idpost"];
+            if ($typepost > 0){
+                //TODO sauvgarde de la photo ou video poster dans le dossier adequa
+                if(save_post($idpost,$idalbum,$contenu)){
+                    logger("sucees - creation d'un post pour l'utilisateur ".$email);
+                }else logger("erreur - creation d'un post pour l'utilisateur ".$email);
+            }
+        }else {
+            logger("erreur - creation d'un post pour l'utilisateur ".$email);
+        }
+    }else{
+        logger("erreur dans le type du post, type donner :".$typepost);
+    }
+}

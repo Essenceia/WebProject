@@ -17,6 +17,7 @@ require __DIR__."/../log/phperrorlog.log";
 function creat_new_user_directory($email){
    if(!file_exists('userdata/'.$email)){
         mkdir('userdata/'.$email, 0755, true);
+       mkdir('userdata/'.$email."/0", 0755, true);
         if(!copy('userdata/default/fond.jpg','userdata/'.$email.'/fond.jpg')){
             logger("erreur de copie userdata/default/fond.jpg");
         }
@@ -30,3 +31,19 @@ function creat_new_user_directory($email){
 function creat_new_user_album($email,$albumname){
 
 }
+/*
+ * La photo ou video prendra pour nom la valheur de idpost
+ */
+function save_post($idpost,$idalbum,$pathtodata){
+    $extension = strrchr($pathtodata, '.');
+        if(move_uploaded_file($pathtodata, "userdata/".$idalbum.$idpost.$extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+        {
+            echo 'Upload effectué avec succès !';
+            return 1;
+        }
+        else //Sinon (la fonction renvoie FALSE).
+        {
+            echo 'Echec de l\'upload !';
+            return 0;
+        }
+    }
