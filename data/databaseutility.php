@@ -53,32 +53,53 @@ function get_user_list(){
     }
     return $res;
 }
+
+function get_user($email){
+    $db = connect_db();
+    //ceci est une diff
+    if($db->ping()) {
+
+        $sql = "SELECT * FROM webapp.user WHERE email='$email'";
+        $resrequette = mysqli_query($db, $sql);
+
+        $res = mysqli_fetch_assoc($resrequette);
+    }
+    return $res;
+}
+
 /*
  * Verfie si l'utilisateur existe deja dans la base et essaye de l'ajouter, return :
  * 0 - fail , l'utilisateur existe deja
- * 1 - sucees , ajout reussie
+ * 1 - succes , ajout reussie
+ * 2 - fail , impossible dde se connecter à la BDD
  */
-function add_user($bd,$email,$nom,$pseudo){
+function add_user($email,$nom,$pseudo){
+    $db = connect_db();
     $sql = "INSERT INTO webapp.user (email, nom, mdp, pseudo) VALUES ('$email','$nom','$pseudo','$pseudo')";
-    if(mysqli_query($bd,$sql)){
-        //creation reussi
-        creat_new_user_directory($email);
-        logger("sucees - creation de l'utilisateur avec les parapetres :".$email.$nom.$pseudo);
+    if ($bd->ping()) {
+        if(mysqli_query($bd,$sql)){
+            //creation reussi
+            creat_new_user_directory($email);
+            logger("succes - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
 
-        return 1;
+            return 1;
+        }
+        else{
+            logger("erreur - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
+            return 0;
+        } 
     }
     else{
-        logger("erreur - creation de l'utilisateur avec les parapetres :".$email.$nom.$pseudo);
-
-        return 0;
+        return 2;
     } // erreur dans la creation
 }
 /*
  * Verfie si l'utilisateur existe deja dans la base et le supprime de la base, return :
  * 0 - fail , n'existe pas
  * 1 - sucees , effeceage de la surface du web reussi
+ * 2 - fail, connexion impossible
  */
-function delet_user($email)
+function delete_user($email)
 {
     $bd = connect_db();
     if ($bd->ping()) {
@@ -120,9 +141,10 @@ function delet_user($email)
             //suppression de ces donners
             rrmdir("userdata/".$email);
         }else {
-            logger("Erreur - l'utilisateur n'existe pas , pas possible de le suprimer ".$email);
+            logger("Erreur - l'utilisateur n'existe pas , impossible de le suprimer ".$email);
+            return 0;
         }
-    }return 0;
+    }return 2;
 }
 /*
  * Demande en amie :

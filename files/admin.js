@@ -3,19 +3,25 @@ $(document).ready(function () {
     //on cache les formulaires
     $(".supprimer").hide();
     $(".ajouter").hide();
+    afficheusers();
     
-    //Affiche la liste des utilisateurs
-    $.ajax({
-        url: 'admintraitement.php',
-        method: 'GET',
-        success: function (msg) {
-            var users = msg.split(";");
-            users.forEach(function (element) {
-                alert(element);
-                $('#userlist').innerHTML = element + "</br>";
-            }); 
-        }
-    });
+    function afficheusers(){
+        //Affiche la liste des utilisateurs
+        $.ajax({
+            url: 'admintraitement.php',
+            method: 'GET',
+            success: function (msg) {
+                var users = msg.split(";");
+              //  users.forEach(function (element) {
+                $.each( users, function( index, value ){
+                    if(index==0)
+                        $('#userlist').html(value +"<br/>");
+
+                    else $('#userlist').append(value +"<br/>");
+                }); 
+            }
+        });
+    }
     
     //Affiche le champ pour rentrer les infos de l'utilisateur à ajouter
     $("#ajouterButton").click(function () {
@@ -45,7 +51,8 @@ $(document).ready(function () {
                 url: 'admintraitement.php',
                 method: 'POST',
                 success: function(msg) {
-                    alert(msg);                    
+                    alert(msg);   
+                    afficheusers();
                 }
             });
         }
@@ -68,6 +75,7 @@ $(document).ready(function () {
                 method: 'POST',
                 success: function(msg) {
                     alert(msg);
+                    afficheusers();
                 }
             });
         }
