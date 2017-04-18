@@ -1,6 +1,6 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+//use \Psr\Http\Message\ServerRequestInterface as Request;
+//use \Psr\Http\Message\ResponseInterface as Response;
 
 require 'vendor/autoload.php';
 require_once'data/databaseutility.php';
@@ -58,3 +58,4 @@ $app->get('/Configuration/', function ($request, $response, $args) {
 $app->get('/Publication/', function ($request, $response, $args) {
     return $this->view->render($response, 'Publication.twig', ["name" => "Publication.twig"]);
 });
+$app->run();

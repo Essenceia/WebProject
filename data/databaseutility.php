@@ -38,14 +38,18 @@ function friend_list($userid,$db){
     }
     echo "</h5> </ul>";
 }
-function get_user_list($db){
-    $res =[];
-    $sql = "SELECT * FROM webapp.user";
-    $resrequette = mysqli_query($db,$sql);
-    for($i = 0 ; $i< mysqli_num_rows($resrequette) ; $i++){
-        $res[$i]= mysqli_fetch_assoc($resrequette);
+function get_user_list(){
+    $db = connect_db();
+    $res = [];
+    if($db->ping()) {
+
+        $sql = "SELECT * FROM webapp.user";
+        $resrequette = mysqli_query($db, $sql);
+        for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+            $res[$i] = mysqli_fetch_assoc($resrequette);
+        }
+
     }
-    //echo sizeof($res);
     return $res;
 }
 /*
@@ -76,7 +80,7 @@ function add_user($bd,$email,$nom,$pseudo){
 function delet_user($email)
 {
     $bd = connect_db();
-    if (!$bd) {
+    if ($bd->ping()) {
         //blindage - verification que l'utilisateur existe
         $sql = "SELECT * from webapp.user WHERE email='$email'";
         $res = mysqli_query($bd,$sql);
@@ -174,7 +178,7 @@ function create_post($db,$email,$typepost,$legende,$idalbum,$contenu){
     //blindage
     $sql ="";
     $db = connect_db();
-    if(!$db) {
+    if($db->ping()) {
         if ($typepost >= 0 and $typepost < 3) {
             switch ($typepost) {
                 case 0:
@@ -214,7 +218,7 @@ function create_post($db,$email,$typepost,$legende,$idalbum,$contenu){
  */
 function connect_datavalide($email,$pw){
     $db = connect_db();
-    if(!$db) {
+    if($db->ping()) {
         $sql = "SELECT * from webapp.user WHERE email='$email' ";
         $res = mysqli_query($db,$sql);
         if($res){

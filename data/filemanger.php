@@ -29,7 +29,9 @@ function creat_new_user_directory($email){
    }
 }
 function creat_new_user_album($email,$albumname){
-
+    if(!file_exists('userdata/'.$email."/".$albumname)) {
+    //TODO a finir
+    }
 }
 /*
  * La photo ou video prendra pour nom la valheur de idpost
