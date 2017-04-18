@@ -1,0 +1,31 @@
+<div id="status">
+    <form method="post" action="publication.php" >
+        Status :
+        <input type="text" id="textbox" name="status" id="status"/>
+        <input type="submit" id="button" value="Publier" name="publierStatus"/>
+    </form>
+</div>
+
+<hr>
+<!-- Publication Image/Video-->
+<div id="postImVid">
+    <form method="post" action="publication.php" >
+        <input type="text" id="textbox" name="path"  class="Box"/>
+        <input type="button" id="button" value="Sélectionner un média" name="selMedia"/>
+
+        <br/>
+
+        <input type="text" name="lieu" id="textbox" value="Lieu"/>
+        <input type="date" name="date" id="textbox" value="Date"/>
+        <input type="text" name="emot" id="textbox" value="Emotion"/>
+        <input type="text" name="activité" id="textbox" value="Activité"/>
+
+        <br/>
+
+        <input type="radio" name="typPub" value="Public" checked> Publique <br/>
+        <input type="radio" name="typPub" value="Amis" > Amis <br/>
+        <input type="radio" name="typPub" value="Seul" > Moi-même <br/>
+
+        <input type="submit" id="button" value="Publier" name="ajouter"/>
+    </form>
+</div>

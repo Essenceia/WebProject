@@ -53,4 +53,10 @@ $app->get('/Coupe2016/', function ($request, $response, $args) {
     $data = get_user_list($this->db);
     return $this->view->render($response, 'UserTest.twig', ["users" => $data, "basededonner" => $this->db]);
 });
+$app->get('/Configuration/', function ($request, $response, $args) {
+    return $this->view->render($response, 'Configuration.twig', ["name" => "Configuration.twig"]);
+});
+$app->get('/Publication/', function ($request, $response, $args) {
+    return $this->view->render($response, 'Publication.twig', ["name" => "Publication.twig"]);
+});
 $app->run();
