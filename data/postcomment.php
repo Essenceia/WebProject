@@ -11,6 +11,6 @@ if (isset($_POST['requete']))
 {
     //on vas cree un post
     $type = 0;
+    $comment = $_POST['requete'];
 
-    echo $_POST['requete'];
 }
