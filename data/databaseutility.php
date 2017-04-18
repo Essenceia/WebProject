@@ -74,7 +74,6 @@ function get_user($email){
  * 2 - fail , impossible dde se connecter à la BDD
  */
 function add_user($email,$nom,$pseudo){
-<<<<<<< HEAD
     $db = connect_db();
     $sql = "INSERT INTO webapp.user (email, nom, mdp, pseudo) VALUES ('$email','$nom','$pseudo','$pseudo')";
     if ($bd->ping()) {
@@ -82,16 +81,6 @@ function add_user($email,$nom,$pseudo){
             //creation reussi
             creat_new_user_directory($email);
             logger("succes - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
-=======
-    $bd = connect_db();
-    if($bd->ping()){
-    $sql = "INSERT INTO webapp.user (email, nom, mdp, pseudo) VALUES ('$email','$nom','$pseudo','$pseudo')";
-    if(mysqli_query($bd,$sql)){
-        //creation reussi
-        creat_new_user_directory($email);
-        logger("succes - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
->>>>>>> fa2b11e86e73eb666983a21eb2a1a010adc955ff
-
             return 1;
         }
         else{
