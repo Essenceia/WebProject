@@ -3,25 +3,29 @@ $(document).ready(function () {
     //on cache les formulaires
     $(".supprimer").hide();
     $(".ajouter").hide();
-    afficheusers();
     
-    function afficheusers(){
+    var i;
+    function afficheusers() {
         //Affiche la liste des utilisateurs
         $.ajax({
             url: 'admintraitement.php',
             method: 'GET',
             success: function (msg) {
                 var users = msg.split(";");
-              //  users.forEach(function (element) {
-                $.each( users, function( index, value ){
-                    if(index==0)
-                        $('#userlist').html(value +"<br/>");
+                for (i = 0; i < users.length; i++) {
+                    $temp = $users[i].split("-");
+                    $.each(temp, function ( index, value ){
+                        if(i==0)
+                            $('#userlist').html("<img src={{ '/../userdata/'"+ temp[0] +"'/icon.png'}} alt=&quot;Icon&quot; height=&quot;128&quot; width=&quot;128&quot;>"+ temp[1] +"<br/>");
 
-                    else $('#userlist').append(value +"<br/>");
-                }); 
+                        else $('#userlist').append("<img src={{ '/../userdata/'"+ temp[0] +"'/icon.png'}} alt=&quot;Icon&quot; height=&quot;128&quot; width=&quot;128&quot;>"+ temp[1] +"<br/>");
+                    }); 
+                }
             }
-        });
-    }
+        }); 
+     };
+    
+    afficheusers();
     
     //Affiche le champ pour rentrer les infos de l'utilisateur à ajouter
     $("#ajouterButton").click(function () {
