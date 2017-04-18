@@ -1,19 +1,16 @@
 <?php
 
-    require __DIR__."\..\data\databaseutility.php";
+    require __DIR__."/../data/databaseutility.php";
 
-    $db = connect_db();
 
-    if(!$db)
-        echo "Impossible de se connecter";
-    else{
         function getusers(){
+
             //Récupère la liste des utilisateurs dans la bdd et la renvoie sous forme d'un tableau
-            $list = get_user_list($db);
-            foreach($list as $unit)
-                echo $unit;
-                // echo $unit['email'] +" "+ $unit['nom'] +" "+ $unit['pseudo'] +";";
-        }
+            $list = get_user_list();
+            foreach($list as $unit){
+               // echo $unit;
+                echo $unit['email']." ". $unit['nom']." ". $unit['pseudo'] ."<br>";
+        }}
 
         function adduser(){
 
@@ -38,7 +35,9 @@
         else if(isset($_POST['emaildel'])){
             deleteuser();
         }
-        else getusers();
+        else{
+            getusers();
+        }
 
         /*
 
@@ -47,5 +46,5 @@
         echo "Form Submitted Succesfully";
 
         */
-    }
+
 ?>
