@@ -5,7 +5,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require 'vendor/autoload.php';
 require_once'data/databaseutility.php';
 
-
 $app = new \Slim\App([
     'settings' => [
         'determineRouteBeforeAppMiddleware' => true,
@@ -51,6 +50,11 @@ $app->get('/OrdBot/', function ($request, $response, $args) {
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
     $data = get_user_list($this->db);
-    return $this->view->render($response, 'UserTest.twig', ["users" => $data]);
+    return $this->view->render($response, 'UserTest.twig', ["users" => $data, "basededonner" => $this->db]);
 });
-$app->run();
+$app->get('/Configuration/', function ($request, $response, $args) {
+    return $this->view->render($response, 'Configuration.twig', ["name" => "Configuration.twig"]);
+});
+$app->get('/Publication/', function ($request, $response, $args) {
+    return $this->view->render($response, 'Publication.twig', ["name" => "Publication.twig"]);
+});

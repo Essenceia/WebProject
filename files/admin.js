@@ -13,7 +13,7 @@ $(document).ready(function () {
             users.forEach(function (element) {
                 alert(element);
                 $('#userlist').innerHTML = element + "</br>";
-            });
+            }); 
         }
     });
     
