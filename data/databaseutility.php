@@ -91,9 +91,6 @@ function add_user($email,$nom,$pseudo){
     else{
         return 2;
     } // erreur dans la creation
-}else{
-        return 0;
-    }
 }
 /*
  * Verfie si l'utilisateur existe deja dans la base et le supprime de la base, return :

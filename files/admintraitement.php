@@ -10,7 +10,7 @@
             logger("called user list");
             foreach($list as $unit){
                // echo $unit;
-                echo $unit['email']."@edu.ece.fr ". $unit['nom']." ". $unit['pseudo'] .";";
+                echo $unit['email']."-".$unit['email']."@edu.ece.fr ". $unit['nom']." ". $unit['pseudo'] .";";
         }}
 
         function adduser(){
