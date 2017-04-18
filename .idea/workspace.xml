@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa628525-0db5-440d-879e-79bef2cc04b5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/postcomment.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/uploader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/4d658281-9317-4224-bea4-51052e84a79e.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/4d658281-9317-4224-bea4-51052e84a79e.xml" />
+    <list default="true" id="aa628525-0db5-440d-879e-79bef2cc04b5" name="Default" comment="Merge branch 'master' of https://github.com/Essenceia/WebProject&#10;&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/databaseutility.php" afterPath="$PROJECT_DIR$/data/databaseutility.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/filemanger.php" afterPath="$PROJECT_DIR$/data/filemanger.php" />
+    </list>
+    <list id="da1f49a6-4dd7-4a12-8912-9efee5375a85" name="Rejected commit: Default" comment="Merge branch 'master' of https://github.com/Essenceia/WebProject&#10;&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/UserTest.twig" afterPath="$PROJECT_DIR$/layout/UserTest.twig" />
     </list>
     <ignored path="DarwinLab.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,9 +75,12 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="53" column="64" lean-forward="true" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
-              <folding />
+            <state relative-caret-position="75">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding>
+                <marker date="1492508199096" expanded="true" signature="3198:3240" ph="..." />
+                <marker date="1492508199096" expanded="true" signature="3198:3239" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,104 +95,52 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="webapp.user" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/1dda6be/4d658281-9317-4224-bea4-51052e84a79e/webapp.user">
-          <provider editor-type-id="text-editor">
+      <file leaf-file-name="MenuBas.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/layout/MenuBas.twig">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="6" />
               <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="webapp.amis" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/1dda6be/4d658281-9317-4224-bea4-51052e84a79e/webapp.amis">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+      <file leaf-file-name="index.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/layout/index.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="51" lean-forward="false" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
               <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="databaseutility.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MenuHaut.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/layout/MenuHaut.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="databaseutility.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/databaseutility.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="63">
+              <caret line="139" column="25" lean-forward="false" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
               <folding>
-                <marker date="1492457978871" expanded="true" signature="1280:1348" ph="SELECT * FRO... amis" />
-                <marker date="1492457978871" expanded="true" signature="1722:1747" ph="SELECT * FRO... user" />
-                <marker date="1492457978871" expanded="true" signature="2173:2267" ph="INSERT INTO webapp.user... " />
-                <marker date="1492457978871" expanded="true" signature="2814:2937" ph="SELECT * FRO... amis" />
-                <marker date="1492457978871" expanded="true" signature="3153:3242" ph="INSERT INTO webapp.amis... " />
-                <marker date="1492457978871" expanded="true" signature="3820:3907" ph="SELECT * FRO... amis" />
-                <marker date="1492457978871" expanded="true" signature="3999:4105" ph="UPDATE webap... " />
-                <marker date="1492457978871" expanded="true" signature="4997:5084" ph="INSERT INTO webapp.post... " />
-                <marker date="1492457978871" expanded="true" signature="5155:5261" ph="INSERT INTO webapp.post... " />
-                <marker date="1492457978871" expanded="true" signature="5289:5376" ph="INSERT INTO webapp.post... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserTest.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/layout/UserTest.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="exemple d'utilisation" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/exemple d'utilisation">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="postcomment.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/postcomment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="filemanger.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/filemanger.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="40" lean-forward="false" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="uploader.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/uploader.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="53" />
-              <folding>
-                <element signature="e#6#85#0#PHP" expanded="true" />
+                <marker date="1492508009696" expanded="true" signature="1280:1348" ph="SELECT * FRO... amis" />
+                <marker date="1492508009696" expanded="true" signature="1722:1747" ph="SELECT * FRO... user" />
+                <marker date="1492508009696" expanded="true" signature="2173:2267" ph="INSERT INTO webapp.user... " />
+                <marker date="1492508009696" expanded="true" signature="2814:2937" ph="SELECT * FRO... amis" />
+                <marker date="1492508009696" expanded="true" signature="3153:3242" ph="INSERT INTO webapp.amis... " />
+                <marker date="1492508009696" expanded="true" signature="3820:3907" ph="SELECT * FRO... amis" />
+                <marker date="1492508009696" expanded="true" signature="3999:4105" ph="UPDATE webap... " />
+                <marker date="1492508009696" expanded="true" signature="4997:5084" ph="INSERT INTO webapp.post... " />
+                <marker date="1492508009696" expanded="true" signature="5155:5261" ph="INSERT INTO webapp.post... " />
+                <marker date="1492508009696" expanded="true" signature="5289:5376" ph="INSERT INTO webapp.post... " />
               </folding>
             </state>
           </provider>
@@ -210,6 +157,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="essenceia" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -395,6 +347,20 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="files" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DarwinLab" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DarwinLab" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="data" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -550,7 +516,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159726000" />
+    <option name="totallyTimeSpent" value="160097000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -567,11 +533,12 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23938507" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.272293" sideWeight="0.4172767" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40605095" sideWeight="0.49707174" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6321656" sideWeight="0.5058565" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15885799" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6321656" sideWeight="0.4941435" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.272293" sideWeight="0.58272326" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14808917" sideWeight="0.58272326" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -606,6 +573,24 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
@@ -616,6 +601,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'master' of https://github.com/Essenceia/WebProject&#10;&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/Essenceia/WebProject&#10;&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -842,8 +831,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/layout/index.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="30" selection-end-column="7" />
+        <state relative-caret-position="390">
+          <caret line="26" column="51" lean-forward="false" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -859,7 +849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -887,7 +876,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -900,7 +888,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -931,12 +918,13 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0512471655328797" x="328.2469801553063" y="377.2989646246765" />
+          <settings layout="Hierarchic Group" zoom="1.0512471655328797" x="328.0" y="377.0" />
           <SelectedNodes />
           <Categories>
-            <Category>Key columns</Category>
             <Category>Columns</Category>
+            <Category>Key columns</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
@@ -952,19 +940,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/databaseutility.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="63">
+          <caret line="139" column="25" lean-forward="false" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
           <folding>
-            <marker date="1492457978871" expanded="true" signature="1280:1348" ph="SELECT * FRO... amis" />
-            <marker date="1492457978871" expanded="true" signature="1722:1747" ph="SELECT * FRO... user" />
-            <marker date="1492457978871" expanded="true" signature="2173:2267" ph="INSERT INTO webapp.user... " />
-            <marker date="1492457978871" expanded="true" signature="2814:2937" ph="SELECT * FRO... amis" />
-            <marker date="1492457978871" expanded="true" signature="3153:3242" ph="INSERT INTO webapp.amis... " />
-            <marker date="1492457978871" expanded="true" signature="3820:3907" ph="SELECT * FRO... amis" />
-            <marker date="1492457978871" expanded="true" signature="3999:4105" ph="UPDATE webap... " />
-            <marker date="1492457978871" expanded="true" signature="4997:5084" ph="INSERT INTO webapp.post... " />
-            <marker date="1492457978871" expanded="true" signature="5155:5261" ph="INSERT INTO webapp.post... " />
-            <marker date="1492457978871" expanded="true" signature="5289:5376" ph="INSERT INTO webapp.post... " />
+            <marker date="1492508009696" expanded="true" signature="1280:1348" ph="SELECT * FRO... amis" />
+            <marker date="1492508009696" expanded="true" signature="1722:1747" ph="SELECT * FRO... user" />
+            <marker date="1492508009696" expanded="true" signature="2173:2267" ph="INSERT INTO webapp.user... " />
+            <marker date="1492508009696" expanded="true" signature="2814:2937" ph="SELECT * FRO... amis" />
+            <marker date="1492508009696" expanded="true" signature="3153:3242" ph="INSERT INTO webapp.amis... " />
+            <marker date="1492508009696" expanded="true" signature="3820:3907" ph="SELECT * FRO... amis" />
+            <marker date="1492508009696" expanded="true" signature="3999:4105" ph="UPDATE webap... " />
+            <marker date="1492508009696" expanded="true" signature="4997:5084" ph="INSERT INTO webapp.post... " />
+            <marker date="1492508009696" expanded="true" signature="5155:5261" ph="INSERT INTO webapp.post... " />
+            <marker date="1492508009696" expanded="true" signature="5289:5376" ph="INSERT INTO webapp.post... " />
           </folding>
         </state>
       </provider>
@@ -973,7 +961,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -994,7 +981,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -1007,15 +993,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="53" column="64" lean-forward="true" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
-          <folding />
+        <state relative-caret-position="75">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <marker date="1492508199096" expanded="true" signature="3198:3240" ph="..." />
+            <marker date="1492508199096" expanded="true" signature="3198:3239" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1023,7 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
