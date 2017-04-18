@@ -5,9 +5,9 @@
  * Date: 4/15/17
  * Time: 11:48 AM
  */
-
+require "settingspath.php";
 require "filemanger.php";
-require __DIR__."\..\log\looger.php";
+require __DIR__ . SLASH."..".SLASH."log".SLASH."looger.php";
 require "connection.php";
 
 function get_email($prefix){
@@ -74,6 +74,7 @@ function get_user($email){
  * 2 - fail , impossible dde se connecter à la BDD
  */
 function add_user($email,$nom,$pseudo){
+<<<<<<< HEAD
     $db = connect_db();
     $sql = "INSERT INTO webapp.user (email, nom, mdp, pseudo) VALUES ('$email','$nom','$pseudo','$pseudo')";
     if ($bd->ping()) {
@@ -81,6 +82,15 @@ function add_user($email,$nom,$pseudo){
             //creation reussi
             creat_new_user_directory($email);
             logger("succes - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
+=======
+    $bd = connect_db();
+    if($bd->ping()){
+    $sql = "INSERT INTO webapp.user (email, nom, mdp, pseudo) VALUES ('$email','$nom','$pseudo','$pseudo')";
+    if(mysqli_query($bd,$sql)){
+        //creation reussi
+        creat_new_user_directory($email);
+        logger("succes - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
+>>>>>>> fa2b11e86e73eb666983a21eb2a1a010adc955ff
 
             return 1;
         }
@@ -92,6 +102,9 @@ function add_user($email,$nom,$pseudo){
     else{
         return 2;
     } // erreur dans la creation
+}else{
+        return 0;
+    }
 }
 /*
  * Verfie si l'utilisateur existe deja dans la base et le supprime de la base, return :
@@ -197,7 +210,7 @@ function accept_friend_request($db,$fromuser,$touser){
  *  1 - photo : il peut y avoir une legende et un idalbum ( pas obligatoire pour les deux) - $contenu a la path vers le fichier selectionner par l'utilisateur
  *  2 - video : meme que photo
  */
-function create_post($db,$email,$typepost,$legende,$idalbum,$contenu){
+function create_post($email,$typepost,$legende,$idalbum,$contenu){
     //blindage
     $sql ="";
     $db = connect_db();
@@ -238,6 +251,7 @@ function create_post($db,$email,$typepost,$legende,$idalbum,$contenu){
  * 0 - connection reussi
  * 1 - utilisateur n'existe pas
  * 2 - mauvais mot de passe
+ * 3 - erreur bd
  */
 function connect_datavalide($email,$pw){
     $db = connect_db();
@@ -257,5 +271,7 @@ function connect_datavalide($email,$pw){
             logger("Erreur - identifiant de l'utilisatuer n'existe pas utilisateur : ".$email);
             return 1;
         }
+    }else{
+        return 3;
     }
 }

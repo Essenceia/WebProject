@@ -5,6 +5,7 @@
  * Date: 4/18/17
  * Time: 1:50 PM
  */
+
 require "databaseutility.php";
 function connect($email, $mdp){
   $state = connect_datavalide($email, $mdp);

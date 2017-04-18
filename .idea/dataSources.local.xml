@@ -9,7 +9,9 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
+      <introspection-schemas>*:information_schema,mysql</introspection-schemas>
       <resolve-scope>information_schema:|mysql:</resolve-scope>
+      <unqualified-resolve-schemas>information_schema:|mysql:</unqualified-resolve-schemas>
     </data-source>
     <data-source name="MariabDB - webapp@localhost" uuid="1054d8d7-cb36-4dbe-8041-236e5088c24f">
       <database-info product="MySQL" version="10.1.22-MariaDB-" jdbc-version="4.0" driver-name="MariaDB connector/J" driver-version="1.5.9">
@@ -19,7 +21,9 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>julia</user-name>
+      <introspection-schemas>*:information_schema</introspection-schemas>
       <resolve-scope>:</resolve-scope>
+      <unqualified-resolve-schemas>:</unqualified-resolve-schemas>
     </data-source>
     <data-source name="MariabDB - webapp@localhost [2]" uuid="4d658281-9317-4224-bea4-51052e84a79e">
       <database-info product="MySQL" version="10.1.22-MariaDB-" jdbc-version="4.0" driver-name="MariaDB connector/J" driver-version="1.5.9">
@@ -29,7 +33,9 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>julia</user-name>
+      <introspection-schemas>*:webapp</introspection-schemas>
       <resolve-scope>webapp:</resolve-scope>
+      <unqualified-resolve-schemas>webapp:</unqualified-resolve-schemas>
     </data-source>
   </component>
 </project>
