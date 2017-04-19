@@ -35,7 +35,7 @@ $container['username']= function (){
   //TODO revoyer les paramtres de connection effectif, a faire quand on aura une page de connection
   return  $email;
 };
-$app->get('/', function ($request, $response, $args) {
+$app->get('/Login', function ($request, $response, $args) {
     return $this->view->render($response, 'login.twig');
 });
 $app->get('/Profil/', function ($request, $response, $args) {
@@ -60,7 +60,7 @@ $app->get('/Coupe2016/', function ($request, $response, $args) {
     return $this->view->render($response, 'UserTest.twig', ["users" => $data]);
 });
 
-$app->get('/Configuration/', function ($request, $response, $args) {
+$app->get('/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
 });
 $app->get('/Chronologie/', function ($request, $response, $args) {

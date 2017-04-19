@@ -86,3 +86,14 @@ span{
     width: 80%;
 
 }
+.configurationForm{
+    padding-top: 5vh;
+    font-size: large;
+
+}
+#configuration{
+    height:100vh;
+    padding-top: 10vh;
+    font-size: large;
+
+}
