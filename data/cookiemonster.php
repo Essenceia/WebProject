@@ -12,6 +12,7 @@ function connect($email, $mdp){
   if ($state == 0){
       // creation d'un cookie avec le nom de l'utilisateur - valable 20 minuter
       setcookie("user",$email,time()+(60*20));
+      logger("Cookie activer au nom de ".$email);
   }
 }
 function disconnect(){

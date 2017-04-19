@@ -23,8 +23,32 @@ function get_friend_status($row){
 /*
  * Permet de recuperer les emails des amies du l'utilisateur dont l'id est passer en argument
  */
-function friend_list($userid,$db){
-    echo "<br> <h6> Acriviter de la liste d'ami </h6> <h5><ul>";
+function friend_list($friend_status){
+    $data_out = [];
+    $data =[];
+    $db = connect_db();
+    if($db->ping()){
+        $email = $_COOKIE['user'];
+        logger("valheur du cookie ".$email);
+        $sql = "SELECT * FROM webapp.amis WHERE user1='$email' OR (( user1='$email' OR user2='$email') AND amis.status='1'  )" ;
+        $res = mysqli_query($db,$sql);
+        for ($i = 0; $i < mysqli_num_rows($res); $i++) {
+            $data[$i] = mysqli_fetch_assoc($res);
+            if($data['user1']==$email){
+                $friend = $data[$i]['user2'];
+            }else{
+                $friend = $data[$i]['user1'];
+            }logger("friend found ".$friend);
+            $data_out[$i] = get_selected_user($friend);
+            if($friend_status){$data_out[$i]['friend_status'] = get_friend_status($data[$i]);}
+
+        }
+
+    }else{
+        logger("erreur de connection a la base ");
+    }
+    return $data_out;
+   /*echo "<br> <h6> Acriviter de la liste d'ami </h6> <h5><ul>";
     $sqlquery = "SELECT * FROM webapp.amis  WHERE user1='$userid'  OR user2='$userid' ";
     $res = mysqli_query($db,$sqlquery);
     if (mysqli_num_rows($res) > 0) {
@@ -36,7 +60,7 @@ function friend_list($userid,$db){
     } else {
         echo "<li>0 results</li>";
     }
-    echo "</h5> </ul>";
+    echo "</h5> </ul>";*/
 }
 function get_user_list(){
     $db = connect_db();
@@ -54,19 +78,58 @@ function get_user_list(){
     return $res;
 }
 
-function get_user($email){
+function get_user(){
     $db = connect_db();
-    //ceci est une diff
-    if($db->ping()) {
+    $email = $_COOKIE['user'];
+    $res = [];
+    if($_COOKIE['user']) {
+        //ceci est une diff
+        if ($db->ping()) {
 
-        $sql = "SELECT * FROM webapp.user WHERE email='$email'";
-        $resrequette = mysqli_query($db, $sql);
+            $sql = "SELECT * FROM webapp.user WHERE email='$email'";
+            $resrequette = mysqli_query($db, $sql);
 
-        $res = mysqli_fetch_assoc($resrequette);
+            $res = mysqli_fetch_assoc($resrequette);
+        }
+    }else{
+        logger("erreur de cookie retrive");
     }
     return $res;
 }
+function get_selected_user($email){
+    $db = connect_db();
+    $res = [];
+        //ceci est une diff
+        if ($db->ping()) {
 
+            $sql = "SELECT * FROM webapp.user WHERE email='$email'";
+            $resrequette = mysqli_query($db, $sql);
+
+            $res = mysqli_fetch_assoc($resrequette);
+        }
+
+    return $res;
+}
+function get_album($email){
+    $db = connect_db();
+    $res = [];
+    //ceci est une diff
+    if($db->ping()) {
+
+        $sql = "SELECT * FROM webapp.album WHERE user='$email'";
+        $resrequette = mysqli_query($db, $sql);
+
+        for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+            $res[$i] = mysqli_fetch_assoc($resrequette);
+        }
+    }
+    if($res)
+    {
+        return $res;
+    }
+    else return 2;
+
+}
 /*
  * Verfie si l'utilisateur existe deja dans la base et essaye de l'ajouter, return :
  * 0 - fail , l'utilisateur existe deja
@@ -182,7 +245,8 @@ function friend_request($db,$touser){
  * accepter une demande en amie d'un utilisateur:
  * l'utilisateur qui accept la demande est touser le recepteur de la demande
  */
-function accept_friend_request($db,$fromuser,$touser){
+function accept_friend_request($db,$fromuser){
+    $touser = $_COOKIE['user'];
     if($_COOKIE['user']){
     $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' AND amis.status=0";
     $res = mysqli_query($db,$sql);
@@ -196,48 +260,71 @@ function accept_friend_request($db,$fromuser,$touser){
         }
     }else {logger("error , nombre de ligne invalide");}
 }else{
-        logger("erreur de cokkie de sesion");}}
+        logger("erreur de cokkie de sesion");}
+}
 /*
  * Fonction pour cree un nouveau post , type de postes :
  *  0 - post ecrit : le text sera stoquer dans legende
  *  1 - photo : il peut y avoir une legende et un idalbum ( pas obligatoire pour les deux) - $contenu a la path vers le fichier selectionner par l'utilisateur
  *  2 - video : meme que photo
  */
-function create_post($email,$typepost,$legende,$idalbum,$contenu){
-    //blindage
-    $sql ="";
+function delet_friend($todelet,$status){
+    $touser = $_COOKIE['user'];
     $db = connect_db();
-    if($db->ping()) {
-        if ($typepost >= 0 and $typepost < 3) {
-            switch ($typepost) {
-                case 0:
-                    $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                    break;
-                case 1 && 2:
-                    if ($idalbum != 0) $sql = "INSERT INTO webapp.post (user, type, legende,idalbum)  VALUES ('$email','$typepost','$legende','$idalbum')";
-                    else $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                    break;
-            }
-            $sql .= " WHERE user='$email' ";
-            $res = mysqli_query($db, $sql);
-            if ($res) {
-                //creation reussi
+    if($db->ping()){
+    if($_COOKIE['user']){
+        $sql= "DELETE * FROM webapp.amis WHERE ((user1='$todelet' AND user2='$touser') OR (user2='$todelet' AND user1='$touser'))AND amis.status='$status' " ;
+        if(mysqli_query($db,$sql)){
+            logger("Destruction de la realtion d'ami");
+        }
+       else{
+           logger("erreur dans la destruction de la realtion d'ami");
+       }
+    }else{
+        logger("erreur de cokkie de sesion");}
+}else{
+        logger("erreur connection base de donner");}
+}
 
-                $row = mysqli_fetch_assoc($res);
-                $idpost = $row["idpost"];
-                if ($typepost > 0) {
-                    //TODO sauvgarde de la photo ou video poster dans le dossier adequa
-                    if (save_post($idpost, $idalbum, $contenu)) {
-                        logger("sucees - creation d'un post pour l'utilisateur " . $email);
-                    } else logger("erreur - creation d'un post pour l'utilisateur " . $email);
+function create_post($email,$typepost,$legende,$idalbum,$contenu){
+    $email = $_COOKIE['user'];
+    if($_COOKIE['user']) {
+        //blindage
+        $sql = "";
+        $db = connect_db();
+        if ($db->ping()) {
+            if ($typepost >= 0 and $typepost < 3) {
+                switch ($typepost) {
+                    case 0:
+                        $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
+                        break;
+                    case 1 && 2:
+                        if ($idalbum != 0) $sql = "INSERT INTO webapp.post (user, type, legende,idalbum)  VALUES ('$email','$typepost','$legende','$idalbum')";
+                        else $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
+                        break;
+                }
+                $sql .= " WHERE user='$email' ";
+                $res = mysqli_query($db, $sql);
+                if ($res) {
+                    //creation reussi
+
+                    $row = mysqli_fetch_assoc($res);
+                    $idpost = $row["idpost"];
+                    if ($typepost > 0) {
+                        //TODO sauvgarde de la photo ou video poster dans le dossier adequa
+                        if (save_post($idpost, $idalbum, $contenu)) {
+                            logger("sucees - creation d'un post pour l'utilisateur " . $email);
+                        } else logger("erreur - creation d'un post pour l'utilisateur " . $email);
+                    }
+                } else {
+                    logger("erreur - creation d'un post pour l'utilisateur " . $email);
                 }
             } else {
-                logger("erreur - creation d'un post pour l'utilisateur " . $email);
+                logger("erreur dans le type du post, type donner :" . $typepost);
             }
-        } else {
-            logger("erreur dans le type du post, type donner :" . $typepost);
         }
-    }
+    }else{
+        logger("erreur de cokkie de sesion");}
 }
 /*
  * Procedure de l'utilisateur avec email et pw , verifie que ce sont les bons identifiants
