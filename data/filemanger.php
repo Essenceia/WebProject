@@ -58,17 +58,12 @@ function save_post($idpost,$idalbum,$pathtodata)
  * Fonction de remove recursive d'un dossier
  */
 function rrmdir($dir) {
+    //logger("Nous sommes dans le dossier ".__DIR__. " et avons recu comme parametre ".$dir);
+    $dir = __DIR__.SLASH."..".SLASH.$dir;
     if (is_dir($dir)) {
-        $objects = scandir($dir);
-        foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
-                if (is_dir($dir.SLASH.$object))
-                    rrmdir($dir.SLASH.$object);
-                else
-                    unlink($dir.SLASH.$object);
-            }
-        }
-        rmdir($dir);
+       /* array_map('unlink', glob("$dir./*.*"));
+        rmdir($dir);*/
+        system("rm -rf ".escapeshellarg($dir));
         logger("Sucees de la supression du dossier ".$dir);
     }else{
         logger("Erreur dans la supression du dossier".$dir);

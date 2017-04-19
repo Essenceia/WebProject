@@ -4,13 +4,42 @@
     <meta charset="utf-8">
     <title>Anti-Social</title>
 
-    <link href="layout/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="/../layout/css/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //alert("in");
+        $("#subButton").click(function () {
+            //alert("We have entenred function");
+            var str = $("#email").val();
+            var tab = str.split("@");
+            if(tab[1]!= "edu.ece.fr" ) {
+                alert("Erreur dans le mail, nous attendoins a un mail de l'ece terminant par @edu.ece.fr");
+            }else if($("#mdp").val()==''){
+                alert("Erreur , le champ des mots de passe est vide");
+            }else{
+                alert("ajax field called");
+                $.ajax({
+                    type: 'POST',
+                    url: '/../layout/load.php',
+                    data: 'email='+tab[0]+'&mdp='+$("#mdp").val(),
+                    complete: function(res) {
+                        if(res!='')alert(res);
+                        window.location='/../index.php/Profil/';
+                        }
 
+                });
+
+            }
+        });
+        
+    });
+</script>
     <form id="login">
-       Nom: <input type="email" name="email"> <br>
-        Mot de passe: <input type="password" name="mdp"> <br>
-        <input type="submit" name="subButton" value="Se connecter">
+       Nom: <input type="email" name="email" id="email"> <br>
+        Mot de passe: <input type="password" name="mdp" id="mdp"> <br>
+        <input type="button" id="subButton" value="Se connecter">
     </form>
 </body>

@@ -1,1 +1,60 @@
 vous êtes dans la chronologie
+
+<!-- Post -->
+{% for postres in data %}
+<div id="post">
+
+    {% set post =  postres.post %}
+
+        {% if post.type == 0 %}
+            <!-- post text -->
+            <h2>   {{ post.legend }}</h2> <br>
+            {% if post.emotion %}
+                <div id="emotion">
+                    <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion">
+                </div>
+            {% endif %}
+        {% elseif post.type == 1 or post.type ==2 %}
+            <!-- post image ou video-->
+            <img src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.mp4'}} name={{ post.idpost }}>
+            {% if post.type == 1 %}
+            {% else %}
+                <video width="320" height="240" autoplay>
+                    <source src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.mp4'}} type="video/mp4">
+                    <source src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.ogg'}} type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+            {% endif %}
+            <form class="add to album" id="addToAlbumAction" method="post">
+                Add to album - pour toi marianne<input type="submit" value="Valider"/>
+            </form>
+        {% endif %}
+        {% if post.legende %}
+            {{ post.legende }}
+        {% endif %}
+        {% if post.date%}
+            {{ post.date}}
+        {% endif %}
+        {% if post.lieu%}
+            {{ post.lieu }}
+        {% endif %}
+        {% if post.activiter%}
+            {{ post.activiter}}
+        {% endif %}
+
+</div>
+<!-- Commentaire -->
+    <div id="comment">
+    {% if postres.comment %}
+{% for com in postres.comment %}
+    {{ com }}
+Commentaire de: {{ com.user }} le :{{ com.date }} <br>
+  {% if com.type %}
+      <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion">
+
+  {% endif %}
+    {{ com.reactiontxt }}
+{% endfor %}
+        {% endif %}
+    </div>
+{% endfor %}

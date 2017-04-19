@@ -1,11 +1,11 @@
 <?php
 //use \Psr\Http\Message\ServerRequestInterface as Request;
 //use \Psr\Http\Message\ResponseInterface as Response;
-require "settingspath_root.php";
-require "vendor".SLASH."autoload.php";
+require_once "settingspath_root.php";
+require_once "vendor".SLASH."autoload.php";
 require_once "data".SLASH."databaseutility.php";
-require "data".SLASH."cookiemonster.php";
-require "data".SLASH."postutility.php";
+require_once "data".SLASH."cookiemonster.php";
+require_once "data".SLASH."postutility.php";
 $app = new \Slim\App([
     'settings' => [
         'determineRouteBeforeAppMiddleware' => true,
@@ -41,29 +41,34 @@ $app->get('/Login/', function ($request, $response, $args) {
 $app->get('/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
     $data = get_album($this->username);
+    $tmp = [];
     if($data==2)
     {
-        return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "Il n'y a aucun album"]);
+        return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "Il n'y a aucun album" , "data"=>$res]);
 
     }
-    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> ""]);
+    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "", "data"=>$res]);
 
 });
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
     $data = get_user_list($this->db);
-    return $this->view->render($response, 'UserTest.twig', ["users" => $data]);
+    $res = [];
+    return $this->view->render($response, 'UserTest.twig', ["users" => $data,"data" =>$res]);
 });
 $app->get('/Profil/', function ($request, $response, $args) {
     $data = get_user($this->username);
-    return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig"]);
+    $tmp =[];
+    return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig","data" =>$tmp]);
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
 });
 $app->get('/Configuration/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
+    $res =[];
+    return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig","data" =>$res]);
 });
 $app->get('/Chronologie/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig"]);
+    $data = get_chronologie(0,$this->username);
+    return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig", "data" => $data]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
     $data = get_post_actualiter(0,$this->username);

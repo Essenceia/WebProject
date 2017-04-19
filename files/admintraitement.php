@@ -1,6 +1,7 @@
 <?php
 
-    require __DIR__."\..\data\databaseutility.php";
+    require "settingspath.php";
+    require __DIR__.SLASH."..".SLASH."data".SLASH."databaseutility.php";
 
 
         function getusers(){

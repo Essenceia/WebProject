@@ -5,10 +5,10 @@
  * Date: 4/15/17
  * Time: 11:48 AM
  */
-require "settingspath.php";
-require "filemanger.php";
-require __DIR__ . SLASH."..".SLASH."log".SLASH."looger.php";
-require "connection.php";
+require_once "settingspath.php";
+require_once "filemanger.php";
+require_once __DIR__ . SLASH."..".SLASH."log".SLASH."looger.php";
+require_once "connection.php";
 
 function get_email($prefix){
     $ret = $prefix . "@edu.ece.fr";
