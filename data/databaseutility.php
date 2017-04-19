@@ -23,7 +23,7 @@ function get_friend_status($row){
 /*
  * Permet de recuperer les emails des amies du l'utilisateur dont l'id est passer en argument
  */
-function friend_list(){
+function friend_list($friend_status){
     $data_out = [];
     $data =[];
     $db = connect_db();
@@ -40,7 +40,7 @@ function friend_list(){
                 $friend = $data[$i]['user1'];
             }logger("friend found ".$friend);
             $data_out[$i] = get_selected_user($friend);
-            $data_out[$i]['friend_status'] = get_friend_status($data[$i]);
+            if($friend_status){$data_out[$i]['friend_status'] = get_friend_status($data[$i]);}
 
         }
 
@@ -273,7 +273,7 @@ function delet_friend($todelet,$status){
     $db = connect_db();
     if($db->ping()){
     if($_COOKIE['user']){
-        $sql= "DELETE * FROM webapp.amis WHERE (user1='$email' OR user2='$email') AND amis.status='$status' " ;
+        $sql= "DELETE * FROM webapp.amis WHERE ((user1='$todelet' AND user2='$touser') OR (user2='$todelet' AND user1='$touser'))AND amis.status='$status' " ;
         if(mysqli_query($db,$sql)){
             logger("Destruction de la realtion d'ami");
         }

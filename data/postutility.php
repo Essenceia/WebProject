@@ -11,13 +11,14 @@ function get_post_actualiter($pagenum,$email){
     $db = connect_db();
     //$email = $_COOKIE['user'];
     $data = [];
-    $num = NUMBER_PER_PAGE;
-    $offset = NUMBER_PER_PAGE*$pagenum;
+    $num = (int)NUMBER_PER_PAGE;
+    $offset = (int)NUMBER_PER_PAGE*$pagenum;
+    logger("valeheur de offset ".$offset." num per page ".$num);
     if($db->ping()){
         if($email){
             //TODO a trouver pourquoi la recherche a partir d'une limite ne fonctionne pas
-            //$sql = "SELECT * FROM webapp.post WHERE user='$email' ORDER BY date DESC LIMIT '$num' OFFSET '$offset'";
-            $sql = "SELECT * FROM webapp.post WHERE user='$email' ORDER BY date DESC ";
+            $sql = "SELECT * FROM webapp.post WHERE user='$email' ORDER BY date DESC LIMIT 10 OFFSET 0 ";
+            //$sql = "SELECT * FROM webapp.post WHERE user='$email' ORDER BY date DESC ";
 
             $res = mysqli_query($db,$sql);
             for ($i = 0; $i < mysqli_num_rows($res); $i++) {
@@ -31,4 +32,48 @@ function get_post_actualiter($pagenum,$email){
         logger("erreur connection base de donner");}
         return $data;
 
+}
+function get_post_data($idpost){
+    $data=[];
+    $db = connect_db();
+    if($db->ping()){
+        $sql= "SELECT * from webapp.post WHERE idpost='$idpost' ";
+        $res = mysqli_query($db,$sql);
+        for ($i = 0; $i < mysqli_num_rows($res); $i++) {
+            $data[$i] = mysqli_fetch_assoc($res);}
+    }else{
+        logger("erreur connection base de donner - post data ");}
+    return $data;
+}
+function get_comment_from_post($idpost){
+    $data=[];
+    $db = connect_db();
+    if($db->ping()){
+        $sql= "SELECT * from webapp.reaction WHERE idpost='$idpost' ";
+        $res = mysqli_query($db,$sql);
+        $data = mysqli_fetch_assoc($res);
+    }else{
+        logger("erreur connection base de donner - get comment from post");}
+    return $data;
+}
+function get_chronologie($pagenum,$email){
+    $db = connect_db();
+    //$email = $_COOKIE['user'];
+    $data = [];
+    $num = NUMBER_PER_PAGE;
+    $offset = NUMBER_PER_PAGE*$pagenum;
+    if($db->ping()){
+        if($email){
+            //recuperer ta liste d'amie
+            $sql = "SELECT post.idpost from webapp.amis, webapp.post 
+            WHERE ((amis.user1 = '$email' OR amis.user2='$email') AND amis.status=1 AND post.privacy=1)
+            OR post.privacy = 2
+             ORDER BY post.date LIMIT 10 OFFSET 0 ";
+
+        }else{
+            logger("erreur de cokkie de sesion");}
+    }
+    else{
+        logger("erreur connection base de donner");}
+    return $data;
 }

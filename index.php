@@ -62,9 +62,6 @@ $app->get('/Profil/', function ($request, $response, $args) {
 $app->get('/Configuration/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
 });
-$app->get('/Amis/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "amis.twig"]);
-});
 $app->get('/Chronologie/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig"]);
 });
@@ -74,7 +71,7 @@ $app->get('/Publication/', function ($request, $response, $args) {
 });
 $app->get('/Amis/', function ($request, $response, $args) {
     logger("friend_list still called");
-    $data = friend_list();
+    $data = friend_list(1);
     logger("end friend_list still called");
     return $this->view->render($response, 'index.twig', ["name" => "Amis.twig" ,"user_name" =>$this->username , "data" => $data]);
 });
