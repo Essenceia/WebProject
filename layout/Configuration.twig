@@ -1,27 +1,86 @@
 <div id="configuration">
+    <script type="text/javascript">
+        $(document).ready(function () {
+                
+            var SLASH = "/";
+            $("#changernom").submit(function (e) {
+                e.preventDefault();
+                if ($("#nom").val() == '')
+                {
+                    alert("Veuillez entrer un nom");
+                }        
+                else{
+                    $.ajax({
+                        data: 'nom=' +  $("#nom").val(),
+                        url: SLASH+'..'+SLASH+'layout'+SLASH+'configuration.php',
+                        method: 'POST',
+                        success: function(msg) {
+                            alert(msg);   
+                        }
+                    });
+                }
+            });
+            $("#changerpseudo").submit(function (e) {
+                e.preventDefault();
+                if ($("#pseudo").val() == '')
+                {
+                    alert("Veuillez entrer un pseudo valide");
+                }        
+                else{
+                    $.ajax({
+                        data: 'pseudo=' +  $("#pseudo").val(),
+                        url: SLASH+'..'+SLASH+'layout'+SLASH+'configuration.php',
+                        method: 'POST',
+                        success: function(msg) {
+                            alert(msg);   
+                        }
+                    });
+                }
+            });
+            $("#changermdp").submit(function (e) {
+                e.preventDefault();
+               
+                if ($("#ancienpwd").val() == ''){
+                    alert("Veuillez entrer votre ancien mot de passe");
+                }
+                    
+                else if( $("#password").val() == ''){
+                    alert("Veuillez entrer un nouveau mot de passe");
+                }        
+                else{
+                    $.ajax({
+                        
+                        data: 'ancienpwd=' +  $("#ancienpwd").val() +"&password=" +$("#password").val(),
+                        url: SLASH+'..'+SLASH+'layout'+SLASH+'configuration.php',
+                        method: 'POST',
+                        success: function(msg) {
+                            alert(msg);   
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    
     <!-- Changement Nom -->
-    <form method="post" action="configuration.php" id="configurationForm" >
-        Nom : <input type="text" name="nom" id="textbox">
-        <input type="submit" id="button" value="Changer"/>
-    </form>
-    <!-- Changement Email -->
-    <form method="post" action="configuration.php" id="configurationForm">
-        Email : <input type="email" name="email"id="textbox" >
-        <input type="submit" id="button" value="Changer"/>
+    <form id="changernom" class="configurationForm" >
+        Nom : <input type="text" name="nom" id="nom" class="textbox">
+        <input type="submit" class="button" value="Changer"/>
     </form>
     <!-- Changement Pseudo -->
-    <form method="post" action="configuration.php" id="configurationForm">
-        Pseudo : <input type="text" name="pseudo" id="textbox">
-        <input type="submit" id="button" value="Changer"/>
+    <form id="changerpseudo" class="configurationForm">
+        Pseudo : <input type="text" name="pseudo" id="pseudo" class="textbox">
+        <input type="submit" class="button" value="Changer"/>
     </form>
     <!-- Changement mdp -->
-    <form method="post" action="configuration.php" id="configurationForm" >
-        Mot de passe : <input type="text" name="password" id="textbox">
-        <input type="submit" id="button" value="Changer"/>
+    <form  id="changermdp" class="configurationForm" >
+        Ancien mot de passe : <input type="password" id="ancienpwd" name="ancienpwd" class="textbox"><br/><br/><br/>
+        Nouveau mot de passe : <input type="password" id="password" name="password" class="textbox">
+        <input type="submit" class="button" value="Changer"/>
     </form>
     <!-- Changement Photo -->
-    <form method="post" action="configuration.php" id="configurationForm">
-        Photo : <input type="text" name="photo"  id="textbox">
-        <input type="submit" id="button" value="Publier" name="ajouter"/>
+    <form id="changerphoto" class="configurationForm">
+        Photo : <input type="text" name="photo"  id="photo" class="textbox">
+        <input type="submit" class="button" value="Changer" name="ajouter"/>
     </form>
 </div>

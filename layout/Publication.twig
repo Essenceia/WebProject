@@ -1,24 +1,26 @@
-<div id="status">
-    <form method="post" action="publication.php" >
+<div class="publi">
+    <form method="post" action="publication.php" class="pp">
         Status :
-        <input type="text" id="textbox" name="status" id="status"/>
+        <input type="text" class="textbox" name="status" id="status"/>
         <input type="submit" id="button" value="Publier" name="publierStatus"/>
     </form>
 </div>
 
 <hr>
 <!-- Publication Image/Video-->
-<div id="postImVid">
-    <form method="post" action="publication.php" >
-        <input type="text" id="textbox" name="path"  class="Box"/>
-        <input type="button" id="button" value="Sélectionner un média" name="selMedia"/>
+<div class="publi">
+    <form method="post" action="publication.php" class="pp" >
+        <input type="text" class="textbox" name="path"  class="Box"/>
+        <input type="button" class="button" value="Sélectionner un média" name="selMedia"/>
 
         <br/>
+        <br/>
+        <br/>
 
-        <input type="text" name="lieu" id="textbox" value="Lieu"/>
-        <input type="date" name="date" id="textbox" value="Date"/>
-        <input type="text" name="emot" id="textbox" value="Emotion"/>
-        <input type="text" name="activité" id="textbox" value="Activité"/>
+        <input type="text" name="lieu" class="textbox" value="Lieu"/>
+        <input type="text" name="emot" class="textbox" value="Emotion"/>
+        <input type="text" name="activité" class="textbox" value="Activité"/>
+        <input type="text" name="nomalbum" class=textbox" value="Nom de l'album"/>
 
         <br/>
 
@@ -26,7 +28,7 @@
         <input type="radio" name="typPub" value="Amis" > Amis <br/>
         <input type="radio" name="typPub" value="Seul" > Moi-même <br/>
 
-        <input type="submit" id="button" value="Publier" name="ajouter"/>
+        <input type="submit" class="button" value="Publier" name="ajouter"/>
     </form>
 </div>
 <!-- Affichage de l'historique-->

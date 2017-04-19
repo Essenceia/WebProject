@@ -39,6 +39,14 @@ $app->get('/Login/', function ($request, $response, $args) {
     return $this->view->render($response, 'login.twig');
 });
 $app->get('/', function ($request, $response, $args) {
+    return $this->view->render($response, 'login.twig');
+});
+$app->get('/Profil/', function ($request, $response, $args) {
+    $data = get_user($this->username);
+    return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig"]);
+    //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
+});
+$app->get('/Album/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
     $data = get_album($this->username);
     $tmp = [];
@@ -56,12 +64,7 @@ $app->get('/Coupe2016/', function ($request, $response, $args) {
     $res = [];
     return $this->view->render($response, 'UserTest.twig', ["users" => $data,"data" =>$res]);
 });
-$app->get('/Profil/', function ($request, $response, $args) {
-    $data = get_user($this->username);
-    $tmp =[];
-    return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig","data" =>$tmp]);
-    //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
-});
+
 $app->get('/Configuration/', function ($request, $response, $args) {
     $res =[];
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig","data" =>$res]);
