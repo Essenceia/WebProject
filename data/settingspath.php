@@ -9,7 +9,7 @@
  * 1 - path windows \
  */
 if(!defined('PATH')) {
-    define('PATH', 1);
+    define('PATH', 0);
 
     if (PATH == 0) {
         $slash = '/';

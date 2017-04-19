@@ -1,11 +1,11 @@
 <?php
 //use \Psr\Http\Message\ServerRequestInterface as Request;
 //use \Psr\Http\Message\ResponseInterface as Response;
-require "settingspath_root.php";
-require "vendor".SLASH."autoload.php";
+require_once "settingspath_root.php";
+require_once "vendor".SLASH."autoload.php";
 require_once "data".SLASH."databaseutility.php";
-require "data".SLASH."cookiemonster.php";
-require "data".SLASH."postutility.php";
+require_once "data".SLASH."cookiemonster.php";
+require_once "data".SLASH."postutility.php";
 $app = new \Slim\App([
     'settings' => [
         'determineRouteBeforeAppMiddleware' => true,
@@ -27,8 +27,13 @@ $container['db']= function(){
     $db = connect_db();
     return $db;
 };
+<<<<<<< HEAD
 
 /*$container['username']= function (){
+=======
+/*
+$container['username']= function (){
+>>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
   $email = "m.champalier";
   $mdp = 'ooo';
   connect($email,$mdp);
@@ -36,41 +41,62 @@ $container['db']= function(){
   return  $email;
 };*/
 $app->get('/Login/', function ($request, $response, $args) {
+<<<<<<< HEAD
+=======
+    return $this->view->render($response, 'login.twig');
+});
+$app->get('/', function ($request, $response, $args) {
+>>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
     return $this->view->render($response, 'login.twig');
 });
 $app->get('/Profil/', function ($request, $response, $args) {
     $data = get_user();
     $res =[];
     return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig", "data"=>$res]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
 });
 $app->get('/Album/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
     $data = get_album();
+<<<<<<< HEAD
+=======
+    $tmp = [];
+>>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
     if($data==2)
     {
         return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "Il n'y a aucun album" , "data"=>$tmp]);
 
     }
-    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> ""]);
+    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "", "data"=>$tmp]);
 
 });
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
     //$data = get_user_list($this->db);
     $data = get_user_list();
+<<<<<<< HEAD
     return $this->view->render($response, 'UserTest.twig', ["users" => $data]);
+=======
+    $res = [];
+    return $this->view->render($response, 'UserTest.twig', ["users" => $data,"data" =>$res]);
+>>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
 });
 
 $app->get('/Configuration/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
+    $res =[];
+    return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig","data" =>$res]);
 });
-
 $app->get('/Chronologie/', function ($request, $response, $args) {
     //$name = $_COOKIE['user'];
     $data = get_chronologie(0);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig", "data" => $data]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
@@ -84,6 +110,9 @@ $app->get('/Amis/', function ($request, $response, $args) {
     $name = $_COOKIE['user'];
     logger("end friend_list still called");
     return $this->view->render($response, 'index.twig', ["name" => "amis.twig" ,"user_name" =>$name, "data" => $data]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
 });
 $app->run();
