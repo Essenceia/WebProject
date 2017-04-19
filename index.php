@@ -35,9 +35,19 @@ $container['username']= function (){
   //TODO revoyer les paramtres de connection effectif, a faire quand on aura une page de connection
   return  $email;
 };
-
+$app->get('/Login/', function ($request, $response, $args) {
+    return $this->view->render($response, 'login.twig');
+});
 $app->get('/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Publication.twig","user_name" => $this->username]);
+    //accept_friend_request($this->db,"desmazes","kiki");
+    $data = get_album($this->username);
+    if($data==2)
+    {
+        return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "Il n'y a aucun album"]);
+
+    }
+    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> ""]);
+
 });
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
@@ -51,6 +61,12 @@ $app->get('/Profil/', function ($request, $response, $args) {
 });
 $app->get('/Configuration/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
+});
+$app->get('/Amis/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "amis.twig"]);
+});
+$app->get('/Chronologie/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig"]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
     $data = get_post_actualiter(0,$this->username);

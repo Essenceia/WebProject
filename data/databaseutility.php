@@ -110,7 +110,26 @@ function get_selected_user($email){
 
     return $res;
 }
+function get_album($email){
+    $db = connect_db();
+    $res = [];
+    //ceci est une diff
+    if($db->ping()) {
 
+        $sql = "SELECT * FROM webapp.album WHERE user='$email'";
+        $resrequette = mysqli_query($db, $sql);
+
+        for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+            $res[$i] = mysqli_fetch_assoc($resrequette);
+        }
+    }
+    if($res)
+    {
+        return $res;
+    }
+    else return 2;
+
+}
 /*
  * Verfie si l'utilisateur existe deja dans la base et essaye de l'ajouter, return :
  * 0 - fail , l'utilisateur existe deja
@@ -183,6 +202,7 @@ function delete_user($email)
             }
             //suppression de ces donners
             rrmdir("userdata/".$email);
+            return 1;
         }else {
             logger("Erreur - l'utilisateur n'existe pas , impossible de le suprimer ".$email);
             return 0;
