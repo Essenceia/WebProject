@@ -158,6 +158,7 @@ function delete_user($email)
             }
             //suppression de ces donners
             rrmdir("userdata/".$email);
+            return 1;
         }else {
             logger("Erreur - l'utilisateur n'existe pas , impossible de le suprimer ".$email);
             return 0;

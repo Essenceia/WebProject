@@ -12,15 +12,12 @@ $(document).ready(function () {
             method: 'GET',
             success: function (msg) {
                 var users = msg.split(";");
-                for (i = 0; i < users.length; i++) {
-                    $temp = $users[i].split("-");
-                    $.each(temp, function ( index, value ){
-                        if(i==0)
-                            $('#userlist').html("<img src={{ '/../userdata/'"+ temp[0] +"'/icon.png'}} alt=&quot;Icon&quot; height=&quot;128&quot; width=&quot;128&quot;>"+ temp[1] +"<br/>");
+                $.each(users, function ( index, value ){
+                    if(index == 0) $('#userlist').html("<li>" +value +"</li><br/>");
 
-                        else $('#userlist').append("<img src={{ '/../userdata/'"+ temp[0] +"'/icon.png'}} alt=&quot;Icon&quot; height=&quot;128&quot; width=&quot;128&quot;>"+ temp[1] +"<br/>");
-                    }); 
-                }
+                    else $('#userlist').append("<li>" +value +"</li><br/>");
+                }); 
+                
             }
         }); 
      };
