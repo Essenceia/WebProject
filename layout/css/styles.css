@@ -86,6 +86,12 @@ span{
     width: 80%;
 
 }
+#amisAff{
+    font-size: medium;
+    text-align: inherit;
+    width: 80%;
+    text-align: left;
+}
 .configurationForm{
     padding-top: 5vh;
     font-size: large;

@@ -35,10 +35,10 @@ $container['username']= function (){
   //TODO revoyer les paramtres de connection effectif, a faire quand on aura une page de connection
   return  $email;
 };
-$app->get('/Login', function ($request, $response, $args) {
+$app->get('/', function ($request, $response, $args) {
     return $this->view->render($response, 'login.twig');
 });
-$app->get('/', function ($request, $response, $args) {
+$app->get('/Profil/', function ($request, $response, $args) {
     $data = get_user($this->username);
     return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig"]);
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
