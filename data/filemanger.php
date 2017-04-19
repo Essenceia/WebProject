@@ -7,8 +7,7 @@
  *
  * Fichier qui gere le les fichier photos et video , ect...
  *
-*TODO : ATTENTION : je tourne sous un systeme UNIX mes path utilise des '/'
- * TODO :alors que sur vos odi il ce peut que sa soit des '\'
+*TODO : ATTENTION : faire attention de bien modifer le define de settingpath correctement
  */
 require "settingspath.php";
 require __DIR__.SLASH."..".SLASH."log".SLASH."phperrorlog.log";
@@ -17,25 +16,26 @@ require __DIR__.SLASH."..".SLASH."log".SLASH."phperrorlog.log";
 //fait l'inisialisation des parametres par default
 function creat_new_user_directory($email){
     logger("**************Creation du'un directorty for user :".$email."*********************");
-    logger("value of root path ".__DIR__);
-   if(!file_exists('/../userdata/'.$email)) {
-       mkdir('/../userdata/' . $email, 0755, true);
-       mkdir('/../userdata/' . $email . "/0", 0755, true);
-       if (file_exists('/../userdata/' . $email) and file_exists('/../userdata/' . $email . "/0")) {
-           if (!copy('/../userdata/default/fond.jpg', '/../userdata/' . $email . '/fond.jpg')) {
-               logger("erreur de copie userdata/default/fond.jpg");
+    logger("value of root path ".__DIR__.SLASH."..".SLASH."userdata".SLASH.$email. "        ");
+   if(is_dir(SLASH."..".SLASH."userdata".SLASH.$email) == false) {
+       mkdir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email, 0755, true);
+       mkdir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email .SLASH."0", 0755, true);
+       if (is_dir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email) and is_dir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email .SLASH."0")) {
+           if (!copy(__DIR__.SLASH."..".SLASH."userdata".SLASH."default".SLASH."fond.jpg", __DIR__.SLASH."..".SLASH."userdata".SLASH. $email . SLASH."fond.jpg")) {
+               logger("erreur de copie userdata".SLASH."default".SLASH."fond.jpg");
            }
-           if (!copy('userdata/default/icon.png', 'userdata/' . $email . '/icon.png')) {
-               logger("erreur de copie userdata/default/icon.png.jpg");
+           if (!copy(__DIR__.SLASH."..".SLASH."userdata".SLASH."default".SLASH."icon.png", __DIR__.SLASH."..".SLASH."userdata".SLASH. $email . SLASH."icon.png")) {
+               logger("erreur de copie userdata".SLASH."default".SLASH."icon.png");
            }
        } else {
-           logger('Erreur creation de dossier :userdata/' . $email);
+           logger('Erreur creation de dossier :userdata'.SLASH . $email);
        }
    }logger("Erreur - Cannot find file userdata , check path");
 }
 function creat_new_user_album($email,$albumname){
-    if(!file_exists('userdata/'.$email."/".$albumname)) {
-    mkdir('userdata/'.$email."/".$albumname);
+    if(!file_exists(__DIR__.SLASH."..".SLASH.'userdata'.SLASH.$email.SLASH.$albumname)) {
+    mkdir(__DIR__.SLASH."..".SLASH.'userdata'.SLASH.$email.SLASH.$albumname);
+    logger("Creation du dossier poour l'album reussi ".$albumname." user id".$email);
     }
 }
 /*
@@ -44,7 +44,7 @@ function creat_new_user_album($email,$albumname){
 function save_post($idpost,$idalbum,$pathtodata)
 {
     $extension = strrchr($pathtodata, '.');
-    if (move_uploaded_file($pathtodata, "userdata/" . $idalbum . $idpost . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+    if (move_uploaded_file($pathtodata, __DIR__.SLASH."..".SLASH."userdata".SLASH . $idalbum . $idpost . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
     {
         echo 'Upload effectué avec succès !';
         return 1;
@@ -62,10 +62,10 @@ function rrmdir($dir) {
         $objects = scandir($dir);
         foreach ($objects as $object) {
             if ($object != "." && $object != "..") {
-                if (is_dir($dir."/".$object))
-                    rrmdir($dir."/".$object);
+                if (is_dir($dir.SLASH.$object))
+                    rrmdir($dir.SLASH.$object);
                 else
-                    unlink($dir."/".$object);
+                    unlink($dir.SLASH.$object);
             }
         }
         rmdir($dir);

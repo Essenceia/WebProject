@@ -6,7 +6,7 @@
  * Time: 1:50 PM
  */
 
-require "databaseutility.php";
+//require "databaseutility.php";
 function connect($email, $mdp){
   $state = connect_datavalide($email, $mdp);
   if ($state == 0){
