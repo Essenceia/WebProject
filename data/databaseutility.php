@@ -268,3 +268,26 @@ function connect_datavalide($email,$pw){
         return 3;
     }
 }
+
+/*
+ * Chnage le nom de l'utilisateur
+ * 0 - nom changé
+ * 1 - utilisateur n'existe pas
+ * 2 - connexion impossible
+ */
+function change_name($name){
+    $db = connect_db();
+    if($db->ping()) {
+        $sql = "UPDATE webapp.user SET nom = '$name' WHERE email='".$_COOKIE["user"]."' ";
+        if (mysqli_query($db, $sql)) {
+            echo "Record updated successfully";
+            return 0;
+        } else {
+            echo "Error updating record: " . mysqli_error($conn);
+            return 1;
+        }
+    }else{
+        return 2;
+    }
+}
+
