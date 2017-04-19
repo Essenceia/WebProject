@@ -1,5 +1,6 @@
-<table>
-    {{ error }}
+<table class="visuProfil">
+   <p class="visuProfil"> {{ error }}
+   </p>
     {% for alb in album %}
         <tr>
             <td>
@@ -8,7 +9,7 @@
             <td>
                 <ul>
 
-                    <li>
+                    <li class="page">
                      Nom:   {{ alb.nom }}<br>
                       Description:   {{ alb.description }} <br>
 

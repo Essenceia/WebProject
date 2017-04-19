@@ -1,78 +1,99 @@
-body { background-color: whitesmoke;
+body { background-color: GhostWhite;
     color: #000000;
-    font-family: Arial, Helvetica, sans-serif; }
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: Century;
+    font-size: 0.70em;
+    text-align: center;
+    height: 100vh}
 
-#nav { font-weight:bold;
-    font-size: .70em;
-    margin-left: 15px; margin-right: 15px;}
 
-
-#MenuH { background-color: #600050;
-    color: #003300;
+#MenuH { background-color: #2040E0;
     width: 100%;
-    height:10vh;
-    text-align: center;}
+    height:5vh;
+    text-align: center;
+    text-decoration: none;
+}
 #MenuHTxt{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 5.00em;
-    color: Ivory;
-    float: left;
-    margin-left: 1px;
+    font-size: 2.00em;
+    color: GhostWhite;
+    margin-left: 0px;
     margin-right: 70px;
     display:inline-block;
-    line-height:50%;
     vertical-align:middle;
+    text-decoration: none;
 }
 
 #MenuB {
-    background-color:#8E4585;
-    float: left;
+    background-color:#0070FF;
     width: 100%;
+    height:4vh;
     text-align: center;
-    height: 10vh;
+    text-decoration: none;
+
 }
 
 #MenuBTxt {
-    background-color:#8E4585;
-    text-align: center;
-    float: none;
-    height: 10vh;
-    font-size: 3.00em;
-    margin-left: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.00em;
+    color: GhostWhite;
+    margin-left: 0px;
     margin-right: 70px;
-    margin-bottom: 30px;
-    vertical-align:middle;
     display:inline-block;
+    vertical-align:middle;
+    text-decoration: none;
 }
 
-#Messagerie {
+#messagerie {
     width: 20%;
     text-align: center;
-    background-color: #8470FF;
+    background-color: #F5F5F5;
+    color: GhostWhite;
     float: right;
+    text-decoration: none;
     height: 100vh;
-}
-
-#left-colomn {
-    text-align:center;
-    font-size: 2.00em;
 }
 
 #footer {
     font-size: .60em;
     font-style: italic;
-    text-align: center}
+    text-align: center;
+}
 #left-colomn{
     width: 80%;
 }
-#button, #textbox{
 
-    height:50px;
-    font-size:5.0em;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
 #button{
-    background-color: #D000A0;
+    background-color: #6495ED;
     color: white;
+}
+#login{
+    height:100vh;
+    padding-top: 30vh;
+    font-size: xx-large;
+
+}
+.page{
+    text-align: center;
+}
+span{
+    line-height: inherit;
+    vertical-align: bottom;
+}
+.visuProfil{
+    font-size:3.0em;
+    text-align: inherit;
+    width: 80%;
+
+}
+.configurationForm{
+    padding-top: 5vh;
+    font-size: large;
+
+}
+#configuration{
+    height:100vh;
+    padding-top: 10vh;
+    font-size: large;
+
 }
