@@ -30,7 +30,7 @@ $container['db']= function(){
 
 /*
 $container['username']= function (){
->>>>>>> 56868b060e26e2c547f3d2367460ad924fce45db
+
   $email = "m.champalier";
   $mdp = 'ooo';
   connect($email,$mdp);
