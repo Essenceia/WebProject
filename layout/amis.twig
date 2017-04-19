@@ -1,1 +1,30 @@
-bienvenue dans la liste d'amis
+<h2>Liste d'amis</h2>
+
+<table>
+    {% for user in data%}
+
+        <tr>
+            <td>
+                <img src={{ '/../userdata/'~ user.email ~ '/icon.png'}}  height="128" width="128" name="Icon">
+            </td>
+            <td>
+                <ul>
+
+                    <li>
+                        {{ user.nom }}<br>
+                        {{ user.email }} <br>
+                        {{ user.pseudo }} <br>
+                        {{ user.mdp }} <br>
+                        {{ user.friend_status }} <br>
+                        <form class="delet friend" id="supprimerAction" method="post">
+                            Suprime ami - pour toi marianne<input type="submit" value="Valider"/>
+                        </form>
+
+
+                    </li>
+
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
