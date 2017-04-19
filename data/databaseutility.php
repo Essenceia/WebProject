@@ -76,8 +76,8 @@ function get_user($email){
 function add_user($email,$nom,$pseudo){
     $db = connect_db();
     $sql = "INSERT INTO webapp.user (email, nom, mdp, pseudo) VALUES ('$email','$nom','$pseudo','$pseudo')";
-    if ($bd->ping()) {
-        if(mysqli_query($bd,$sql)){
+    if ($db->ping()) {
+        if(mysqli_query($db,$sql)){
             //creation reussi
             creat_new_user_directory($email);
             logger("succes - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
@@ -139,6 +139,7 @@ function delete_user($email)
             }
             //suppression de ces donners
             rrmdir("userdata/".$email);
+            return 1;
         }else {
             logger("Erreur - l'utilisateur n'existe pas , impossible de le suprimer ".$email);
             return 0;

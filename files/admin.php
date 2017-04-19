@@ -28,8 +28,10 @@
         
         <div>
             <h2>Liste des utilisateurs</h2>
-            <div id="userlist">
-
+            <div>
+                <ul id="userlist">
+                
+                </ul>
             </div>
         </div>
     </body>
