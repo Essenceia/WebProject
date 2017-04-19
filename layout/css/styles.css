@@ -1,19 +1,18 @@
 body { background-color: GhostWhite;
     color: #000000;
-    font-family: Arial, Helvetica, sans-serif; }
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: Century;
+    font-size: 0.70em;
+    text-align: center;
+    height: 100vh}
 
-#nav { font-weight:bold;
-    font-size: .70em;
-    margin-left: 15px; margin-right: 15px;}
 
-#menu{
-    width: 100%;
-    height: 8vh ;
-}
 #MenuH { background-color: #2040E0;
     width: 100%;
     height:5vh;
-    text-align: center;}
+    text-align: center;
+    text-decoration: none;
+}
 #MenuHTxt{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2.00em;
@@ -22,41 +21,37 @@ body { background-color: GhostWhite;
     margin-right: 70px;
     display:inline-block;
     vertical-align:middle;
+    text-decoration: none;
 }
 
 #MenuB {
     background-color:#0070FF;
-    float: left;
     width: 100%;
+    height:4vh;
     text-align: center;
-    height: 3vh;
+    text-decoration: none;
+
 }
 
 #MenuBTxt {
-    color:GhostWhite;
-    text-align: center;
-    float: left;
-    height: 10vh;
-    font-size: 1.00em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.00em;
+    color: GhostWhite;
     margin-left: 0px;
     margin-right: 70px;
-    margin-bottom: 30px;
-    vertical-align:middle;
     display:inline-block;
+    vertical-align:middle;
+    text-decoration: none;
 }
 
 #messagerie {
     width: 20%;
     text-align: center;
-    background-color: #4682B4;
+    background-color: #F5F5F5;
     color: GhostWhite;
     float: right;
+    text-decoration: none;
     height: 100vh;
-}
-
-#left-colomn {
-    text-align:center;
-    font-size: 2.00em;
 }
 
 #footer {
@@ -67,14 +62,27 @@ body { background-color: GhostWhite;
 #left-colomn{
     width: 80%;
 }
-#button, #textbox{
 
-    height:50px;
-    font-size:5.0em;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
 #button{
-    background-color: #D000A0;
+    background-color: #6495ED;
     color: white;
+}
+#login{
+    height:100vh;
+    padding-top: 30vh;
+    font-size: xx-large;
+
+}
+.page{
+    text-align: center;
+}
+span{
+    line-height: inherit;
+    vertical-align: bottom;
+}
+.visuProfil{
+    font-size:3.0em;
+    text-align: inherit;
+    width: 80%;
+
 }

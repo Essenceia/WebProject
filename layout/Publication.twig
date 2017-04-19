@@ -1,7 +1,7 @@
 <div id="status">
     <form method="post" action="publication.php" >
         Status :
-        <input type="text" id="textbox" name="status" id="status"/>
+        <input type="text" class="textbox" name="status" id="status"/>
         <input type="submit" id="button" value="Publier" name="publierStatus"/>
     </form>
 </div>
@@ -10,15 +10,15 @@
 <!-- Publication Image/Video-->
 <div id="postImVid">
     <form method="post" action="publication.php" >
-        <input type="text" id="textbox" name="path"  class="Box"/>
-        <input type="button" id="button" value="Sélectionner un média" name="selMedia"/>
+        <input type="text" class="textbox" name="path"  class="Box"/>
+        <input type="button" class="button" value="Sélectionner un média" name="selMedia"/>
 
         <br/>
 
-        <input type="text" name="lieu" id="textbox" value="Lieu"/>
-        <input type="date" name="date" id="textbox" value="Date"/>
-        <input type="text" name="emot" id="textbox" value="Emotion"/>
-        <input type="text" name="activité" id="textbox" value="Activité"/>
+        <input type="text" name="lieu" class="textbox" value="Lieu"/>
+        <input type="date" name="date" class="textbox" value="Date"/>
+        <input type="text" name="emot" class="textbox" value="Emotion"/>
+        <input type="text" name="activité" class="textbox" value="Activité"/>
 
         <br/>
 
@@ -26,46 +26,7 @@
         <input type="radio" name="typPub" value="Amis" > Amis <br/>
         <input type="radio" name="typPub" value="Seul" > Moi-même <br/>
 
-        <input type="submit" id="button" value="Publier" name="ajouter"/>
+        <input type="submit" class="button" value="Publier" name="ajouter"/>
     </form>
 </div>
-<!-- Affichage de l'historique-->
-<h1>Resultat de la recherche</h1>
-{% for post in data %}
 
-{% if post.type == 0 %}
-<!-- post text -->
-    <h2>   {{ post.legend }}</h2> <br>
-    {% if post.emotion %}
-        <div id="emotion">
-        <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion">
-        </div>
-    {% endif %}
-{% elseif post.type == 1 or post.type ==2 %}
-    <!-- post image ou video-->
-    <img src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.mp4'}} name={{ post.idpost }}>
-    {% if post.type == 1 %}
-        {% else %}
-            <video width="320" height="240" autoplay>
-                <source src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.mp4'}} type="video/mp4">
-                <source src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.ogg'}} type="video/ogg">
-                Your browser does not support the video tag.
-            </video>
-    {% endif %}
-    <form class="add to album" id="addToAlbumAction" method="post">
-        Add to album - pour toi marianne<input type="submit" value="Valider"/>
-    </form>
-{% endif %}
-    {% if post.legende %}
-        {{ post.legende }}
-    {% endif %}
-    {% if post.date%}
-        {{ post.date}}
-    {% endif %}
-    {% if post.lieu%}
-        {{ post.lieu }}
-    {% endif %}
-    {% if post.activiter%}
-        {{ post.activiter}}
-    {% endif %}
-{% endfor %}
