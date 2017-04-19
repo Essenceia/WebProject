@@ -64,7 +64,7 @@ $app->get('/Configuration/', function ($request, $response, $args) {
 $app->get('/Amis/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "amis.twig"]);
 });
-$app->get('/Chronologie/', function ($request, $response, $args) {
+$app->get("/Chronologie/", function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig"]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
