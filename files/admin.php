@@ -21,7 +21,7 @@
        
         <input type="button" id="supprimerButton" value="Supprimer un utilisateur"/>
  
-        <form class="hidden supprimer" id="supprimerAction" method="post">
+        <form class="hidden supprimer" id="supprimerAction" >
             Email : <input type="text" name="emaildel" id="emaildel"/> @edu.ece.fr 
             <input type="submit" value="Valider"/>
         </form>

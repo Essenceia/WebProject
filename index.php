@@ -38,7 +38,7 @@ $container['username']= function (){
 $app->get('/Login', function ($request, $response, $args) {
     return $this->view->render($response, 'login.twig');
 });
-$app->get('/Profil/', function ($request, $response, $args) {
+$app->get('/', function ($request, $response, $args) {
     $data = get_user($this->username);
     return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig"]);
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
@@ -63,6 +63,7 @@ $app->get('/Coupe2016/', function ($request, $response, $args) {
 $app->get('/Configuration/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
 });
+
 $app->get('/Chronologie/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig"]);
 });
@@ -70,7 +71,7 @@ $app->get('/Publication/', function ($request, $response, $args) {
     $data = get_post_actualiter(0,$this->username);
     return $this->view->render($response, 'index.twig', ["name" => "Publication.twig" ,"user_name" =>$this->username , "data" => $data]);
 });
-$app->get('/', function ($request, $response, $args) {
+$app->get('/Amis/', function ($request, $response, $args) {
     logger("friend_list still called");
     $data = friend_list(1);
     logger("end friend_list still called");
