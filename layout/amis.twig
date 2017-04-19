@@ -1,6 +1,6 @@
 <h2>Liste d'amis</h2>
 
-<table>
+<table id="amisAff">
     {% for user in data%}
 
         <tr>
@@ -10,18 +10,15 @@
             <td>
                 <ul>
 
-                    <li>
-                        {{ user.nom }}<br>
-                        {{ user.email }} <br>
-                        {{ user.pseudo }} <br>
-                        {{ user.mdp }} <br>
-                        {{ user.friend_status }} <br>
+
+                        Nom : {{ user.nom }}<br>
+                        Email: {{ user.email }} @edu.ece.fr<br>
+                        Pseudo : {{ user.pseudo }} <br>
+                        Statuts d'amitié : {{ user.friend_status }} <br>
                         <form class="delet friend" id="supprimerAction" method="post">
-                            Suprime ami - pour toi marianne<input type="submit" value="Valider"/>
+                            Supprime ami - pour toi marianne<input type="submit" value="Valider"/>
                         </form>
 
-
-                    </li>
 
                 </ul>
             </td>
