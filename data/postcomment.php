@@ -5,7 +5,7 @@
  * Date: 4/18/17
  * Time: 9:33 AM
  */
-require_once "databaseutility.php";
+require"databaseutility.php";
 
 if (isset($_POST['requete']))
 {
