@@ -1,6 +1,11 @@
+*{
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body { background-color: GhostWhite;
     color: #000000;
-    font-family: Arial, Helvetica, sans-serif;
+
     font-family: Century;
     font-size: 0.70em;
     text-align: center;
@@ -14,7 +19,6 @@ body { background-color: GhostWhite;
     text-decoration: none;
 }
 #MenuHTxt{
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 2.00em;
     color: GhostWhite;
     margin-left: 0px;
@@ -23,7 +27,11 @@ body { background-color: GhostWhite;
     vertical-align:middle;
     text-decoration: none;
 }
-
+#MenuHTxt:hover{
+    font-weight: bold;
+    font-size: xx-large;
+    color:#FF0000;
+}
 #MenuB {
     background-color:#0070FF;
     width: 100%;
@@ -34,7 +42,6 @@ body { background-color: GhostWhite;
 }
 
 #MenuBTxt {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 2.00em;
     color: GhostWhite;
     margin-left: 0px;
@@ -42,6 +49,11 @@ body { background-color: GhostWhite;
     display:inline-block;
     vertical-align:middle;
     text-decoration: none;
+}
+#MenuBTxt:hover{
+    font-weight: bold;
+    font-size: x-large;
+    color:#FF0000;
 }
 
 #messagerie {
@@ -67,18 +79,38 @@ body { background-color: GhostWhite;
     background-color: #6495ED;
     color: white;
 }
+
+
+
 #login{
-    height:100vh;
-    padding-top: 30vh;
-    font-size: xx-large;
+   font-size: xx-large;
+    border:solid;
+    border-color: #00BFFF;
+    border-width: 5px;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 50px;
+    padding-bottom: 50px;
 
 }
-.page{
-    text-align: center;
+
+.pageIndex{
+
+    border:solid;
+    border-color: #00BFFF;
+    border-width: 5px;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 span{
     line-height: inherit;
     vertical-align: bottom;
+}
+.page{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .visuProfil{
     font-size:3.0em;
@@ -101,9 +133,22 @@ span{
     height:100vh;
     padding-top: 10vh;
     font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
 
 }
-.pp{
-    padding-top: 4vh;
-    font-size: large;
+.connect{
+    padding-top: 10vh;
+    text-align: center;
+    font-size: xx-large;
+    font-weight:bold;
+    color: #00BFFF;
+}
+
+.titre{
+    padding-top: 5vh;
+    text-align: center;
+    font-size: 15.00em;
+    font-weight:bold;
+
+    color: #E050FF;
 }
