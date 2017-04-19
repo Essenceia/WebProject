@@ -37,6 +37,17 @@ $container['username']= function (){
 $app->get('/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Publication.twig","user_name" => $this->username]);
 });
+$app->get('/Album/', function ($request, $response, $args) {
+    //accept_friend_request($this->db,"desmazes","kiki");
+    $data = get_album("desmazes");
+    if($data==2)
+    {
+        echo "Il n'y a aucun album ";
+
+    }
+    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig"]);
+
+});
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
     $data = get_user_list($this->db);
@@ -49,6 +60,12 @@ $app->get('/Profil/', function ($request, $response, $args) {
 });
 $app->get('/Configuration/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
+});
+$app->get('/Amis/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "amis.twig"]);
+});
+$app->get('/Chronologie/', function ($request, $response, $args) {
+    return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig"]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Publication.twig" ,"user_name" =>$this->username]);

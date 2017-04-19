@@ -18,7 +18,7 @@ function get_friend_status($row){
     if($row["status"]==1){
         return "L'utilisateur ".get_email($row["user1"])." et ".get_email($row["user2"])." sont ami depuis le ".$row["date"]." <br>";
     }
-    else return "L'utilisateur ".get_email($row["user1"])." a demander en amis ".get_email($row["user2"])." le ".$row["date"]." <br>";
+    else return "L'utilisateur ".get_email($row["user1"])." a demandé en amis ".get_email($row["user2"])." le ".$row["date"]." <br>";
 }
 /*
  * Permet de recuperer les emails des amies du l'utilisateur dont l'id est passer en argument
@@ -66,7 +66,26 @@ function get_user($email){
     }
     return $res;
 }
+function get_album($email){
+    $db = connect_db();
+    $res = [];
+    //ceci est une diff
+    if($db->ping()) {
 
+        $sql = "SELECT * FROM webapp.album WHERE user='$email'";
+        $resrequette = mysqli_query($db, $sql);
+
+        for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+            $res[$i] = mysqli_fetch_assoc($resrequette);
+        }
+    }
+    if($res)
+    {
+        return $res;
+    }
+    else return 2;
+
+}
 /*
  * Verfie si l'utilisateur existe deja dans la base et essaye de l'ajouter, return :
  * 0 - fail , l'utilisateur existe deja
@@ -76,8 +95,8 @@ function get_user($email){
 function add_user($email,$nom,$pseudo){
     $db = connect_db();
     $sql = "INSERT INTO webapp.user (email, nom, mdp, pseudo) VALUES ('$email','$nom','$pseudo','$pseudo')";
-    if ($bd->ping()) {
-        if(mysqli_query($bd,$sql)){
+    if ($db->ping()) {
+        if(mysqli_query($db,$sql)){
             //creation reussi
             creat_new_user_directory($email);
             logger("succes - creation de l'utilisateur avec les parametres :".$email.$nom.$pseudo);
