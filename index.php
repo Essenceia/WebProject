@@ -34,18 +34,18 @@ $container['username']= function (){
   //TODO revoyer les paramtres de connection effectif, a faire quand on aura une page de connection
   return "m.champalier";
 };
-$app->get('/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Publication.twig","user_name" => $this->username]);
+$app->get('/Login/', function ($request, $response, $args) {
+    return $this->view->render($response, 'login.twig');
 });
-$app->get('/Album/', function ($request, $response, $args) {
+$app->get('/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
-    $data = get_album("desmazes");
+    $data = get_album($this->username);
     if($data==2)
     {
-        echo "Il n'y a aucun album ";
+        return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "Il n'y a aucun album"]);
 
     }
-    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig"]);
+    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> ""]);
 
 });
 $app->get('/Coupe2016/', function ($request, $response, $args) {
