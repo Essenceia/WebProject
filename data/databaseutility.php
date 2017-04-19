@@ -366,10 +366,14 @@ function change_name($name){
     $db = connect_db();
     if($db->ping()) {
         $email = $_COOKIE['user'];
-        $sql = "UPDATE webapp.user SET nom = '$name' WHERE email='$email' ";
-        if (mysqli_query($db, $sql)) {
-            //"Record updated successfully";
-            return 0;
+        if($email !=''){
+            $sql = "UPDATE webapp.user SET nom = '$name' WHERE email='$email' ";
+            if (mysqli_query($db, $sql)) {
+                //"Record updated successfully";
+                return 0;
+            }
+            else return 1;
+        
         } else {
             //"Mise à jour impossible";
             return 1;
@@ -380,19 +384,22 @@ function change_name($name){
 }
 
 /*
- * Change le l'email de l'utilisateur
- * 0 - nom changé
+ * Change le pseudo de l'utilisateur
+ * 0 - pseudo changé
  * 1 - utilisateur n'existe pas
  * 2 - connexion impossible
  */
-function change_email($change){
+function change_pseudo($change){
     $db = connect_db();
     if($db->ping()) {
         $email = $_COOKIE['user'];
-        $sql = "UPDATE webapp.user SET email = '$change' WHERE email='$email' ";
-        if (mysqli_query($db, $sql)) {
-            //"Record updated successfully";
-            return 0;
+        if($email !=''){
+            $sql = "UPDATE webapp.user SET pseudo = '$change' WHERE email='$email' ";
+            if (mysqli_query($db, $sql)) {
+                //"Record updated successfully";
+                return 0;
+            }
+            else return 0;
         } else {
             //"Mise à jour impossible";
             return 1;
@@ -400,4 +407,41 @@ function change_email($change){
     }else{
         return 2;
     }
+}
+
+/*
+ * Change le password de l'utilisateur
+ * 0 - mdp changé
+ * 1 - Mise à jour impossible
+ * 2 - connexion impossible
+ * 3 - mauvais ancien mot de passe
+ */
+function change_pwd($ancien, $nouveau){
+    $db = connect_db();
+    if($db->ping()) {
+        $email = $_COOKIE['user'];
+        if($email !=''){
+
+            $sql = "SELECT mdp FROM webapp.user WHERE email='$email' limit 1";
+            $resrequette = mysqli_query($db, $sql);
+
+            for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+                $res[$i] = mysqli_fetch_assoc($resrequette);
+            }
+            if($res[0]['mdp'] == $ancien){
+                $sql = "UPDATE webapp.user SET mdp = '$nouveau' WHERE email='$email' limit 1";
+
+                if (mysqli_query($db, $sql)) {
+                //"Record updated successfully";
+                return 0;
+                } else {
+                    //"Mise à jour impossible";
+                    return 1;
+                }
+            }
+            else return 3;
+        }
+        else return 1;  
+    }
+    else return 2;
 }
