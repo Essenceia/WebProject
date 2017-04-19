@@ -63,9 +63,9 @@ function get_comment_from_post($idpost){
         logger("erreur connection base de donner - get comment from post");}
     return $data;
 }
-function get_chronologie($pagenum,$email){
+function get_chronologie($pagenum){
     $db = connect_db();
-    //$email = $_COOKIE['user'];
+    $email = $_COOKIE['user'];
     $data = [];
     $num = NUMBER_PER_PAGE;
     $offset = NUMBER_PER_PAGE*$pagenum;

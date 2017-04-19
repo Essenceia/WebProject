@@ -110,8 +110,9 @@ function get_selected_user($email){
 
     return $res;
 }
-function get_album($email){
+function get_album(){
     $db = connect_db();
+    $email = $_COOKIE['user'];
     $res = [];
     //ceci est une diff
     if($db->ping()) {
@@ -240,6 +241,7 @@ function friend_request($db,$touser){
     }
 }else{
         logger("erreur de cokkie de sesion");
+        return 0;
     }}
 /*
  * accepter une demande en amie d'un utilisateur:
@@ -286,7 +288,7 @@ function delet_friend($todelet,$status){
         logger("erreur connection base de donner");}
 }
 
-function create_post($email,$typepost,$legende,$idalbum,$contenu){
+function create_post($typepost,$legende,$idalbum,$contenu){
     $email = $_COOKIE['user'];
     if($_COOKIE['user']) {
         //blindage
@@ -425,10 +427,10 @@ function change_pwd($ancien, $nouveau){
             $sql = "SELECT mdp FROM webapp.user WHERE email='$email' limit 1";
             $resrequette = mysqli_query($db, $sql);
 
-            for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
-                $res[$i] = mysqli_fetch_assoc($resrequette);
-            }
-            if($res[0]['mdp'] == $ancien){
+            if(mysqli_num_rows($resrequette)) {
+                $res = mysqli_fetch_assoc($resrequette);
+
+            if($res['mdp'] == $ancien){
                 $sql = "UPDATE webapp.user SET mdp = '$nouveau' WHERE email='$email' limit 1";
 
                 if (mysqli_query($db, $sql)) {
@@ -438,7 +440,7 @@ function change_pwd($ancien, $nouveau){
                     //"Mise à jour impossible";
                     return 1;
                 }
-            }
+            }return 3;}
             else return 3;
         }
         else return 1;  
