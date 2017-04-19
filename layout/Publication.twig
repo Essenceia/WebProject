@@ -1,8 +1,20 @@
 <div class="publi">
     <form method="post" action="publication.php" class="pp">
         Status :
-        <input type="text" class="textbox" name="status" id="status"/>
-        <input type="submit" id="button" value="Publier" name="publierStatus"/>
+        <input type="text" class="textbox" name="status" id="status"/> <br> <br> <br>
+        <input type="text" name="date" class="textbox" value="Date" id="date"/>
+        <input type="text" name="lieu" class="textbox" value="Lieu" id="lieu"/>
+        <input type="text" name="emot" class="textbox" value="Emotion" id="emotion"/>
+        <input type="text" name="activité" class="textbox" value="Activité" id="activite"/>
+        <input type="text" name="nomalbum" class=textbox" value="Nom de l'album" id="albumname"/>
+
+        <br/>
+
+        <input type="radio" name="typPub" value="Public" id="pub" checked> Publique <br/>
+        <input type="radio" name="typPub" value="Amis" id="am"> Amis <br/>
+        <input type="radio" name="typPub" value="Seul" id="pr"> Moi-même <br/>
+
+        <input type="submit" id="buttonStatuts" value="Publier" name="publierStatus"/>
     </form>
 </div>
 
@@ -16,7 +28,7 @@
         <br/>
         <br/>
         <br/>
-
+        <input type="text" name="date" class="textbox" value="Date"/>
         <input type="text" name="lieu" class="textbox" value="Lieu"/>
         <input type="text" name="emot" class="textbox" value="Emotion"/>
         <input type="text" name="activité" class="textbox" value="Activité"/>
@@ -28,7 +40,7 @@
         <input type="radio" name="typPub" value="Amis" > Amis <br/>
         <input type="radio" name="typPub" value="Seul" > Moi-même <br/>
 
-        <input type="submit" class="button" value="Publier" name="ajouter"/>
+        <input type="submit" class="button" value="Publier" name="PublierMédia"/>
     </form>
 </div>
 <!-- Affichage de l'historique-->

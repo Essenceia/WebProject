@@ -65,6 +65,22 @@ $app->get('/Album/', function ($request, $response, $args) {
     else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "", "data"=>$tmp]);
 
 });
+
+$app->get('/Photos/', function ($request, $response, $args) {
+    //accept_friend_request($this->db,"desmazes","kiki");
+    $data = get_album();
+
+    $tmp = [];
+
+    if($data==2)
+    {
+        return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "Il n'y a aucun album" , "data"=>$tmp]);
+
+    }
+    else return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "", "data"=>$tmp]);
+
+});
+
 $app->get('/Coupe2016/', function ($request, $response, $args) {
     accept_friend_request($this->db,"desmazes","kiki");
     //$data = get_user_list($this->db);

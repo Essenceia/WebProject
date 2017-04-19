@@ -131,6 +131,26 @@ function get_album(){
     else return 2;
 
 }
+function get_photos_albums($album){
+    $db = connect_db();
+    $email = $_COOKIE['user'];
+    $res = [];
+    //ceci est une diff
+    if($db->ping()) {
+
+        $sql = "SELECT * FROM webapp.post WHERE idpost='$album'";
+        $resrequette = mysqli_query($db, $sql);
+
+        for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+            $res[$i] = mysqli_fetch_assoc($resrequette);
+        }
+    }
+    if($res)
+    {
+        return $res;
+    }
+    else return 2;
+}
 /*
  * Verfie si l'utilisateur existe deja dans la base et essaye de l'ajouter, return :
  * 0 - fail , l'utilisateur existe deja
