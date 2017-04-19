@@ -38,7 +38,7 @@ $container['username']= function (){
 $app->get('/Login/', function ($request, $response, $args) {
     return $this->view->render($response, 'login.twig');
 });
-$app->get('/', function ($request, $response, $args) {
+$app->get('/Album/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
     $data = get_album($this->username);
     if($data==2)
@@ -54,7 +54,7 @@ $app->get('/Coupe2016/', function ($request, $response, $args) {
     $data = get_user_list($this->db);
     return $this->view->render($response, 'UserTest.twig', ["users" => $data]);
 });
-$app->get('/Profil/', function ($request, $response, $args) {
+$app->get('/', function ($request, $response, $args) {
     $data = get_user($this->username);
     return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig"]);
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
