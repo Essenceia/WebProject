@@ -34,7 +34,7 @@ function friend_list($friend_status){
         $res = mysqli_query($db,$sql);
         for ($i = 0; $i < mysqli_num_rows($res); $i++) {
             $data[$i] = mysqli_fetch_assoc($res);
-            if($data['user1']==$email){
+            if($data[$i]['user1']==$email){
                 $friend = $data[$i]['user2'];
             }else{
                 $friend = $data[$i]['user1'];
@@ -357,7 +357,7 @@ function connect_datavalide($email,$pw){
 }
 
 /*
- * Chnage le nom de l'utilisateur
+ * Change le nom de l'utilisateur
  * 0 - nom changé
  * 1 - utilisateur n'existe pas
  * 2 - connexion impossible
@@ -365,12 +365,13 @@ function connect_datavalide($email,$pw){
 function change_name($name){
     $db = connect_db();
     if($db->ping()) {
-        $sql = "UPDATE webapp.user SET nom = '$name' WHERE email='".$_COOKIE["user"]."' ";
+        $email = $_COOKIE['user'];
+        $sql = "UPDATE webapp.user SET nom = '$name' WHERE email='$email' ";
         if (mysqli_query($db, $sql)) {
-            echo "Record updated successfully";
+            //"Record updated successfully";
             return 0;
         } else {
-            echo "Error updating record: " . mysqli_error($conn);
+            //"Mise à jour impossible";
             return 1;
         }
     }else{
@@ -378,3 +379,25 @@ function change_name($name){
     }
 }
 
+/*
+ * Change le l'email de l'utilisateur
+ * 0 - nom changé
+ * 1 - utilisateur n'existe pas
+ * 2 - connexion impossible
+ */
+function change_email($change){
+    $db = connect_db();
+    if($db->ping()) {
+        $email = $_COOKIE['user'];
+        $sql = "UPDATE webapp.user SET email = '$change' WHERE email='$email' ";
+        if (mysqli_query($db, $sql)) {
+            //"Record updated successfully";
+            return 0;
+        } else {
+            //"Mise à jour impossible";
+            return 1;
+        }
+    }else{
+        return 2;
+    }
+}

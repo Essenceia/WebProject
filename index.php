@@ -60,7 +60,8 @@ $app->get('/', function ($request, $response, $args) {
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
 });
 $app->get('/Configuration/', function ($request, $response, $args) {
-    return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig"]);
+    $username = $this->username;
+    return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig",]);
 });
 $app->get('/Chronologie/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig"]);

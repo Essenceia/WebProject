@@ -1,28 +1,68 @@
 <div id="configuration">
+    <script type="text/javascript">
+        $(document).ready(function () {
+                
+            var SLASH = "/";
+            $("#changernom").submit(function (e) {
+                e.preventDefault();
+                if ($("#nom").val() == '')
+                {
+                    alert("Veuillez entrer un nom");
+                }        
+                else{
+                    $.ajax({
+                        data: 'nom=' +  $("#nom").val(),
+                        url: SLASH+'..'+SLASH+'layout'+SLASH+'configuration.php',
+                        method: 'POST',
+                        success: function(msg) {
+                            alert(msg);   
+                        }
+                    });
+                }
+            });
+            $("#changeremail").submit(function (e) {
+                e.preventDefault();
+                if ($("#email").val() == '' || $("#email").val().lastIndexOf("@") != -1)
+                {
+                    alert("Veuillez entrer un email valide");
+                }        
+                else{
+                    $.ajax({
+                        data: 'email=' +  $("#email").val(),
+                        url: SLASH+'..'+SLASH+'layout'+SLASH+'configuration.php',
+                        method: 'POST',
+                        success: function(msg) {
+                            alert(msg);   
+                        }
+                    });
+                }
+            });
+        });
+    </script>
     
     <!-- Changement Nom -->
-    <form method="get" id="changernom" class="configurationForm" >
+    <form id="changernom" class="configurationForm" >
         Nom : <input type="text" name="nom" id="nom" class="textbox">
         <input type="submit" class="button" value="Changer"/>
     </form>
     <!-- Changement Email -->
-    <form method="post" id="changeremail" class="configurationForm">
-        Email : <input type="email" name="email" id="email" class="textbox" >
+    <form id="changeremail" class="configurationForm">
+        Email : <input type="text" name="email" id="email" class="textbox" > @edu.ece.fr
         <input type="submit" class="button" value="Changer"/>
     </form>
     <!-- Changement Pseudo -->
-    <form method="post" id="changerpseudo" class="configurationForm">
+    <form id="changerpseudo" class="configurationForm">
         Pseudo : <input type="text" name="pseudo" id="pseudo" class="textbox">
         <input type="submit" class="button" value="Changer"/>
     </form>
     <!-- Changement mdp -->
-    <form method="post" id="changermdp" class="configurationForm" >
+    <form id="changermdp" class="configurationForm" >
         Ancien mot de passe : <input type="password" id="ancienpwd" name="ancienpwd" class="textbox"><br/>
         Nouveau mot de passe : <input type="password" id="password" name="password" class="textbox">
         <input type="submit" class="button" value="Changer"/>
     </form>
     <!-- Changement Photo -->
-    <form method="post" id="changerphoto" class="configurationForm">
+    <form id="changerphoto" class="configurationForm">
         Photo : <input type="text" name="photo"  id="photo" class="textbox">
         <input type="submit" class="button" value="Changer" name="ajouter"/>
     </form>
