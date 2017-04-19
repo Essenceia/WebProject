@@ -14,6 +14,7 @@
         $("#subButton").click(function () {
             //alert("We have entenred function");
             var str = $("#email").val();
+            //diff to allow push
             var tab = str.split("@");
             if(tab[1]!= "edu.ece.fr" ) {
                 alert("Erreur dans le mail, nous attendoins a un mail de l'ece terminant par @edu.ece.fr");
