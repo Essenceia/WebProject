@@ -1,4 +1,4 @@
-body { background-color: whitesmoke;
+body { background-color: GhostWhite;
     color: #000000;
     font-family: Arial, Helvetica, sans-serif; }
 
@@ -6,49 +6,50 @@ body { background-color: whitesmoke;
     font-size: .70em;
     margin-left: 15px; margin-right: 15px;}
 
-
-#MenuH { background-color: #600050;
-    color: #003300;
+#menu{
     width: 100%;
-    height:10vh;
+    height: 8vh ;
+}
+#MenuH { background-color: #2040E0;
+    width: 100%;
+    height:5vh;
     text-align: center;}
 #MenuHTxt{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 5.00em;
-    color: Ivory;
-    float: left;
-    margin-left: 1px;
+    font-size: 2.00em;
+    color: GhostWhite;
+    margin-left: 0px;
     margin-right: 70px;
     display:inline-block;
-    line-height:50%;
     vertical-align:middle;
 }
 
 #MenuB {
-    background-color:#8E4585;
+    background-color:#0070FF;
     float: left;
     width: 100%;
     text-align: center;
-    height: 10vh;
+    height: 3vh;
 }
 
 #MenuBTxt {
-    background-color:#8E4585;
+    color:GhostWhite;
     text-align: center;
-    float: none;
+    float: left;
     height: 10vh;
-    font-size: 3.00em;
-    margin-left: 1px;
+    font-size: 1.00em;
+    margin-left: 0px;
     margin-right: 70px;
     margin-bottom: 30px;
     vertical-align:middle;
     display:inline-block;
 }
 
-#Messagerie {
+#messagerie {
     width: 20%;
     text-align: center;
-    background-color: #8470FF;
+    background-color: #4682B4;
+    color: GhostWhite;
     float: right;
     height: 100vh;
 }
@@ -61,7 +62,8 @@ body { background-color: whitesmoke;
 #footer {
     font-size: .60em;
     font-style: italic;
-    text-align: center}
+    text-align: center;
+}
 #left-colomn{
     width: 80%;
 }
