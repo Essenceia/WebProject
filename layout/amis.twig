@@ -1,4 +1,37 @@
-<h2>Liste d'amis</h2>
+<script type="text/javascript">
+    //Si on clique sur le bouton d'ajout
+    $("#Amis").submit(function(e){
+        e.preventDefault();
+        if($("#email").val() =='')
+        {
+            alert("Veuillez entrer un email");
+        }
+        else if($("#email").val().lastIndexOf("@") != -1){
+            alert("Veuillez entrer une adresse mail valide");
+        }
+        else{       
+            $.ajax({
+                data: 'email=' +  $("#email").val(),
+                url: SLASH+'..'+SLASH+'layout'+SLASH+'amis.php',
+                method: 'POST',
+                success: function(msg) {
+                    alert(msg);
+                }
+            });
+        }
+    });
+</script>
+
+
+<br/></br><h2>Ajouter un ami</h2></br>
+<div id="ajoutAmis">
+    <form method="post" id="Amis" >
+        Email : <input type="email" name="email" id="textbox">@edu.ece.fr
+        <input type="submit" id="button" value="Ajouter"/>
+    </form>
+</div></br></br></br>
+
+<h2>Liste d'amis</h2></br>
 
 <table id="amisAff">
     {% for user in data%}
@@ -16,10 +49,10 @@
                         Pseudo : {{ user.pseudo }} <br>
                         Statuts d'amitié : {{ user.friend_status }} <br>
                         <form class="delet friend" id="supprimerAction" method="post">
-                            Supprime ami - pour toi marianne<input type="submit" value="Valider"/>
+                            <input type="submit" value="Supprimer de la liste d'amis"/>
                         </form>
 
-
+                        
                 </ul>
             </td>
         </tr>
