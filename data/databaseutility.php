@@ -86,9 +86,9 @@ function get_user_list(){
 
 function get_user(){
     $db = connect_db();
-    $email = $_COOKIE['user'];
+    $email = get_cookie_name();
     $res = [];
-    if($_COOKIE['user']) {
+    if(isset($_COOKIE['user'])) {
         //ceci est une diff
         if ($db->ping()) {
 
@@ -255,8 +255,9 @@ function delete_user($email)
  */
 function friend_request($touser){
     $db = connect_db();
+    $mytmpuser = get_cookie_name();
     if($db->ping()) {
-        if ($_COOKIE['user']){
+        if (isset($_COOKIE['user'])){
             if($touser != $_COOKIE['user']){
                 $fromuser = $_COOKIE['user'];
                 $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' 
@@ -291,10 +292,10 @@ function friend_request($touser){
  * l'utilisateur qui accept la demande est touser le recepteur de la demande
  */
 function accept_friend_request($fromuser){
-    $touser = $_COOKIE['user'];
+    $touser =get_cookie_name();
     $db = connect_db();
     if($db->ping()){
-        if($_COOKIE['user']){
+        if(isset($_COOKIE['user'])){
             $sql = "SELECT * FROM webapp.amis WHERE (user1='$fromuser' AND user2='$touser') OR (user1='$touser' AND user2='$fromuser') AND status=0";
             $res = mysqli_query($db,$sql);
             if (mysqli_num_rows($res) == 1) {
@@ -311,7 +312,7 @@ function accept_friend_request($fromuser){
                 logger("error , nombre de ligne invalide");
                 return 2;
             }
-        
+
         }else{
             logger("erreur de cookie de sesion");
             return 3;
@@ -324,11 +325,11 @@ function accept_friend_request($fromuser){
  *  1 - photo : il peut y avoir une legende et un idalbum ( pas obligatoire pour les deux) - $contenu a la path vers le fichier selectionner par l'utilisateur
  *  2 - video : meme que photo
  */
-function delet_friend($todelet){
+function delet_friend($todelet,$status){
     $touser = get_cookie_name();
     $db = connect_db();
     if($db->ping()){
-        if($_COOKIE['user']){
+        if(isset($_COOKIE['user'])){
             $sql= "DELETE FROM webapp.amis WHERE (user1='$todelet' AND user2='$touser') OR (user2='$todelet' AND user1='$touser')" ;
             if(mysqli_query($db,$sql)){
                 logger("Destruction de l'ami");
@@ -347,7 +348,6 @@ function delet_friend($todelet){
         return 3;
     }
 }
-
 
 /*
  * Procedure de l'utilisateur avec email et pw , verifie que ce sont les bons identifiants

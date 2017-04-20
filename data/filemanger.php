@@ -44,19 +44,21 @@ function creat_new_user_album($email,$albumname){
 /*
  * La photo ou video prendra pour nom la valheur de idpost
  */
+/*
 function save_post($idpost,$idalbum,$pathtodata)
 {
     $extension = strrchr($pathtodata, '.');
-    if (move_uploaded_file($pathtodata, __DIR__.SLASH."..".SLASH."userdata".SLASH . $idalbum . $idpost . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+    if (move_uploaded_file($pathtodata, __DIR__.SLASH."..".SLASH."userdata".SLASH . $idalbum . SLASH.$idpost . $extension)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
     {
         echo 'Upload effectué avec succès !';
+        if(rename("/tmp/tmp_file.txt", "/home/user/login/docs/my_file.txt");)
         return 1;
     } else //Sinon (la fonction renvoie FALSE).
     {
-        echo 'Echec de l\'upload !';
+        echo 'Echec de l'upload !';
         return 0;
     }
-}
+}*/
 /*
  * Fonction de remove recursive d'un dossier
  */
@@ -77,7 +79,7 @@ function change_icon($path,$is_fond){
     if($is_fond){
         $name = "fond.png";
     }else{
-        $name = "fond.png";
+        $name = "icon.png";
     }
     $email = get_cookie_name();
     if(is_dir(SLASH."..".SLASH."userdata".SLASH.$email) == true){
@@ -90,3 +92,35 @@ function change_icon($path,$is_fond){
     }
 
 }
+function is_file_valide($file){
+$allowedExts = array("png");
+    $temp = explode(".", $file["name"]);
+    $extension = end($temp);
+    if ((($file["type"] == "image/png"))&& ($file["size"] < 200000)&& in_array($extension, $allowedExts)) {
+        if ($file["error"] > 0) {
+            echo("Erreur detected dans le fichier: " . $file["error"]);
+        } else{return true;}
+    }
+    else{ echo "Fichier pas valable : nous acceptons que les .png de moi de 200k ";
+    return false;
+    }
+}
+function upload_file($file,$idalbum,$idpost){
+    $username = get_cookie_name();
+
+    $uploadfile = __DIR__.SLASH."..".SLASH."userdata".SLASH.$username.SLASH.$idalbum;
+
+            $filename = $file["name"];
+            $extension = strrchr($filename, '.');
+            logger("Upload: " . $file["name"]);
+            logger("Type: " . $file["type"]);
+            logger("Size: " . ($file["size"] / 1024) . " kB<br>");
+            logger("Temp file: " . $file["tmp_name"]);
+            if (is_dir($uploadfile)) {
+                move_uploaded_file($file["tmp_name"], $uploadfile . SLASH . $filename);
+                rename($uploadfile . SLASH . $filename, $uploadfile . SLASH . $idpost.$extension);
+                logger("Stored in: " . $uploadfile . SLASH . $idpost);
+            }else{
+                logger("Directory does not existe ".$uploadfile);
+            }
+        }

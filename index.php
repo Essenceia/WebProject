@@ -35,20 +35,25 @@ $container['username']= function (){
   //TODO revoyer les paramtres de connection effectif, a faire quand on aura une page de connection
   return  $email;
 };*/
+//disconnect();
 $app->get('/Login/', function ($request, $response, $args) {
+    disconnect();
     return $this->view->render($response, 'login.twig');
 });
 $app->get('/', function ($request, $response, $args) {
+    disconnect();
     return $this->view->render($response, 'login.twig');
 });
 $app->get('/Profil/', function ($request, $response, $args) {
     $data = get_user();
+    $user = get_cookie_name();
     $res =[];
     return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig", "data"=>$res]);
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
 });
 $app->get('/Album/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
+    $user = get_cookie_name();
     $data = get_album();
     $tmp = [];
     if($data==2)
@@ -62,7 +67,9 @@ $app->get('/Album/', function ($request, $response, $args) {
 
 $app->get('/Photos/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
+    $user = get_cookie_name();
     $data = get_album();
+
 
     $tmp = [];
 
@@ -76,6 +83,7 @@ $app->get('/Photos/', function ($request, $response, $args) {
 });
 
 $app->get('/Coupe2016/', function ($request, $response, $args) {
+    $user = get_cookie_name();
     accept_friend_request($this->db,"desmazes","kiki");
     //$data = get_user_list($this->db);
     $data = get_user_list();
@@ -89,10 +97,11 @@ $app->get('/Coupe2016/', function ($request, $response, $args) {
 
 $app->get('/Configuration/', function ($request, $response, $args) {
     $res =[];
+    $user = get_cookie_name();
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig","data" =>$res]);
 });
 $app->get('/Chronologie/', function ($request, $response, $args) {
-    //$name = $_COOKIE['user'];
+    $user = get_cookie_name();
     $data = get_chronologie(0);
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig", "data" => $data]);
 });
@@ -102,6 +111,7 @@ $app->get('/Publication/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Publication.twig" ,"user_name" =>$name , "data" => $data]);
 });
 $app->get('/Amis/', function ($request, $response, $args) {
+    $user = get_cookie_name();
     logger("friend_list still called");
     $data = friend_list(1);
     $name = get_cookie_name();

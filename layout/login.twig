@@ -19,9 +19,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        alert("in");
+       // alert("in");
         $("#subButton").click(function () {
-            alert("We have entenred function");
+           // alert("We have entenred function");
             var str = $("#email").val();
             //diff to allow push
             var tab = str.split("@");
@@ -38,8 +38,8 @@
                     data: 'email='+tab[0]+'&mdp='+$("#mdp").val(),
                     complete: function(data) {
                         var res= data;
-                        alert(data);
-                        alert(Number(res));
+                      //  alert(data);
+                       // alert(Number(res));
                         if(res==0) {
                             window.location = '/../index.php/Profil/';
                         }

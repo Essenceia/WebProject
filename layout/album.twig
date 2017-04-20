@@ -5,7 +5,7 @@
         popup.classList.toggle("show");
     }
     function display_post(id) {
-      //alert(id);
+       alert(id);
         var ellem = document.getElementsByClassName("photo").getElementById(id);
         if (ellem != null ){
             alert("on a recuperer que;lque chose");
@@ -29,42 +29,16 @@
                         </span>
                         <button class="{{ alb.id }}" onmouseover="display_description(this.className)" onclick="display_post(this.className)" ><img src='/../layout/img/dossier.png'  /></button>
         </div>
-    <div class="photo">
-        TEST <br>
-        Album : {{ alb.post }}
+
+        <hr>
 
 
         {% for post in alb.post %}
 
+            <div class="photo" id="{{ alb.id }}">
 
-            <div id="{{ alb.id }}" >
-            <span class="description" id="{{ "photo"~post.idpost}}">
-                {% if post.legende %}
-                    {{ post.legende }} <br>
-                {% endif %}
-                {% if post.date%}
-                    date : {{ post.date}} <br>
-                {% endif %}
-                {% if post.lieu%}
-                    lieu : {{ post.lieu }} <br>
-                {% endif %}
-                {% if post.activiter%}
-                    activiter : {{ post.activiter}} <br>
-                {% endif %}
-                {% if post.privacy%}
-                    Partage :
-                    {% if post.privacy == 0 %}
-                        Priver <br>
-                    {% endif %}
-                    {% if post.privacy == 1 %}
-                    Amis seulement <br>
-                {% endif %}
-                    {% if post.privacy == 2 %}
-                    Public <br>
-                {% endif %}
-                {% endif %}
-            </span>
-            <div class="{{ "photo"~post.idpost}}"  onmouseover="display_description(this.className)">
+
+            <div id="gallery" class="{{ "photo"~post.idpost}}"  onmouseover="display_description(this.className)">
                 {% if post.type == 1 %}
                     <img src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.png'}} name="{{ post.idpost }}">
                 {% elseif post.type==2 %}
@@ -74,12 +48,34 @@
                         Your browser does not support the video tag.
                     </video>
                 {% endif %}
-            </div>
+                <div class="dropdown-content">
+                    {% if post.legende %}
+                        {{ post.legende }} <br>
+                    {% endif %}
+                    {% if post.date%}
+                        date : {{ post.date}} <br>
+                    {% endif %}
+                    {% if post.lieu%}
+                        lieu : {{ post.lieu }} <br>
+                    {% endif %}
+                    {% if post.activiter%}
+                        activiter : {{ post.activiter}} <br>
+                    {% endif %}
+                    {% if post.privacy%}
+                        Partage :
+                        {% if post.privacy == 0 %}
+                            Priver <br>
+                        {% endif %}
+                        {% if post.privacy == 1 %}
+                            Amis seulement <br>
+                        {% endif %}
+                        {% if post.privacy == 2 %}
+                            Public <br>
+                        {% endif %}
+                    {% endif %}
+                </div>
             </div>
             </div>
         {% endfor %}
 
-
-
     {% endfor %}
-</table>

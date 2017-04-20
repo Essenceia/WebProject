@@ -3,66 +3,90 @@
     <script type="text/javascript">
             $(document).ready(function () {
                 var SLASH = "/";
-            $('#formStat').submit(function(e){
-                e.preventDefault();
-               var dateBox=-'', statutBox='', lieuBox='', emo='', act='', pap='';
-    if($("#status").val()!=''){
-        if($("#lieu").val()!='lieu'){ lieuBox= $("#lieu").val();}
-    if($("#emotion").val()!=-1){ emo= $("#emotion").val();} else emo='-1';
-    if($("#activite").val()!='activite'){ act= $("#activite").val();}
-
-    if(document.getElementById('pub').checked){pap=0;}
-    if(document.getElementById('am').checked){pap=1;}
-    if(document.getElementById('pr').checked){pap=2;}
-
-    $.ajax({
-    data: 'type='+'0' + ' &legende=' +  $("#status").val() + ' &idalbum='+'0' + ' &lieu=' + lieuBox + ' &emotion='+emo +' &activite='+ act + ' &contenu='+ '0' + ' &pap='+pap ,
-    url: SLASH+'..'+SLASH+'layout'+SLASH+'publication.php',
-    method: 'POST',
-        success: function(msg) {
-            alert(msg);
-        }
-    })
-    }
-    else alert("Vous n'avez rien entré!");
-
-    })
-                $('#media').submit(function(e){
+                $('#formStat').submit(function (e) {
                     e.preventDefault();
+                    var dateBox = -'', statutBox = '', lieuBox = '', emo = '', act = '', pap = '';
+                    if ($("#status").val() != '') {
+                        if ($("#lieu").val() != 'lieu') {
+                            lieuBox = $("#lieu").val();
+                        }
+                        if ($("#emotion").val() != -1) {
+                            emo = $("#emotion").val();
+                        } else emo = '-1';
+                        if ($("#activite").val() != 'activite') {
+                            act = $("#activite").val();
+                        }
 
-                    var dateBox=-'', statutBox='', lieuBox='', emo='', act='', pap='';
-                    if($("#selMedia").val()!=''){
+                        if (document.getElementById('pub').checked) {
+                            pap = 0;
+                        }
+                        if (document.getElementById('am').checked) {
+                            pap = 1;
+                        }
+                        if (document.getElementById('pr').checked) {
+                            pap = 2;
+                        }
 
-                        if($("#lieu2").val()!='lieu'){ lieuBox= $("#lieu2").val();}
-                        if($("#emo2").val()!=-1){ emo= $("#emo2").val();} else emo='-1';
-                        if($("#act2").val()!='activite'){ act= $("#act2").val();}
-
-                        if(document.getElementById('pub').checked){pap=0;}
-                        if(document.getElementById('am').checked){pap=1;}
-                        if(document.getElementById('pr').checked){pap=2;}
-
-                        $pieces = $("#nameP").val().split("h");
-                        $path="";
-                        $path =$("#selMedia").val() +$pieces[1]; //$pieces[1];
-                        alert($path);
-                        $album = $("#numAl").val();
-                        var al=$album;
-                        var pa=$path;
-                        //$legende = $("#legende").val();
                         $.ajax({
-                            data: 'type='+'1' + ' &legende=' +  $("#legende").val() + ' &idalbum='+al + ' &lieu=' + lieuBox + ' &emotion='+emo +' &activite='+ act + ' &contenu='+ pa + ' &pap='+pap ,
-                            url: SLASH+'..'+SLASH+'layout'+SLASH+'publication.php',
+                            data: 'type=' + '0' + ' &legende=' + $("#status").val() + ' &idalbum=' + '0' + ' &lieu=' + lieuBox + ' &emotion=' + emo + ' &activite=' + act + ' &contenu=' + '0' + ' &pap=' + pap,
+                            url: SLASH + '..' + SLASH + 'layout' + SLASH + 'publication.php',
                             method: 'POST',
-                            success: function(msg) {
+                            success: function (msg) {
                                 alert(msg);
                             }
                         })
                     }
                     else alert("Vous n'avez rien entré!");
 
-                })
+                });
+                $('#media').submit(function (e) {
+                    e.preventDefault();
+                    var pap = 0;
+                    // var dateBox=-'', statutBox='', lieuBox='', emo='', act='', pap='';
+                    //  if($("#selMedia").val()!=''){
+                    /*
+                     if($("#lieu2").val()!='lieu'){ lieuBox= $("#lieu2").val();}
+                     if($("#emo2").val()!=-1){ emo= $("#emo2").val();} else emo='-1';
+                     if($("#act2").val()!='activite'){ act= $("#act2").val();}*/
 
-            });</script>
+                    if (document.getElementById('pub').checked) {
+                        pap = 0;
+                    }
+                    if (document.getElementById('am').checked) {
+                        pap = 1;
+                    }
+                    if (document.getElementById('pr').checked) {
+                        pap = 2;
+                    }
+                    var fd = new FormData(document.getElementById("media"));
+                    fd.append("label", "WEBUPLOAD");
+                    fd.append("pap", pap);
+                    fd.append("type", 1);
+                    fd.append("contenu","");
+                    //$pieces = $("#nameP").val().split("h");
+                    // $path="";
+                    //$path =$("#selMedia").val() +$pieces[1]; //$pieces[1];
+                    alert(fd);
+                    // $album = $("#numAl").val();
+                    //var al=$album;
+                    //var pa=$path;
+                    //$legende = $("#legende").val();
+                    $.ajax({
+                        //data: 'type='+'1' + ' &legende=' +  $("#legende").val() + ' &idalbum='+al + ' &lieu=' + lieuBox + ' &emotion='+emo +' &activite='+ act + ' &contenu='+ pa + ' &pap='+pap ,
+                        data: fd,
+                        url: SLASH + '..' + SLASH + 'layout' + SLASH + 'publication.php',
+                        method: 'POST',
+                        processData: false,  // tell jQuery not to process the data
+                        contentType: false, // tell jQuery not to set contentType
+                        success: function (msg) {
+                            alert(msg);
+                        }
+                    });
+
+
+                });
+            });
+            </script>
 
     <form method="post" class="pp" id="formStat">
         Status :
@@ -86,19 +110,19 @@
 <div class="publi">
     <form method="post" class="pp" id="media">
         <input type="text" class="text" value="legende" name="legende" id="legende"/>
-        <input type="file" class="FileAdd" name="path"  class="Box" id="nameP"/> <br>
-        Ajouter le chemin jusuq'au dossier où le média est stocké afin de pouvoir poster ce média !!! <br>
+        <input type="file" class="FileAdd" name="file"  class="Box" id="nameP" required/> <br>
+        <!--Ajouter le chemin jusuq'au dossier où le média est stocké afin de pouvoir poster ce média !!! <br>
         <input type="text" class="text" value="path" name="selMedia" id="selMedia"/>
 
-        <br/>
+        <br/> -->
         <br/>
         <br/>
         <input type="text" name="lieu" class="textbox" value="lieu" id="lieu2"/>
         Emotion:
-        <input type="number" name="emot" class="textbox" value="emotion" id="emo2"/>
-        <input type="text" name="activité" class="textbox" value="activite" id="act2"/>
+        <input type="number" name="emotion" class="textbox" value="emotion" id="emo2"/>
+        <input type="text" name="activite" class="textbox" value="activite" id="act2"/>
         Numéro de l'album:
-        <input type="number" name="nomalbum" class=textbox" value="0" id="numAl"/>
+        <input type="number" name="idalbum" class=textbox" value="0" id="numAl"/>
 
         <br/>
 
