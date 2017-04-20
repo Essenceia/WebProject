@@ -28,7 +28,7 @@ function friend_list($friend_status){
     $data =[];
     $db = connect_db();
     if($db->ping()){
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         logger("valheur du cookie ".$email);
         $sql = "SELECT * FROM webapp.amis WHERE user1='$email' OR (( user1='$email' OR user2='$email') AND amis.status='1'  )" ;
         $res = mysqli_query($db,$sql);
@@ -77,10 +77,26 @@ function get_user_list(){
     }
     return $res;
 }
+function get_user_login($email){
+    $db = connect_db();
+    $res = [];
+    if($_COOKIE['user']) {
+        //ceci est une diff
+        if ($db->ping()) {
 
+            $sql = "SELECT * FROM webapp.user WHERE email='$email'";
+            $resrequette = mysqli_query($db, $sql);
+
+            $res = mysqli_fetch_assoc($resrequette);
+        }
+    }else{
+        logger("erreur de cookie retrive");
+    }
+    return $res;
+}
 function get_user(){
     $db = connect_db();
-    $email = $_COOKIE['user'];
+    $email = get_cookie_name();
     $res = [];
     if($_COOKIE['user']) {
         //ceci est une diff
@@ -110,9 +126,19 @@ function get_selected_user($email){
 
     return $res;
 }
+function get_ellements_in_album($db,$user,$idalbum){
+    $res =[];
+    $sql = "SELECT * FROM webapp.post WHERE user='$user' AND idalbum='$idalbum' ";
+    $resrequette = mysqli_query($db, $sql);
+
+    for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+        $res[$i] = mysqli_fetch_assoc($resrequette);
+    }logger("nous avons trouver ".mysqli_num_rows($resrequette)."post pour l'album ".$idalbum);
+    return $res;
+}
 function get_album(){
     $db = connect_db();
-    $email = $_COOKIE['user'];
+    $email = get_cookie_name();
     $res = [];
     //ceci est une diff
     if($db->ping()) {
@@ -122,6 +148,7 @@ function get_album(){
 
         for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
             $res[$i] = mysqli_fetch_assoc($resrequette);
+            $res[$i]['post'] = get_ellements_in_album($db,$email,$res[$i]['id']);
         }
     }
     if($res)
@@ -218,7 +245,7 @@ function delete_user($email)
  */
 function friend_request($db,$touser){
     if (!$_COOKIE['user']){
-    $fromuser = $_COOKIE['user'];
+    $fromuser = get_cookie_name();
     $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' 
             OR user2='$fromuser' AND user1='$touser' ";
     $res = mysqli_query($db,$sql);
@@ -248,7 +275,7 @@ function friend_request($db,$touser){
  * l'utilisateur qui accept la demande est touser le recepteur de la demande
  */
 function accept_friend_request($db,$fromuser){
-    $touser = $_COOKIE['user'];
+    $touser = get_cookie_name();
     if($_COOKIE['user']){
     $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' AND amis.status=0";
     $res = mysqli_query($db,$sql);
@@ -271,7 +298,7 @@ function accept_friend_request($db,$fromuser){
  *  2 - video : meme que photo
  */
 function delet_friend($todelet,$status){
-    $touser = $_COOKIE['user'];
+    $touser = get_cookie_name();
     $db = connect_db();
     if($db->ping()){
     if($_COOKIE['user']){
@@ -289,7 +316,7 @@ function delet_friend($todelet,$status){
 }
 
 function create_post($typepost,$legende,$idalbum,$contenu){
-    $email = $_COOKIE['user'];
+    $email = get_cookie_name();
     if($_COOKIE['user']) {
         //blindage
         $sql = "";
@@ -343,14 +370,14 @@ function connect_datavalide($email,$pw){
         if($res){
             $row = mysqli_fetch_assoc($res);
             if ( $row['mdp']==$pw){
-                logger("Connection reussi pour l'utilisatuer , user : ".$email." mdp : ".$pw);
+    //            logger("Connection reussi pour l'utilisatuer , user : ".$email." mdp : ".$pw);
                 return 0;
             }else{
-                logger("Erreur - mauvais mot de passe pour user: ".$email);
+      //          logger("Erreur - mauvais mot de passe pour user: ".$email);
                 return 2;
             }
         }else{
-            logger("Erreur - identifiant de l'utilisatuer n'existe pas utilisateur : ".$email);
+        //    logger("Erreur - identifiant de l'utilisatuer n'existe pas utilisateur : ".$email);
             return 1;
         }
     }else{
@@ -367,7 +394,7 @@ function connect_datavalide($email,$pw){
 function change_name($name){
     $db = connect_db();
     if($db->ping()) {
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         if($email !=''){
             $sql = "UPDATE webapp.user SET nom = '$name' WHERE email='$email' ";
             if (mysqli_query($db, $sql)) {
@@ -394,7 +421,7 @@ function change_name($name){
 function change_pseudo($change){
     $db = connect_db();
     if($db->ping()) {
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         if($email !=''){
             $sql = "UPDATE webapp.user SET pseudo = '$change' WHERE email='$email' ";
             if (mysqli_query($db, $sql)) {
@@ -421,7 +448,7 @@ function change_pseudo($change){
 function change_pwd($ancien, $nouveau){
     $db = connect_db();
     if($db->ping()) {
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         if($email !=''){
 
             $sql = "SELECT mdp FROM webapp.user WHERE email='$email' limit 1";

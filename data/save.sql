@@ -69,7 +69,7 @@ CREATE TABLE `amis` (
 
 LOCK TABLES `amis` WRITE;
 /*!40000 ALTER TABLE `amis` DISABLE KEYS */;
-INSERT INTO `amis` VALUES ('desmazes','m.champalier',1,'2017-04-15 08:59:25'),('tiercelin','desmazes',0,'2016-04-16 08:59:50'),('desmazes','kiki',1,'2017-04-16 22:53:00');
+INSERT INTO `amis` VALUES ('desmazes','m.champalier',1,'2017-04-15 08:59:25'),('tiercelin','desmazes',0,'2016-04-16 08:59:50');
 /*!40000 ALTER TABLE `amis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,12 +87,18 @@ CREATE TABLE `post` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `legende` text,
   `idalbum` int(11) DEFAULT NULL,
+  `lieu` text,
+  `emotion` int(3) DEFAULT NULL,
+  `activiter` text,
+  `contenu` text,
+  `privacy` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idpost`),
   UNIQUE KEY `post_idpost_uindex` (`idpost`),
   KEY `user_qui_post` (`user`),
-  CONSTRAINT `id_album` FOREIGN KEY (`idpost`) REFERENCES `album` (`id`),
+  KEY `id_album` (`idalbum`),
+  CONSTRAINT `id_album` FOREIGN KEY (`idalbum`) REFERENCES `album` (`id`),
   CONSTRAINT `user_qui_post` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +107,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'desmazes',0,'2017-04-17 16:39:47','lll',NULL);
+INSERT INTO `post` VALUES (3,'m.champalier',0,'2017-04-19 11:50:39','Ceci est un post ecrit',NULL,'ece',1,'en cours',NULL,1);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +131,7 @@ CREATE TABLE `reaction` (
   KEY `post_sur_lequel_on_reagit` (`idpost`),
   CONSTRAINT `post_sur_lequel_on_reagit` FOREIGN KEY (`idpost`) REFERENCES `post` (`idpost`),
   CONSTRAINT `user_qui_reagit` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,6 +140,7 @@ CREATE TABLE `reaction` (
 
 LOCK TABLES `reaction` WRITE;
 /*!40000 ALTER TABLE `reaction` DISABLE KEYS */;
+INSERT INTO `reaction` VALUES (3,'desmazes',3,'2017-04-19 12:50:08','LOL MDR , oui je suis constructif',1);
 /*!40000 ALTER TABLE `reaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +169,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('desmazes','Desmazes','kkk','sn','icon','fond'),('kiki','Kyp','Cloine','Cloine','icon','fond'),('m.champalier','Champalier','ooo','Cat','icon','fond'),('tiercelin','Tiercelim','pp','MusicGod','icon','fond');
+INSERT INTO `user` VALUES ('desmazes','Desmazes','kkk','sn','icon','fond'),('kk','oo','ii','ii','icon','fond'),('m.champalier','Champalier','ooo','Cat','icon','fond'),('tiercelin','Tiercelim','pp','MusicGod','icon','fond'),('yolo','Antoine','LOL','LOL','icon','fond');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -175,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-18 10:37:12
+-- Dump completed on 2017-04-19 21:17:43

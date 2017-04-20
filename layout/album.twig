@@ -1,22 +1,85 @@
+<script>
+    function display_description(id) {
+       // alert(id);
+        var popup = document.getElementById(id);
+        popup.classList.toggle("show");
+    }
+    function display_post(id) {
+      //alert(id);
+        var ellem = document.getElementsByClassName("photo").getElementById(id);
+        if (ellem != null ){
+            alert("on a recuperer que;lque chose");
+        }
+        ellem.style.visibility = "visible";
+    }
+
+</script>
 <table class="visuProfil">
    <p class="visuProfil"> {{ error }}
    </p>
-    {% for alb in album %}
-        <tr>
-            <td>
-
-            </td>
-            <td>
-                <ul>
-
-                    <li class="page">
-                     Nom:   {{ alb.nom }}<br>
-                      Description:   {{ alb.description }} <br>
-
-                    </li>
-
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
 </table>
+
+
+
+    {% for alb in album %}
+        <div class="album">
+            <span class="description" id="{{ alb.id }}">
+                     Nom:   {{ alb.nom }}<br>
+                      Description:   {{ alb.description }}
+                        </span>
+                        <button class="{{ alb.id }}" onmouseover="display_description(this.className)" onclick="display_post(this.className)" ><img src='/../layout/img/dossier.png'  /></button>
+        </div>
+    <div class="photo">
+        TEST <br>
+        Album : {{ alb.post }}
+
+
+        {% for post in alb.post %}
+
+
+            <div id="{{ alb.id }}" >
+            <span class="description" id="{{ "photo"~post.idpost}}">
+                {% if post.legende %}
+                    {{ post.legende }} <br>
+                {% endif %}
+                {% if post.date%}
+                    date : {{ post.date}} <br>
+                {% endif %}
+                {% if post.lieu%}
+                    lieu : {{ post.lieu }} <br>
+                {% endif %}
+                {% if post.activiter%}
+                    activiter : {{ post.activiter}} <br>
+                {% endif %}
+                {% if post.privacy%}
+                    Partage :
+                    {% if post.privacy == 0 %}
+                        Priver <br>
+                    {% endif %}
+                    {% if post.privacy == 1 %}
+                    Amis seulement <br>
+                {% endif %}
+                    {% if post.privacy == 2 %}
+                    Public <br>
+                {% endif %}
+                {% endif %}
+            </span>
+            <div class="{{ "photo"~post.idpost}}"  onmouseover="display_description(this.className)">
+                {% if post.type == 1 %}
+                    <img src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.png'}} name="{{ post.idpost }}">
+                {% elseif post.type==2 %}
+                    <video width="320" height="240" autoplay>
+                        <source src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.mp4'}} >
+                        <source src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.ogg'}} >
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+            </div>
+            </div>
+            </div>
+        {% endfor %}
+
+
+
+    {% endfor %}
+

@@ -27,6 +27,7 @@ $container['db']= function(){
     $db = connect_db();
     return $db;
 };
+//disconnect();
 /*
 $container['username']= function (){
   $email = "m.champalier";
@@ -35,6 +36,7 @@ $container['username']= function (){
   //TODO revoyer les paramtres de connection effectif, a faire quand on aura une page de connection
   return  $email;
 };*/
+//disconnect();
 $app->get('/Login/', function ($request, $response, $args) {
     return $this->view->render($response, 'login.twig');
 });
@@ -72,20 +74,21 @@ $app->get('/Configuration/', function ($request, $response, $args) {
     return $this->view->render($response, 'index.twig', ["name" => "Configuration.twig","data" =>$res]);
 });
 $app->get('/Chronologie/', function ($request, $response, $args) {
-    //$name = $_COOKIE['user'];
+    //$name = 'test'
     $data = get_chronologie(0);
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig", "data" => $data]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
-    $name = $_COOKIE['user'];
+    $name = get_cookie_name();
     $data = get_post_actualiter(0,$name);
     return $this->view->render($response, 'index.twig', ["name" => "Publication.twig" ,"user_name" =>$name , "data" => $data]);
 });
 $app->get('/Amis/', function ($request, $response, $args) {
     logger("friend_list still called");
     $data = friend_list(1);
-    $name = $_COOKIE['user'];
+    $name = get_cookie_name();
     logger("end friend_list still called");
     return $this->view->render($response, 'index.twig', ["name" => "amis.twig" ,"user_name" =>$name, "data" => $data]);
 });
 $app->run();
+

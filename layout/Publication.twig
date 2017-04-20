@@ -46,8 +46,9 @@
         {% endif %}
     {% elseif post.type == 1 or post.type ==2 %}
         <!-- post image ou video-->
-        <img src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.mp4'}} name={{ post.idpost }}>
+
         {% if post.type == 1 %}
+            <img src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.png'}} name={{ post.idpost }}>
         {% else %}
             <video width="320" height="240" autoplay>
                 <source src={{ '/../userdata/'~ post.user~'/'~post.idalbum~'/'~post.idpost ~'.mp4'}} type="video/mp4">

@@ -10,9 +10,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        //alert("in");
+        alert("in");
         $("#subButton").click(function () {
-            //alert("We have entenred function");
+            alert("We have entenred function");
             var str = $("#email").val();
             //diff to allow push
             var tab = str.split("@");
@@ -21,14 +21,30 @@
             }else if($("#mdp").val()==''){
                 alert("Erreur , le champ des mots de passe est vide");
             }else{
-                alert("ajax field called");
+               // alert("ajax field called");
                 $.ajax({
                     type: 'POST',
                     url: '/../layout/load.php',
+                    dataType:"html",
                     data: 'email='+tab[0]+'&mdp='+$("#mdp").val(),
-                    complete: function(res) {
-                        if(res!='')alert(res);
-                        window.location='/../index.php/Profil/';
+                    complete: function(data) {
+                        var res= data;
+                        alert(data);
+                        alert(Number(res));
+                        if(res==0) {
+                            window.location = '/../index.php/Profil/';
+                        }
+                        if(res == 1){
+                            alert("Erreur - auqun utilisateur a ce nom");
+                        }
+                        if(res == 2){
+                            alert("Erreur - mauvais mot de passe");
+                        }
+                        if(res==3){
+                            window.location = '/../index.php/files/admin.php';
+                        }
+                        alert("rederecing");
+                        window.location = '/../index.php/Profil/';
                         }
 
                 });
