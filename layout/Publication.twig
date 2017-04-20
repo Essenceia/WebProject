@@ -93,7 +93,7 @@
     <form method="post" class="pp" id="media">
         Legende : <input type="text" class="text" name="legende" id="legende"/></br></br>
         <input type="file" class="FileAdd" name="path"  class="Box" id="nameP"/> <br>
-        Ajouter le chemin jusuq'au dossier où le média est stocké afin de pouvoir poster ce média !!! <br>
+        Ajouter le chemin jusuq'au dossier où le média est stocké <br/>afin de pouvoir poster ce média !!! <br>
         Chemin : <input type="text" class="text" name="selMedia" id="selMedia"/>
 
         <br/>
@@ -112,12 +112,12 @@
         <input type="radio" name="typPub" value="Amis" > Amis
         <input type="radio" name="typPub" value="Seul" > Moi-même
         <br/><br/>
-        <input type="submit" class="button" value="Publier" name="PublierMédia"/>
+        <input type="submit" class="button" value="Publier" name="PublierMédia"/><br/><br/><br/><br/>
     </form>
-</div>
+</div><br/><br/>
 <div class="historique">
     <!-- Affichage de l'historique-->
-    <h1>Resultat de la recherche</h1>
+    <h1 class="center">Resultat de la recherche</h1>
     <div id="post">
     {% for post in data %}
 
@@ -125,8 +125,8 @@
             <!-- post text -->
             <h2>   {{ post.legend }}</h2> <br>
             {% if post.emotion %}
-                <div id="emotion">
-                    <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion">
+                <div id="emotion" class="image-emotion" >
+                    <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion" width="70" height="70">
                 </div>
             {% endif %}
         {% elseif post.type == 1 or post.type ==2 %}
@@ -145,18 +145,27 @@
                 Add to album - pour toi marianne<input type="submit" value="Valider"/>
             </form>
         {% endif %}
-        {% if post.legende %}
-            {{ post.legende }}
-        {% endif %}
-        {% if post.date%}
-            {{ post.date}}
-        {% endif %}
-        {% if post.lieu%}
-            {{ post.lieu }}
-        {% endif %}
-        {% if post.activiter%}
-            {{ post.activiter}}
-        {% endif %}
+        <div class="post">
+            <div class="post-text">
+                {% if post.legende %}
+                    {{ post.legende }}
+                {% endif %}
+            </div>
+            <div  class="post-date">
+                {% if post.date%}
+                    {{ post.date}}
+                {% endif %}
+
+                {% if post.lieu%}
+                    {{ post.lieu }}
+                {% endif %}
+
+                {% if post.activiter%}
+                    {{ post.activiter}}
+                {% endif %}
+            </div>
+        </div>
+        <br/><br/><br/><br/><br/><br/>
     {% endfor %}
     </div>
 </div>

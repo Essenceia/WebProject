@@ -78,7 +78,6 @@ function get_chronologie($pagenum){
              ORDER BY post.date LIMIT 10 OFFSET 0 ";
             $res = mysqli_query($db,$sql);
             if($res){
-                echo "mauvais";
                 if(mysqli_num_rows($res)){
                     for ($i = 0; $i < mysqli_num_rows($res); $i++) {
                         $id = mysqli_fetch_assoc($res);
