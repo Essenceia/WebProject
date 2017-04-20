@@ -24,7 +24,11 @@
                         Pseudo : {{ user.pseudo }} <br>
                         {{ user.friend_status }} <br>
                         <button id="{{ user.email }}" class="supprimerAction" type="button">Supprimer de la liste d'amis</button>
-                        <button style="visibility:hidden" type="button">Accepter la demande d'amis</button>
+                    
+                        {% if 'a demandé' in user.friend_status %}
+                            <button id="{{ user.email }}" class="validerAmi"  type="button">Accepter la demande d'amis</button>
+                        {% endif %}
+                        
 
                         
                 </ul>
@@ -37,8 +41,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            alert("hey");
-            
+                                
             //Si on clique sur le bouton d'ajout
             $("#Amis").submit(function (e) {
                 e.preventDefault();
@@ -62,7 +65,7 @@
                 }
             });
             
-            //Si on clique sur le bouton d'ajout
+            //Si on clique sur le bouton de suppression
             $(".supprimerAction").click(function (e) {
                 e.preventDefault();
                 
@@ -77,6 +80,23 @@
                     }
                 });
             });
+            
+            //Si on accepte la demande d'ami
+            $(".validerAmi").click(function (e) {
+                e.preventDefault();
+                
+                var friendemail = $(this).attr('id');
+                $.ajax({
+                    data: 'emailavalider=' +  friendemail,
+                    url: '../layout/amis.php',
+                    method: 'POST',
+                    success: function(msg) {
+                        alert(msg);   
+                        if(msg == "Ami accepté !")  location.reload(true); 
+                    }
+                });
+            });
+            
         });
          
     </script>

@@ -16,10 +16,16 @@ function get_email($prefix){
 }
 function get_friend_status($row){
     if($row["status"]==1){
-        return "Amis depuis  ".$row["date"];
+        return "Amis depuis le ".$row["date"];
     }
-    else return get_email($row["user1"])." a demandé en ami ".get_email($row["user2"])." le ".$row["date"];
+    else {
+        if($row["user1"] == $_COOKIE['user']){
+            return "Vous avez demandé en ami ".get_email($row["user2"])." le ".$row["date"];
+        }
+        else return get_email($row["user1"])." a demandé en ami ".get_email($row["user2"])." le ".$row["date"];
+    }
 }
+
 /*
  * Permet de recuperer les emails des amies du l'utilisateur dont l'id est passer en argument
  */
@@ -30,7 +36,7 @@ function friend_list($friend_status){
     if($db->ping()){
         $email = $_COOKIE['user'];
         logger("valheur du cookie ".$email);
-        $sql = "SELECT * FROM webapp.amis WHERE user1='$email' OR (( user1='$email' OR user2='$email') AND amis.status='1'  )" ;
+        $sql = "SELECT * FROM webapp.amis WHERE ( user1='$email' OR user2='$email')" ;
         $res = mysqli_query($db,$sql);
         for ($i = 0; $i < mysqli_num_rows($res); $i++) {
             $data[$i] = mysqli_fetch_assoc($res);
@@ -273,22 +279,33 @@ function friend_request($touser){
  * accepter une demande en amie d'un utilisateur:
  * l'utilisateur qui accept la demande est touser le recepteur de la demande
  */
-function accept_friend_request($db,$fromuser){
+function accept_friend_request($fromuser){
     $touser = $_COOKIE['user'];
-    if($_COOKIE['user']){
-    $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' AND amis.status=0";
-    $res = mysqli_query($db,$sql);
-    if (mysqli_num_rows($res) == 1) {
-        $sql = "UPDATE webapp.amis SET status=1 , date=now() WHERE user1='$fromuser' AND user2='$touser' AND amis.status=0";
-        if(mysqli_query($db,$sql)){
-            //creation reussi
-            logger("sucees - update accept la demande d'amie avec les parametres :".$fromuser. " ".$touser." 1 ");
-        }else {
-            logger("erreur - update accept la demande d'amie avec les parametres :".$fromuser. " ".$touser." 1 ");
+    $db = connect_db();
+    if($db->ping()){
+        if($_COOKIE['user']){
+            $sql = "SELECT * FROM webapp.amis WHERE (user1='$fromuser' AND user2='$touser') OR (user1='$touser' AND user2='$fromuser') AND status=0";
+            $res = mysqli_query($db,$sql);
+            if (mysqli_num_rows($res) == 1) {
+                $sql = "UPDATE webapp.amis SET status=1 , date=now() WHERE (user1='$fromuser' AND user2='$touser') OR (user1='$touser' AND user2='$fromuser') AND amis.status=0";
+                if(mysqli_query($db,$sql)){
+                    //creation reussi
+                    logger("succes - update accept la demande d'amie avec les parametres :".$fromuser. " ".$touser." 1 ");
+                    return 1;
+                }else {
+                    logger("erreur - update accept la demande d'amie avec les parametres :".$fromuser. " ".$touser." 1 ");
+                    return 0;
+                }
+            }else {
+                logger("error , nombre de ligne invalide");
+                return 2;
+            }
+        
+        }else{
+            logger("erreur de cookie de sesion");
+            return 3;
         }
-    }else {logger("error , nombre de ligne invalide");}
-}else{
-        logger("erreur de cokkie de sesion");}
+    }else return 4;
 }
 
 

@@ -43,10 +43,36 @@
         else echo "test";
     }
 
+    function validerami(){
+        $email=$_POST['emailavalider'];
+        $res = accept_friend_request($email);
+        if($res==1){
+            echo "Ami accepté !";
+        }
+        else if($res==0){
+            echo "Action impossible";
+        }
+        else if($res==2){
+            echo "Erreur - problème interne";
+        }
+        else if($res==3){
+            echo "Vous n'êtes pas connecté";
+        }
+        else if($res==4){
+            echo "Connexion impossible";
+        }
+        
+        else echo "test";
+    }
+
     if(isset($_POST['email'])) {
         addfriend();
     }
     else if (isset($_POST['emailsuppr'])) {
         supprami();
     }
+    else if (isset($_POST['emailavalider'])) {
+        validerami();
+    }
+
 ?>
