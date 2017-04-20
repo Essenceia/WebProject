@@ -1,6 +1,6 @@
 <?php
 
-    require "settingspath.php";
+    require_once "settingspath.php";
     require __DIR__.SLASH."..".SLASH."data".SLASH."databaseutility.php";
 
 

@@ -2,7 +2,6 @@ $(document).ready(function () {
     $("#buttonStatuts").submit(function(){
     var dateBox=-'', statutBox='', lieuBox='', emo='', act='', pap='';
         if($("#status").val()!=''){
-            if($("#date").val()!='date'){ dateBox= $("#date").val();}
             if($("#lieu").val()!='lieu'){ lieuBox= $("#lieu").val();}
             if($("#emotion").val()!='emotion'){ emo= $("#emotion").val();}
             if($("#activite").val()!='activite'){ act= $("#activite").val();}
@@ -10,6 +9,12 @@ $(document).ready(function () {
             if(document.getElementById('pu').checked){pap=0;}
             if(document.getElementById('am').checked){pap=1;}
             if(document.getElementById('pr').checked){pap=2;}
+
+            $ajax({
+                data: 'type='+0+ '&legende=' +  $("#status").val() + '&idalbum=NULL &lieu=' + lieuBox + '&emotion='+emo +'&activite='+ act + '&contenu=NULL &pap='+pap ,
+                url: 'publication.php',
+                method: 'GET',
+            })
         }
         else alert("Vous n'avez rien entré!");
 

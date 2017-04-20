@@ -34,7 +34,7 @@ function friend_list($friend_status){
     $data =[];
     $db = connect_db();
     if($db->ping()){
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         logger("valheur du cookie ".$email);
         $sql = "SELECT * FROM webapp.amis WHERE ( user1='$email' OR user2='$email')" ;
         $res = mysqli_query($db,$sql);
@@ -116,9 +116,19 @@ function get_selected_user($email){
 
     return $res;
 }
+function get_ellements_in_album($db,$user,$idalbum){
+    $res =[];
+    $sql = "SELECT * FROM webapp.post WHERE user='$user' AND idalbum='$idalbum' ";
+    $resrequette = mysqli_query($db, $sql);
+
+    for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+        $res[$i] = mysqli_fetch_assoc($resrequette);
+    }logger("nous avons trouver ".mysqli_num_rows($resrequette)."post pour l'album ".$idalbum);
+    return $res;
+}
 function get_album(){
     $db = connect_db();
-    $email = $_COOKIE['user'];
+    $email = get_cookie_name();
     $res = [];
     //ceci est une diff
     if($db->ping()) {
@@ -128,6 +138,7 @@ function get_album(){
 
         for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
             $res[$i] = mysqli_fetch_assoc($resrequette);
+            $res[$i]['post'] = get_ellements_in_album($db,$email,$res[$i]['id']);
         }
     }
     if($res)
@@ -307,10 +318,14 @@ function accept_friend_request($fromuser){
         }
     }else return 4;
 }
-
-
+/*
+ * Fonction pour cree un nouveau post , type de postes :
+ *  0 - post ecrit : le text sera stoquer dans legende
+ *  1 - photo : il peut y avoir une legende et un idalbum ( pas obligatoire pour les deux) - $contenu a la path vers le fichier selectionner par l'utilisateur
+ *  2 - video : meme que photo
+ */
 function delet_friend($todelet){
-    $touser = $_COOKIE['user'];
+    $touser = get_cookie_name();
     $db = connect_db();
     if($db->ping()){
         if($_COOKIE['user']){
@@ -333,46 +348,7 @@ function delet_friend($todelet){
     }
 }
 
-function create_post($typepost,$legende,$idalbum,$contenu){
-    $email = $_COOKIE['user'];
-    if($_COOKIE['user']) {
-        //blindage
-        $sql = "";
-        $db = connect_db();
-        if ($db->ping()) {
-            if ($typepost >= 0 and $typepost < 3) {
-                switch ($typepost) {
-                    case 0:
-                        $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                        break;
-                    case 1 && 2:
-                        if ($idalbum != 0) $sql = "INSERT INTO webapp.post (user, type, legende,idalbum)  VALUES ('$email','$typepost','$legende','$idalbum')";
-                        else $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                        break;
-                }
-                $sql .= " WHERE user='$email' ";
-                $res = mysqli_query($db, $sql);
-                if ($res) {
-                    //creation reussi
 
-                    $row = mysqli_fetch_assoc($res);
-                    $idpost = $row["idpost"];
-                    if ($typepost > 0) {
-                        //TODO sauvgarde de la photo ou video poster dans le dossier adequa
-                        if (save_post($idpost, $idalbum, $contenu)) {
-                            logger("sucees - creation d'un post pour l'utilisateur " . $email);
-                        } else logger("erreur - creation d'un post pour l'utilisateur " . $email);
-                    }
-                } else {
-                    logger("erreur - creation d'un post pour l'utilisateur " . $email);
-                }
-            } else {
-                logger("erreur dans le type du post, type donner :" . $typepost);
-            }
-        }
-    }else{
-        logger("erreur de cokkie de sesion");}
-}
 /*
  * Procedure de l'utilisateur avec email et pw , verifie que ce sont les bons identifiants
  * 0 - connection reussi
@@ -388,14 +364,14 @@ function connect_datavalide($email,$pw){
         if($res){
             $row = mysqli_fetch_assoc($res);
             if ( $row['mdp']==$pw){
-                logger("Connection reussi pour l'utilisatuer , user : ".$email." mdp : ".$pw);
+    //            logger("Connection reussi pour l'utilisatuer , user : ".$email." mdp : ".$pw);
                 return 0;
             }else{
-                logger("Erreur - mauvais mot de passe pour user: ".$email);
+      //          logger("Erreur - mauvais mot de passe pour user: ".$email);
                 return 2;
             }
         }else{
-            logger("Erreur - identifiant de l'utilisatuer n'existe pas utilisateur : ".$email);
+        //    logger("Erreur - identifiant de l'utilisatuer n'existe pas utilisateur : ".$email);
             return 1;
         }
     }else{
@@ -412,7 +388,7 @@ function connect_datavalide($email,$pw){
 function change_name($name){
     $db = connect_db();
     if($db->ping()) {
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         if($email !=''){
             $sql = "UPDATE webapp.user SET nom = '$name' WHERE email='$email' ";
             if (mysqli_query($db, $sql)) {
@@ -439,7 +415,7 @@ function change_name($name){
 function change_pseudo($change){
     $db = connect_db();
     if($db->ping()) {
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         if($email !=''){
             $sql = "UPDATE webapp.user SET pseudo = '$change' WHERE email='$email' ";
             if (mysqli_query($db, $sql)) {
@@ -466,7 +442,7 @@ function change_pseudo($change){
 function change_pwd($ancien, $nouveau){
     $db = connect_db();
     if($db->ping()) {
-        $email = $_COOKIE['user'];
+        $email = get_cookie_name();
         if($email !=''){
 
             $sql = "SELECT mdp FROM webapp.user WHERE email='$email' limit 1";

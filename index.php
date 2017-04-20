@@ -27,10 +27,8 @@ $container['db']= function(){
     $db = connect_db();
     return $db;
 };
-
 /*
 $container['username']= function (){
-
   $email = "m.champalier";
   $mdp = 'ooo';
   connect($email,$mdp);
@@ -38,7 +36,6 @@ $container['username']= function (){
   return  $email;
 };*/
 $app->get('/Login/', function ($request, $response, $args) {
-
     return $this->view->render($response, 'login.twig');
 });
 $app->get('/', function ($request, $response, $args) {
@@ -48,15 +45,12 @@ $app->get('/Profil/', function ($request, $response, $args) {
     $data = get_user();
     $res =[];
     return $this->view->render($response, 'index.twig', ["user" => $data, "name" => "profil.twig", "data"=>$res]);
-
     //return $this->view->render($response, 'index.twig', ["name" => "Publication.twig"]);
 });
 $app->get('/Album/', function ($request, $response, $args) {
     //accept_friend_request($this->db,"desmazes","kiki");
     $data = get_album();
-
     $tmp = [];
-
     if($data==2)
     {
         return $this->view->render($response, 'index.twig', ["album" => $data, "name" => "album.twig", "error"=> "Il n'y a aucun album" , "data"=>$tmp]);
@@ -100,21 +94,18 @@ $app->get('/Configuration/', function ($request, $response, $args) {
 $app->get('/Chronologie/', function ($request, $response, $args) {
     //$name = $_COOKIE['user'];
     $data = get_chronologie(0);
-
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig", "data" => $data]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
-    $name = $_COOKIE['user'];
+    $name = get_cookie_name();
     $data = get_post_actualiter(0,$name);
     return $this->view->render($response, 'index.twig', ["name" => "Publication.twig" ,"user_name" =>$name , "data" => $data]);
 });
-
 $app->get('/Amis/', function ($request, $response, $args) {
     logger("friend_list still called");
     $data = friend_list(1);
-    $name = $_COOKIE['user'];
+    $name = get_cookie_name();
     logger("end friend_list still called");
     return $this->view->render($response, 'index.twig', ["name" => "amis.twig" ,"user_name" =>$name, "data" => $data]);
-
 });
 $app->run();

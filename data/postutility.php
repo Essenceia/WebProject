@@ -9,7 +9,7 @@ require_once  "databaseutility.php";
 define('NUMBER_PER_PAGE',10);
 function get_post_actualiter($pagenum,$email){
     $db = connect_db();
-    //$email = $_COOKIE['user'];
+    //$email = get_cookie_name();
     $data = [];
     $num = (int)NUMBER_PER_PAGE;
     $offset = (int)NUMBER_PER_PAGE*$pagenum;
@@ -65,7 +65,7 @@ function get_comment_from_post($idpost){
 }
 function get_chronologie($pagenum){
     $db = connect_db();
-    $email = $_COOKIE['user'];
+    $email = get_cookie_name();
     $data = [];
     $num = NUMBER_PER_PAGE;
     $offset = NUMBER_PER_PAGE*$pagenum;

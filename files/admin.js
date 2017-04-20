@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    
+
     //on cache les formulaires
     $(".supprimer").hide();
     $(".ajouter").hide();
-    
+
     var i;
     function afficheusers() {
         //Affiche la liste des utilisateurs
@@ -16,14 +16,14 @@ $(document).ready(function () {
                     if(index == 0) $('#userlist').html("<li>" +value +"</li><br/>");
 
                     else $('#userlist').append("<li>" +value +"</li><br/>");
-                }); 
-                
+                });
+
             }
-        }); 
+        });
      };
-    
+
     afficheusers();
-    
+
     //Affiche le champ pour rentrer les infos de l'utilisateur à ajouter
     $("#ajouterButton").click(function () {
         $(".supprimer").hide();
@@ -35,7 +35,7 @@ $(document).ready(function () {
         $(".ajouter").hide();
         $(".supprimer").show();
     });
-    
+
     //Si on clique sur le bouton d'ajout
     $("#ajouterAction").submit(function (e) {
         e.preventDefault();
@@ -52,13 +52,13 @@ $(document).ready(function () {
                 url: 'admintraitement.php',
                 method: 'POST',
                 success: function(msg) {
-                    alert(msg);   
+                    alert(msg);
                     afficheusers();
                 }
             });
         }
     });
-    
+
     //Si on clique sur le bouton d'ajout
     $("#supprimerAction").submit(function(e){
         e.preventDefault();
@@ -69,7 +69,7 @@ $(document).ready(function () {
         else if($("#emaildel").val().lastIndexOf("@") != -1){
             alert("Veuillez entrer une adresse mail valide");
         }
-        else{       
+        else{
             $.ajax({
                 data: 'emaildel=' +  $("#emaildel").val(),
                 url: 'admintraitement.php',
@@ -81,4 +81,5 @@ $(document).ready(function () {
             });
         }
     });
+
 });

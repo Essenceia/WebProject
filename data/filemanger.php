@@ -9,8 +9,9 @@
  *
 *TODO : ATTENTION : faire attention de bien modifer le define de settingpath correctement
  */
-require "settingspath.php";
-require __DIR__.SLASH."..".SLASH."log".SLASH."phperrorlog.log";
+require_once "settingspath.php";
+require_once "cookiemonster.php";
+require_once __DIR__.SLASH."..".SLASH."log".SLASH."phperrorlog.log";
 
 //cree le dossier dans lequel seront regrouper toutes les donnes d'un utilisateur ainsi que
 //fait l'inisialisation des parametres par default
@@ -32,6 +33,8 @@ function creat_new_user_directory($email){
        }
    }logger("Erreur - Cannot find file userdata , check path");
 }
+
+
 function creat_new_user_album($email,$albumname){
     if(!file_exists(__DIR__.SLASH."..".SLASH.'userdata'.SLASH.$email.SLASH.$albumname)) {
     mkdir(__DIR__.SLASH."..".SLASH.'userdata'.SLASH.$email.SLASH.$albumname);
@@ -68,4 +71,22 @@ function rrmdir($dir) {
     }else{
         logger("Erreur dans la supression du dossier".$dir);
     }
+}
+
+function change_icon($path,$is_fond){
+    if($is_fond){
+        $name = "fond.png";
+    }else{
+        $name = "fond.png";
+    }
+    $email = get_cookie_name();
+    if(is_dir(SLASH."..".SLASH."userdata".SLASH.$email) == true){
+        if (!copy($path, __DIR__.SLASH."..".SLASH."userdata".SLASH. $email . SLASH.$name)) {
+            logger("erreur de copie userdata de ".$path." vers ".__DIR__.SLASH."..".SLASH."userdata".SLASH. $email . SLASH.$name);
+        }
+
+    }else{
+        logger("erreur le dossier n'existe pas ".SLASH."..".SLASH."userdata".SLASH.$email);
+    }
+
 }
