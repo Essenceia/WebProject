@@ -33,6 +33,8 @@ function creat_new_user_directory($email){
        }
    }logger("Erreur - Cannot find file userdata , check path");
 }
+
+
 function creat_new_user_album($email,$albumname){
     if(!file_exists(__DIR__.SLASH."..".SLASH.'userdata'.SLASH.$email.SLASH.$albumname)) {
     mkdir(__DIR__.SLASH."..".SLASH.'userdata'.SLASH.$email.SLASH.$albumname);
