@@ -193,11 +193,21 @@ span{
     font-weight:bold;
     color: #00BFFF;
 }
+.clear{
+    clear: both;
+}
 div.gallery {
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
     width: 180px;
+}
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
 }
 
 .titre{

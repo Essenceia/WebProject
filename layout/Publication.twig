@@ -87,54 +87,55 @@
                 });
             });
             </script>
+    <br/> <br/> <br/><h1 class="center">PUBLICATION</h1><br/>
 
-    <form method="post" class="pp" id="formStat">
+    <form method="post" class="pp publi-left left center" id="formStat">
+        <h3>Publier un status</h3><br/>
         Status :
         <input type="text" class="textbox" name="status" id="status"/> <br> <br> <br>
-        <input type="text" name="lieu" class="textbox" value="lieu" id="lieu"/>
-        <input type="number" name="emot" class="textbox" value="0" id="emotion"/>
-        <input type="text" name="activité" class="textbox" value="activite" id="activite"/>
+        Lieu : <input type="text" name="lieu" class="textbox" id="lieu"/><br/><br/>
+        Emotion : <input type="number" name="emot" class="textbox" value="0" id="emotion"/><br/><br/>
+        Activité : <input type="text" name="activité" class="textbox" id="activite"/><br/>
 
         <br/>
 
-        <input type="radio" name="typPub" value="Public" id="pub" checked> Publique <br/>
-        <input type="radio" name="typPub" value="Amis" id="am"> Amis <br/>
-        <input type="radio" name="typPub" value="Seul" id="pr"> Moi-même <br/>
+        <input type="radio" name="typPub" value="Public" id="pub" checked> Publique 
+        <input type="radio" name="typPub" value="Amis" id="am"> Amis 
+        <input type="radio" name="typPub" value="Seul" id="pr"> Moi-même <br/><br/>
 
         <input type="submit" id="buttonStatuts" value="Publier" name="publierStatus"/>
     </form>
 </div>
 
-<hr>
 <!-- Publication Image/Video-->
 <div class="publi">
-    <form method="post" class="pp" id="media">
-        <input type="text" class="text" value="legende" name="legende" id="legende"/>
-        <input type="file" class="FileAdd" name="file"  class="Box" id="nameP" required/> <br>
+    <form method="post" class="pp publi-right right center" id="media">
+        <h3>Publier un média</h3><br/>
+        Légende : <input type="text" class="text" name="legende" id="legende"/><br/><br/>
+        <input type="file" class="FileAdd" name="file"  class="Box" id="nameP" required/> <br><br/>
         <!--Ajouter le chemin jusuq'au dossier où le média est stocké afin de pouvoir poster ce média !!! <br>
         <input type="text" class="text" value="path" name="selMedia" id="selMedia"/>
 
         <br/> -->
         <br/>
         <br/>
-        <input type="text" name="lieu" class="textbox" value="lieu" id="lieu2"/>
-        Emotion:
-        <input type="number" name="emotion" class="textbox" value="emotion" id="emo2"/>
-        <input type="text" name="activite" class="textbox" value="activite" id="act2"/>
+        Lieu : <input type="text" name="lieu" class="textbox" id="lieu2"/><br/><br/>
+        Emotion: <input type="number" name="emotion" class="textbox" value="emotion" id="emo2"/><br/><br/>
+        Activité : <input type="text" name="activite" class="textbox" id="act2"/><br/><br/>
         Numéro de l'album:
-        <input type="number" name="idalbum" class=textbox" value="0" id="numAl"/>
+        <input type="number" name="idalbum" class="textbox" value="0" id="numAl"/><br/><br/>
 
         <br/>
 
-        <input type="radio" name="typPub" value="Public" checked> Publique <br/>
-        <input type="radio" name="typPub" value="Amis" > Amis <br/>
-        <input type="radio" name="typPub" value="Seul" > Moi-même <br/>
+        <input type="radio" name="typPub" value="Public" checked> Publique 
+        <input type="radio" name="typPub" value="Amis" > Amis 
+        <input type="radio" name="typPub" value="Seul" > Moi-même <br/><br/>
 
-        <input type="submit" class="button" value="Publier" name="PublierMédia"/>
+        <input type="submit" class="button" value="Publier" name="PublierMédia"/></br></br>
     </form>
 </div>
 <!-- Affichage de l'historique-->
-<h1>Resultat de la recherche</h1>
+<h1 class="clear center"><br/>VOS PUBLICATIONS</h1></br>
 <div id="post">
 {% for post in data %}
 
@@ -142,8 +143,8 @@
         <!-- post text -->
         <h2>   {{ post.legend }}</h2> <br>
         {% if post.emotion %}
-            <div id="emotion">
-                <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion">
+            <div id="emotion" class="image-emotion">
+                <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion" width=70 height=70>
             </div>
         {% endif %}
     {% elseif post.type == 1 or post.type ==2 %}
@@ -162,17 +163,28 @@
             Add to album - pour toi marianne<input type="submit" value="Valider"/>
         </form>
     {% endif %}
-    {% if post.legende %}
-        {{ post.legende }}
-    {% endif %}
-    {% if post.date%}
-        {{ post.date}}
-    {% endif %}
-    {% if post.lieu%}
-        {{ post.lieu }}
-    {% endif %}
-    {% if post.activiter%}
-        {{ post.activiter}}
-    {% endif %}
-{% endfor %}
+    <div class="post">
+        <div class="post-text">
+
+            {% if post.legende %}
+                {{ post.legende }}
+            {% endif %}
+        </div>
+        <div  class="post-date">
+
+            {% if post.date%}
+                {{ post.date}}
+            {% endif %}
+            {% if post.lieu%}
+                {{ post.lieu }}
+            {% endif %}
+            {% if post.activiter%}
+                {{ post.activiter}}
+            {% endif %}
+        </div>
+    </div>
+    <br/><br/><br/><br/><br/><br/>
+
+        {% endfor %}
+    
 </div>
