@@ -308,46 +308,6 @@ function delet_friend($todelet,$status){
         logger("erreur connection base de donner");}
 }
 
-function create_post($typepost,$legende,$idalbum,$contenu){
-    $email = $_COOKIE['user'];
-    if($_COOKIE['user']) {
-        //blindage
-        $sql = "";
-        $db = connect_db();
-        if ($db->ping()) {
-            if ($typepost >= 0 and $typepost < 3) {
-                switch ($typepost) {
-                    case 0:
-                        $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                        break;
-                    case 1 && 2:
-                        if ($idalbum != 0) $sql = "INSERT INTO webapp.post (user, type, legende,idalbum)  VALUES ('$email','$typepost','$legende','$idalbum')";
-                        else $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                        break;
-                }
-                $sql .= " WHERE user='$email' ";
-                $res = mysqli_query($db, $sql);
-                if ($res) {
-                    //creation reussi
-
-                    $row = mysqli_fetch_assoc($res);
-                    $idpost = $row["idpost"];
-                    if ($typepost > 0) {
-                        //TODO sauvgarde de la photo ou video poster dans le dossier adequa
-                        if (save_post($idpost, $idalbum, $contenu)) {
-                            logger("sucees - creation d'un post pour l'utilisateur " . $email);
-                        } else logger("erreur - creation d'un post pour l'utilisateur " . $email);
-                    }
-                } else {
-                    logger("erreur - creation d'un post pour l'utilisateur " . $email);
-                }
-            } else {
-                logger("erreur dans le type du post, type donner :" . $typepost);
-            }
-        }
-    }else{
-        logger("erreur de cokkie de sesion");}
-}
 /*
  * Procedure de l'utilisateur avec email et pw , verifie que ce sont les bons identifiants
  * 0 - connection reussi

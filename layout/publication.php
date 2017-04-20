@@ -1,57 +1,81 @@
 <?php
 
-    require "settingspath.php";
-    require __DIR__.SLASH."..".SLASH."data".SLASH."databaseutility.php";
+require_once "settingspath.php";
+require_once __DIR__.SLASH."..".SLASH."data".SLASH."databaseutility.php";
+require_once __DIR__.SLASH."..".SLASH."data".SLASH."settingspath.php";
+require_once __DIR__.SLASH."..".SLASH."data".SLASH."filemanger.php";
+require_once __DIR__ . SLASH."..".SLASH."log".SLASH."looger.php";
+require_once __DIR__.SLASH."..".SLASH."data".SLASH."connection.php";
+
+function create_post($typepost, $legende,$idalbum,$lieu, $emotion, $activite, $contenu, $pap){
+    $email = $_COOKIE['user'];
+    $datepost=date("Y-m-d H:i:s");
+    //$date=DATE_FORMAT($datepost,timestamp);
+    //$date=strtotime($datepost);
+    $emo= intval ($emotion);
+    $type=intval($typepost);
+    $pip=intval($pap);
+    $alb=intval($idalbum);
+    echo $alb;
+
+    if($_COOKIE['user']) {
+        //blindage
+        $sql = "";
+        $sql2="";
+        $db = connect_db();
+        if ($db->ping()) {
+            if ($typepost >= 0 and $typepost < 3) {
+                switch ($typepost) {
+                    case 0:
+                        $sql = "INSERT INTO webapp.post (user, type, legende, lieu,emotion, activiter, privacy)  VALUES ('$email',$type,'$legende','$lieu',$emo,'$activite',$pip)";
+                        $sql2 = "SELECT * FROM webapp.post WHERE user='$email' AND legende='$legende' AND type=$type AND lieu='$lieu' AND emotion=$emo AND activiter='$activite' AND privacy=$pip";
+                        break;
+                    case 1 :
+                        if ($idalbum >0) {
+                            $sql = "INSERT INTO webapp.post (user, type, legende, idalbum, lieu, emotion, activiter, contenu, privacy)  VALUES ('$email',$type,'$legende',$alb,'$lieu', $emo,'$activite', '$contenu', $pip)";
+                        echo "je suis dans les medias";}
+                        else $sql = "INSERT INTO webapp.post (user, type, legende, lieu, emotion, activiter, contenu, privacy)  VALUES ('$email',$type,'$legende','$lieu', $emo,'$activite','$contenu', $pip)";
+                        $sql2 = "SELECT * FROM webapp.post WHERE user='$email' AND contenu='$contenu'";
+                        break;
+                }
+
+                $res = mysqli_query($db, $sql);
+                echo $res;
+                echo "c'eatttttit res";
+                if($res)
+                {
+                    echo "ajouter okay... ?";
+                }else echo "c'est soi ce bazare...";
+                $res2 = mysqli_query($db, $sql2);
+                if ($res2) {
+                    //creation reussi
+                    if(mysqli_fetch_assoc($res2))
+                    {
+                        $row=mysqli_fetch_assoc($res2);
+                        $idpost = $row["idpost"];
+                        echo "Ajout Réussi !";
+                        if ($typepost > 0) {
+                            //TODO sauvgarde de la photo ou video poster dans le dossier adequa
+                            if (save_post($idpost, $idalbum, $contenu)) {
+                                logger("sucees - creation d'un post pour l'utilisateur " . $email);
+                            } else logger("erreur - creation d'un post pour l'utilisateur " . $email);
+                        }
+                    }
 
 
-        function getusers(){
+                } else { echo "Ajout Fail";
 
-            //Récupère la liste des utilisateurs dans la bdd et la renvoie sous forme d'un tableau
-            $list = get_user_list();
-            logger("called user list");
-            foreach($list as $unit){
-               // echo $unit;
-                echo $unit['email']."@edu.ece.fr ". $unit['nom']." ". $unit['pseudo'] .";";
-        }}
-
-        function adduser(){
-
-            //On récupète les informations envoyées
-            $email=$_POST['emailadd'];
-            $pseudo=$_POST['pseudo'];
-            $nom=$_POST['nom'];
-            $res = add_user($email,$nom,$pseudo);
-            if($res == 1) echo "Utilisateur ajouté"; 
-            else if($res == 0) echo "L'utilisateur existe déjà";
-            else if($res == 2) echo "Connexion impossible";
-
-
+                    logger("erreur - creation d'un post pour l'utilisateur " . $email);
+                }
+            } else {
+                echo " Fail";
+                logger("erreur dans le type du post, type donner :" . $typepost);
+            }
         }
+    }else{
+        echo "cookie";
+        logger("erreur de cokkie de sesion");}
+}
 
-        function deleteuser(){
-            //On récupète les informations envoyées
-            $email=$_POST['emaildel'];   
-            $res = delete_user($email);
-            if($res == 1) echo "Utilisateur supprimé";
-            else if($res == 0) echo "L'utilisateur n'existe pas"; 
-            else if($res == 2) echo "Connexion impossible"; 
-        }
-
-        if(isset($_POST['emailadd']) && isset($_POST['pseudo']) && isset($_POST['nom'])){
-            adduser();
-        }
-        else if(isset($_POST['emaildel'])){
-            deleteuser();
-        }
-        else{
-            getusers();
-        }
-
-        /*
-
-        //Insert query
-        $query = mysql_query("insert into form_element(name, email, password, contact) values ('$name2', '$email2', '$password2','$contact2')");
-        echo "Form Submitted Succesfully";
-
-        */
+create_post($_POST['type'], $_POST['legende'],$_POST['idalbum'],$_POST['lieu'],$_POST['emotion'],$_POST['activite'],$_POST['contenu'],$_POST['pap']);
 
