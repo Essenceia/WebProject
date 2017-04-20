@@ -88,6 +88,7 @@ function get_user(){
     $db = connect_db();
     $email = get_cookie_name();
     $res = [];
+
     if(isset($_COOKIE['user'])) {
         //ceci est une diff
         if ($db->ping()) {
