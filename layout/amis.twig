@@ -1,12 +1,14 @@
-<br/></br><h2>Ajouter un ami</h2></br>
-<div id="ajoutAmis">
+<br/></br><br/></br>
+
+<h1 class="center">Liste d'amis</h1></br>
+
+<br/></br><h2  class="center">Ajouter un ami</h2></br>
+<div class="center" id="ajoutAmis">
     <form id="Amis">
         Email : <input type="text" name="email" id="email">@edu.ece.fr
         <input type="submit" id="button" value="Ajouter"/>
     </form>
 </div></br></br></br>
-
-<h2>Liste d'amis</h2></br>
 
 <table id="amisAff">
     {% for user in data%}
@@ -36,7 +38,7 @@
         </tr>
     {% endfor %}
 </table>
-<footer>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script type="text/javascript">
@@ -100,4 +102,3 @@
         });
          
     </script>
-</footer>
