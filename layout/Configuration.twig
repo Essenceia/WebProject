@@ -59,19 +59,13 @@
                     });
                 }
             });
-            /*
-            $("#photofond").change(function (e) {
+            
+            $("#changerphoto").submit(function (e) {
                 e.preventDefault();
                 
                 
-                alert($("#photo").val());
                     
-                var tmppath = URL.createObjectURL(event.target.files[0]);
-                $("img").fadeIn("fast").attr('src',URL.createObjectURL(event.target.files[0]));
-
-                alert("Temporary Path(Copy it and try pasting it in browser address bar) --> <strong>["+tmppath+"]</strong>");
-              /*  else{
-                    $.ajax({
+                /*$.ajax({
                         
                         data: 'ancienpwd=' +  $("#ancienpwd").val() +"&password=" +$("#password").val(),
                         url: SLASH+'..'+SLASH+'layout'+SLASH+'configuration.php',

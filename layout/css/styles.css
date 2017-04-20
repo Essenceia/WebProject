@@ -159,6 +159,22 @@ div.gallery {
 
     color: #E050FF;
 }
+.historique{
+    clear: both;
+}
+
+.publi-left{
+    float: left;
+    margin-left: 10%;
+    margin-top: 60px;
+}
+
+.publi-right{
+    float: right;
+    margin-right: 10%;
+    margin-top: 30px;
+}
+
 div.gallery:hover {
     border: 1px solid #777;
 }
