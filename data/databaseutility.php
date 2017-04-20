@@ -16,9 +16,9 @@ function get_email($prefix){
 }
 function get_friend_status($row){
     if($row["status"]==1){
-        return "L'utilisateur ".get_email($row["user1"])." et ".get_email($row["user2"])." sont ami depuis le ".$row["date"]." <br>";
+        return "Amis depuis  ".$row["date"];
     }
-    else return "L'utilisateur ".get_email($row["user1"])." a demander en amis ".get_email($row["user2"])." le ".$row["date"]." <br>";
+    else return get_email($row["user1"])." a demandé en ami ".get_email($row["user2"])." le ".$row["date"];
 }
 /*
  * Permet de recuperer les emails des amies du l'utilisateur dont l'id est passer en argument
@@ -236,33 +236,39 @@ function delete_user($email)
  * 1 - sucees
  * fonctionne
  */
-function friend_request($db,$touser){
-    if (!$_COOKIE['user']){
-    $fromuser = $_COOKIE['user'];
-    $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' 
-            OR user2='$fromuser' AND user1='$touser' ";
-    $res = mysqli_query($db,$sql);
-    if (mysqli_num_rows($res) > 0) {
-        logger("Erreur une relation d'amie existe deja entre ".$fromuser." et ".$touser);
-        return 0;
-    }
-    else{
-        $sql = "INSERT INTO webapp.amis (user1, user2,status,date) VALUES ('$fromuser','$touser',0,now())";
-        if(mysqli_query($db,$sql)){
-            //creation reussi
-            logger("sucees - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
+function friend_request($touser){
+    $db = connect_db();
+    if($db->ping()) {
+        if ($_COOKIE['user']){
+            if($touser != $_COOKIE['user']){
+                $fromuser = $_COOKIE['user'];
+                $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' 
+                        OR user2='$fromuser' AND user1='$touser' ";
+                $res = mysqli_query($db,$sql);
+                if (mysqli_num_rows($res) > 0) {
+                    logger("Erreur une relation d'amie existe deja entre ".$fromuser." et ".$touser);
+                    return 0;
+                }
+                else{
+                    $sql = "INSERT INTO webapp.amis (user1, user2,status,date) VALUES ('$fromuser','$touser',0,now())";
+                    if(mysqli_query($db,$sql)){
+                        //creation reussi
+                        logger("sucees - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
 
-            return 1;
-        }else {
-            logger("erreur - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
+                        return 1;
+                    }else {
+                        logger("erreur - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
 
-            return 0;
+                        return 2;
+                    }
+                }
+            }else return 3;
+        }else{
+            logger("erreur de cookie de sesion");
+            return 4;
         }
     }
-}else{
-        logger("erreur de cokkie de sesion");
-        return 0;
-    }}
+}
 /*
  * accepter une demande en amie d'un utilisateur:
  * l'utilisateur qui accept la demande est touser le recepteur de la demande
@@ -284,28 +290,30 @@ function accept_friend_request($db,$fromuser){
 }else{
         logger("erreur de cokkie de sesion");}
 }
-/*
- * Fonction pour cree un nouveau post , type de postes :
- *  0 - post ecrit : le text sera stoquer dans legende
- *  1 - photo : il peut y avoir une legende et un idalbum ( pas obligatoire pour les deux) - $contenu a la path vers le fichier selectionner par l'utilisateur
- *  2 - video : meme que photo
- */
-function delet_friend($todelet,$status){
+
+
+function delet_friend($todelet){
     $touser = $_COOKIE['user'];
     $db = connect_db();
     if($db->ping()){
-    if($_COOKIE['user']){
-        $sql= "DELETE * FROM webapp.amis WHERE ((user1='$todelet' AND user2='$touser') OR (user2='$todelet' AND user1='$touser'))AND amis.status='$status' " ;
-        if(mysqli_query($db,$sql)){
-            logger("Destruction de la realtion d'ami");
+        if($_COOKIE['user']){
+            $sql= "DELETE FROM webapp.amis WHERE (user1='$todelet' AND user2='$touser') OR (user2='$todelet' AND user1='$touser')" ;
+            if(mysqli_query($db,$sql)){
+                logger("Destruction de l'ami");
+                return 1;
+            }
+           else{
+               logger("erreur dans la destruction de l'ami");
+               return 0;
+           }
+        }else{
+            logger("erreur de cookie de session");
+            return 2;
         }
-       else{
-           logger("erreur dans la destruction de la realtion d'ami");
-       }
     }else{
-        logger("erreur de cokkie de sesion");}
-}else{
-        logger("erreur connection base de donner");}
+        logger("erreur connexion base de donnée");
+        return 3;
+    }
 }
 
 function create_post($typepost,$legende,$idalbum,$contenu){

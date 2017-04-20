@@ -1,32 +1,7 @@
-<script type="text/javascript">
-    //Si on clique sur le bouton d'ajout
-    $("#Amis").submit(function(e){
-        e.preventDefault();
-        if($("#email").val() =='')
-        {
-            alert("Veuillez entrer un email");
-        }
-        else if($("#email").val().lastIndexOf("@") != -1){
-            alert("Veuillez entrer une adresse mail valide");
-        }
-        else{       
-            $.ajax({
-                data: 'email=' +  $("#email").val(),
-                url: SLASH+'..'+SLASH+'layout'+SLASH+'amis.php',
-                method: 'POST',
-                success: function(msg) {
-                    alert(msg);
-                }
-            });
-        }
-    });
-</script>
-
-
 <br/></br><h2>Ajouter un ami</h2></br>
 <div id="ajoutAmis">
-    <form method="post" id="Amis" >
-        Email : <input type="email" name="email" id="textbox">@edu.ece.fr
+    <form id="Amis">
+        Email : <input type="text" name="email" id="email">@edu.ece.fr
         <input type="submit" id="button" value="Ajouter"/>
     </form>
 </div></br></br></br>
@@ -47,10 +22,9 @@
                         Nom : {{ user.nom }}<br>
                         Email: {{ user.email }} @edu.ece.fr<br>
                         Pseudo : {{ user.pseudo }} <br>
-                        Statuts d'amitié : {{ user.friend_status }} <br>
-                        <form class="delet friend" id="supprimerAction" method="post">
-                            <input type="submit" value="Supprimer de la liste d'amis"/>
-                        </form>
+                        {{ user.friend_status }} <br>
+                        <button id="{{ user.email }}" class="supprimerAction" type="button">Supprimer de la liste d'amis</button>
+                        <button style="visibility:hidden" type="button">Accepter la demande d'amis</button>
 
                         
                 </ul>
@@ -58,3 +32,52 @@
         </tr>
     {% endfor %}
 </table>
+<footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert("hey");
+            
+            //Si on clique sur le bouton d'ajout
+            $("#Amis").submit(function (e) {
+                e.preventDefault();
+                if ($("#email").val() == '')
+                {
+                    alert("Veuillez entrer un email");
+                }
+                else if($("#email").val().lastIndexOf("@") != -1){
+                    alert("Veuillez entrer une adresse mail valide");
+                }
+                else{
+                    $.ajax({
+                        data: 'email=' +  $("#email").val(),
+                        url: '../layout/amis.php',
+                        method: 'POST',
+                        success: function(msg) {
+                            alert(msg);   
+                            if(msg == "Demande envoyée !")  location.reload(true); 
+                        }
+                    });
+                }
+            });
+            
+            //Si on clique sur le bouton d'ajout
+            $(".supprimerAction").click(function (e) {
+                e.preventDefault();
+                
+                var friendemail = $(this).attr('id');
+                $.ajax({
+                    data: 'emailsuppr=' +  friendemail,
+                    url: '../layout/amis.php',
+                    method: 'POST',
+                    success: function(msg) {
+                        alert(msg);   
+                        if(msg == "Ami supprimé !")  location.reload(true); 
+                    }
+                });
+            });
+        });
+         
+    </script>
+</footer>
