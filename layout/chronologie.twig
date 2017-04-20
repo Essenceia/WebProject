@@ -1,4 +1,4 @@
-vous êtes dans la chronologie
+<br/><br/><br/><br/><h1 class="center">Vous êtes dans la chronologie</h1><br/><br/>
 
 <!-- Post -->
 {% for postres in data %}
@@ -10,8 +10,8 @@ vous êtes dans la chronologie
             <!-- post text -->
             <h2>   {{ post.legend }}</h2> <br>
             {% if post.emotion %}
-                <div id="emotion">
-                    <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion">
+                <div id="emotion" class="image-emotion" >
+                    <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion" width="70" height="70">
                 </div>
             {% endif %}
         {% elseif post.type == 1 or post.type ==2 %}
@@ -29,18 +29,27 @@ vous êtes dans la chronologie
                 Add to album - pour toi marianne<input type="submit" value="Valider"/>
             </form>
         {% endif %}
-        {% if post.legende %}
-            {{ post.legende }}
-        {% endif %}
-        {% if post.date%}
-            {{ post.date}}
-        {% endif %}
-        {% if post.lieu%}
-            {{ post.lieu }}
-        {% endif %}
-        {% if post.activiter%}
-            {{ post.activiter}}
-        {% endif %}
+        <div class="post">
+            <div class="post-text">
+                {% if post.legende %}
+                    {{ post.legende }}
+                {% endif %}
+            </div>
+            <div  class="post-date">
+                {% if post.date%}
+                    {{ post.date}}
+                {% endif %}
+
+                {% if post.lieu%}
+                    {{ post.lieu }}
+                {% endif %}
+
+                {% if post.activiter%}
+                    {{ post.activiter}}
+                {% endif %}
+            </div>
+            <br/><br/><br/>
+        </div>
 
 </div>
 <!-- Commentaire -->

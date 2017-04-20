@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
         <script type="text/javascript" src="admin.js"></script>
+        <link href="/../layout/css/styles.css" rel="stylesheet" type="text/css"/>
+
 
         <title>Admin</title>
         <script>
@@ -45,38 +47,39 @@
     </head>
    
     <body onload="checkCookie()">
-    <div id="not_admin">
+        <br/><br/><h1 class="center">ADMINISTRATEUR</h1>
+        <div id="not_admin">
         Erreur - Tu n'est pas un admin
         <br>
         <form action="http://localhost:8080/">
             <input type="submit" value="Retour au login" />
         </form>
-    </div>
- <div id="admin_block"  >
-        <input type="button" id="ajouterButton" value="Ajouter un utilisateur"/>
- 
-        <form class="hidden ajouter" method="post" id="ajouterAction">
-            Email : <input type="text" name="emailadd" id="emailadd"/> @edu.ece.fr         
-            Pseudo : <input type="text" name="pseudo" id="pseudo"/>
-            Nom : <input type="text" name="nom" id="nom"/>
-            <input type="submit" value="Valider"/>
-        </form>
-       
-        <input type="button" id="supprimerButton" value="Supprimer un utilisateur"/>
- 
-        <form class="hidden supprimer" id="supprimerAction" >
-            Email : <input type="text" name="emaildel" id="emaildel"/> @edu.ece.fr 
-            <input type="submit" value="Valider"/>
-        </form>
-        
-        <div>
-            <h2>Liste des utilisateurs</h2>
-            <div>
-                <ul id="userlist">
-                
-                </ul>
-            </div>
         </div>
- </div>
+        <div id="admin_block"  >
+                <input type="button" id="ajouterButton" value="Ajouter un utilisateur"/>
+
+                <form class="hidden ajouter" method="post" id="ajouterAction">
+                    Email : <input type="text" name="emailadd" id="emailadd"/> @edu.ece.fr         
+                    Pseudo : <input type="text" name="pseudo" id="pseudo"/>
+                    Nom : <input type="text" name="nom" id="nom"/>
+                    <input type="submit" value="Valider"/>
+                </form>
+
+                <input type="button" id="supprimerButton" value="Supprimer un utilisateur"/>
+
+                <form class="hidden supprimer" id="supprimerAction" >
+                    Email : <input type="text" name="emaildel" id="emaildel"/> @edu.ece.fr 
+                    <input type="submit" value="Valider"/>
+                </form>
+
+                <div>
+                    <h2>Liste des utilisateurs</h2>
+                    <div>
+                        <ul id="userlist">
+
+                        </ul>
+                    </div>
+                </div>
+         </div>
     </body>
 </html>
