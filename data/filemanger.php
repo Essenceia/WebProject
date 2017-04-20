@@ -22,7 +22,7 @@ function creat_new_user_directory($email){
        mkdir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email, 0755, true);
        mkdir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email .SLASH."0", 0755, true);
        if (is_dir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email) and is_dir(__DIR__.SLASH."..".SLASH."userdata".SLASH. $email .SLASH."0")) {
-           if (!copy(__DIR__.SLASH."..".SLASH."userdata".SLASH."default".SLASH."fond.jpg", __DIR__.SLASH."..".SLASH."userdata".SLASH. $email . SLASH."fond.jpg")) {
+           if (!copy(__DIR__.SLASH."..".SLASH."userdata".SLASH."default".SLASH."fond.png", __DIR__.SLASH."..".SLASH."userdata".SLASH. $email . SLASH."fond.png")) {
                logger("erreur de copie userdata".SLASH."default".SLASH."fond.jpg");
            }
            if (!copy(__DIR__.SLASH."..".SLASH."userdata".SLASH."default".SLASH."icon.png", __DIR__.SLASH."..".SLASH."userdata".SLASH. $email . SLASH."icon.png")) {
@@ -93,15 +93,18 @@ function change_icon($path,$is_fond){
 
 }
 function is_file_valide($file){
-$allowedExts = array("png");
+$allowedExts = array("png","jpg");
     $temp = explode(".", $file["name"]);
     $extension = end($temp);
-    if ((($file["type"] == "image/png"))&& ($file["size"] < 200000)&& in_array($extension, $allowedExts)) {
+    if ((($file["type"] == "image/png")||($file["type"] == "image/jpg"))&& ($file["size"] < 200000)&& in_array($extension, $allowedExts)) {
         if ($file["error"] > 0) {
             echo("Erreur detected dans le fichier: " . $file["error"]);
-        } else{return true;}
+        } else{
+            echo("Fichier valable");
+            return true;}
     }
     else{ echo "Fichier pas valable : nous acceptons que les .png de moi de 200k ";
+    logger("Fichier pas valable : nous acceptons que les .png de moi de 200k ");
     return false;
     }
 }

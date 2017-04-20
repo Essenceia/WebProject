@@ -31,7 +31,7 @@ CREATE TABLE `album` (
   UNIQUE KEY `album_id_uindex` (`id`),
   KEY `user_proprietaire_album` (`user`),
   CONSTRAINT `user_proprietaire_album` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `album` (
 
 LOCK TABLES `album` WRITE;
 /*!40000 ALTER TABLE `album` DISABLE KEYS */;
-INSERT INTO `album` VALUES ('desmazes',1,'testalbum','this is test');
+INSERT INTO `album` VALUES ('desmazes',1,'testalbum','this is test'),('m.champalier',2,'test2','another test');
 /*!40000 ALTER TABLE `album` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `post` (
   KEY `id_album` (`idalbum`),
   CONSTRAINT `id_album` FOREIGN KEY (`idalbum`) REFERENCES `album` (`id`),
   CONSTRAINT `user_qui_post` FOREIGN KEY (`user`) REFERENCES `user` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (3,'m.champalier',0,'2017-04-19 11:50:39','Ceci est un post ecrit',NULL,'ece',1,'en cours',NULL,1);
+INSERT INTO `post` VALUES (3,'m.champalier',0,'2017-04-19 11:50:39','Ceci est un post ecrit',NULL,'ece',1,'en cours',NULL,1),(6,'desmazes',1,'2017-04-20 13:51:43','Test',1,'ece',NULL,'rien','6',1),(7,'desmazes',1,'2017-05-20 14:50:46','test2',1,NULL,NULL,NULL,'7',1),(8,'desmazes',1,'2017-04-20 14:50:59','test 3 ',1,'arg',NULL,'I have cookies','8',1),(9,'desmazes',0,'2017-04-20 15:23:31','Hello ',NULL,' ',0,'activite truc ',NULL,0),(10,'desmazes',0,'2017-04-20 15:26:56','ggg ',NULL,' ',1,'activite joggong ',NULL,1),(11,'desmazes',0,'2017-04-20 16:02:18','',NULL,'',0,'',NULL,0),(12,'desmazes',0,'2017-04-20 16:03:53','',NULL,'',0,'',NULL,0),(13,'desmazes',0,'2017-04-20 16:30:35','legende',NULL,'lieu',2,'activite none',NULL,0),(14,'desmazes',0,'2017-04-20 16:31:37','legende',NULL,'lieu',2,'activite none',NULL,0),(15,'desmazes',0,'2017-04-20 16:32:51','legende',NULL,'lieu',2,'activite none',NULL,0),(17,'desmazes',1,'2017-04-20 16:36:53','legende',1,'lieu',2,'activite none','',0);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +169,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('desmazes','Desmazes','kkk','sn','icon','fond'),('kk','oo','ii','ii','icon','fond'),('m.champalier','Champalier','ooo','Cat','icon','fond'),('tiercelin','Tiercelim','pp','MusicGod','icon','fond'),('yolo','Antoine','LOL','LOL','icon','fond');
+INSERT INTO `user` VALUES ('desmazes','Desmazes','kkk','sn','icon','fond'),('m.champalier','Champalier','ooo','Cat','icon','fond'),('tiercelin','Tiercelim','pp','MusicGod','icon','fond');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -182,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-19 21:17:43
+-- Dump completed on 2017-04-21  0:17:42
