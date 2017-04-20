@@ -1,0 +1,14 @@
+<table class="visuProfil">
+   <p class="visuProfil"> {{ error }}
+   </p>
+    {% for photo in album %}
+        <tr>
+            <td>
+
+            </td>
+            <td>
+               <img src={{ '/../userdata/'~ user.email ~ '/'~photo.contenu~'''}} alt="Icon" height="128" width="128">
+            </td>
+        </tr>
+    {% endfor %}
+</table>

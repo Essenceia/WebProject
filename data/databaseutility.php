@@ -16,9 +16,9 @@ function get_email($prefix){
 }
 function get_friend_status($row){
     if($row["status"]==1){
-        return "L'utilisateur ".get_email($row["user1"])." et ".get_email($row["user2"])." sont ami depuis le ".$row["date"]." <br>";
+        return "Amis depuis  ".$row["date"];
     }
-    else return "L'utilisateur ".get_email($row["user1"])." a demander en amis ".get_email($row["user2"])." le ".$row["date"]." <br>";
+    else return get_email($row["user1"])." a demandé en ami ".get_email($row["user2"])." le ".$row["date"];
 }
 /*
  * Permet de recuperer les emails des amies du l'utilisateur dont l'id est passer en argument
@@ -77,26 +77,10 @@ function get_user_list(){
     }
     return $res;
 }
-function get_user_login($email){
-    $db = connect_db();
-    $res = [];
-    if($_COOKIE['user']) {
-        //ceci est une diff
-        if ($db->ping()) {
 
-            $sql = "SELECT * FROM webapp.user WHERE email='$email'";
-            $resrequette = mysqli_query($db, $sql);
-
-            $res = mysqli_fetch_assoc($resrequette);
-        }
-    }else{
-        logger("erreur de cookie retrive");
-    }
-    return $res;
-}
 function get_user(){
     $db = connect_db();
-    $email = get_cookie_name();
+    $email = $_COOKIE['user'];
     $res = [];
     if($_COOKIE['user']) {
         //ceci est une diff
@@ -157,6 +141,26 @@ function get_album(){
     }
     else return 2;
 
+}
+function get_photos_albums($album){
+    $db = connect_db();
+    $email = $_COOKIE['user'];
+    $res = [];
+    //ceci est une diff
+    if($db->ping()) {
+
+        $sql = "SELECT * FROM webapp.post WHERE idpost='$album'";
+        $resrequette = mysqli_query($db, $sql);
+
+        for ($i = 0; $i < mysqli_num_rows($resrequette); $i++) {
+            $res[$i] = mysqli_fetch_assoc($resrequette);
+        }
+    }
+    if($res)
+    {
+        return $res;
+    }
+    else return 2;
 }
 /*
  * Verfie si l'utilisateur existe deja dans la base et essaye de l'ajouter, return :
@@ -258,18 +262,39 @@ function friend_request($db,$touser){
         if(mysqli_query($db,$sql)){
             //creation reussi
             logger("sucees - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
+function friend_request($touser){
+    $db = connect_db();
+    if($db->ping()) {
+        if ($_COOKIE['user']){
+            if($touser != $_COOKIE['user']){
+                $fromuser = $_COOKIE['user'];
+                $sql = "SELECT * FROM webapp.amis WHERE user1='$fromuser' AND user2='$touser' 
+                        OR user2='$fromuser' AND user1='$touser' ";
+                $res = mysqli_query($db,$sql);
+                if (mysqli_num_rows($res) > 0) {
+                    logger("Erreur une relation d'amie existe deja entre ".$fromuser." et ".$touser);
+                    return 0;
+                }
+                else{
+                    $sql = "INSERT INTO webapp.amis (user1, user2,status,date) VALUES ('$fromuser','$touser',0,now())";
+                    if(mysqli_query($db,$sql)){
+                        //creation reussi
+                        logger("sucees - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
 
-            return 1;
-        }else {
-            logger("erreur - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
+                        return 1;
+                    }else {
+                        logger("erreur - creation de une demande d'amie avec les parametres :".$fromuser. " ".$touser." 0 ");
 
-            return 0;
+                        return 2;
+                    }
+                }
+            }else return 3;
+        }else{
+            logger("erreur de cookie de sesion");
+            return 4;
         }
     }
-}else{
-        logger("erreur de cokkie de sesion");
-        return 0;
-    }}
+}
 /*
  * accepter une demande en amie d'un utilisateur:
  * l'utilisateur qui accept la demande est touser le recepteur de la demande
@@ -301,41 +326,25 @@ function delet_friend($todelet,$status){
     $touser = get_cookie_name();
     $db = connect_db();
     if($db->ping()){
-    if($_COOKIE['user']){
-        $sql= "DELETE * FROM webapp.amis WHERE ((user1='$todelet' AND user2='$touser') OR (user2='$todelet' AND user1='$touser'))AND amis.status='$status' " ;
-        if(mysqli_query($db,$sql)){
-            logger("Destruction de la realtion d'ami");
+        if($_COOKIE['user']){
+            $sql= "DELETE FROM webapp.amis WHERE (user1='$todelet' AND user2='$touser') OR (user2='$todelet' AND user1='$touser')" ;
+            if(mysqli_query($db,$sql)){
+                logger("Destruction de l'ami");
+                return 1;
+            }
+           else{
+               logger("erreur dans la destruction de l'ami");
+               return 0;
+           }
+        }else{
+            logger("erreur de cookie de session");
+            return 2;
         }
-       else{
-           logger("erreur dans la destruction de la realtion d'ami");
-       }
     }else{
-        logger("erreur de cokkie de sesion");}
-}else{
-        logger("erreur connection base de donner");}
+        logger("erreur connexion base de donnée");
+        return 3;
+    }
 }
-
-function create_post($typepost,$legende,$idalbum,$contenu){
-    $email = get_cookie_name();
-    if($_COOKIE['user']) {
-        //blindage
-        $sql = "";
-        $db = connect_db();
-        if ($db->ping()) {
-            if ($typepost >= 0 and $typepost < 3) {
-                switch ($typepost) {
-                    case 0:
-                        $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                        break;
-                    case 1 && 2:
-                        if ($idalbum != 0) $sql = "INSERT INTO webapp.post (user, type, legende,idalbum)  VALUES ('$email','$typepost','$legende','$idalbum')";
-                        else $sql = "INSERT INTO webapp.post (user, type, legende)  VALUES ('$email','$typepost','$legende')";
-                        break;
-                }
-                $sql .= " WHERE user='$email' ";
-                $res = mysqli_query($db, $sql);
-                if ($res) {
-                    //creation reussi
 
                     $row = mysqli_fetch_assoc($res);
                     $idpost = $row["idpost"];
