@@ -1,16 +1,18 @@
+<br/><br/><h1 class="center">PROFIL</h1><br/><br/>
+
 <table class="visuProfil">
 
         <tr>
             <td>
-                <img src={{ '/../userdata/'~user.email~'/icon.png'}} alt="Icon" height="128" width="128">
+                <img src={{ '/../userdata/'~user.email~'/icon.png'}} alt="Icon" height="150" width="150" class="decalage">
             </td>
             <td>
                 <ul>
 
                     <li class="page">
-                       Nom:  {{ user.nom }}<br>
-                       Email : {{ user.email }} @edu.ece.fr<br>
-                       Pseudo : {{ user.pseudo }} <br>
+                       Nom:  <b>{{ user.nom }}<br><br/></b>
+                       Email : <b>{{ user.email }} @edu.ece.fr<br><br/></b>
+                       Pseudo : <b>{{ user.pseudo }} <br></b>
                     </li>
 
                 </ul>
@@ -57,3 +59,5 @@
         {{ post.activiter}}
     {% endif %}
 {% endfor %}
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

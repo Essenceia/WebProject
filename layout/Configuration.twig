@@ -79,30 +79,33 @@
         });
     </script>
     
+    <h1 class="center">Configuration</h1>
     <!-- Changement Nom -->
-    <form id="changernom" class="configurationForm" >
-        Nom : <input type="text" name="nom" id="nom" class="textbox">
-        <input type="submit" class="button" value="Changer"/>
-    </form>
-    <!-- Changement Pseudo -->
-    <form id="changerpseudo" class="configurationForm">
-        Pseudo : <input type="text" name="pseudo" id="pseudo" class="textbox">
-        <input type="submit" class="button" value="Changer"/>
-    </form>
-    <!-- Changement mdp -->
-    <form  id="changermdp" class="configurationForm" >
-        Ancien mot de passe : <input type="password" id="ancienpwd" name="ancienpwd" class="textbox"><br/><br/><br/>
-        Nouveau mot de passe : <input type="password" id="password" name="password" class="textbox">
-        <input type="submit" class="button" value="Changer"/>
-    </form>
-    <!-- Changement Photo -->
-    <form id="changerphoto" class="configurationForm" enctype="multipart/form-data" >
-        Photo de profil : <input type="file" name="photo" id="photo">
-        <input type="submit" class="button" value="Changer" name="submitphoto"/>
-    </form>
-    <!-- Changement Photo Fond-->
-    <form id="changerphotofond" class="configurationForm" enctype="multipart/form-data">
-        Photo de fond : <input type="file" name="photofond" id="photofond">
-        <input type="submit" class="button" value="Changer" name="submitphotofond"/>
-    </form>
+    <div class="decalage">
+        <form id="changernom" class="configurationForm" >
+            Nom : <input type="text" name="nom" id="nom" class="textbox">
+            <input type="submit" class="button" value="Changer"/>
+        </form>
+        <!-- Changement Pseudo -->
+        <form id="changerpseudo" class="configurationForm">
+            Pseudo : <input type="text" name="pseudo" id="pseudo" class="textbox">
+            <input type="submit" class="button" value="Changer"/>
+        </form>
+        <!-- Changement mdp -->
+        <form  id="changermdp" class="configurationForm" >
+            Ancien mot de passe : <input type="password" id="ancienpwd" name="ancienpwd" class="textbox"><br/><br/><br/>
+            Nouveau mot de passe : <input type="password" id="password" name="password" class="textbox">
+            <input type="submit" class="button" value="Changer"/>
+        </form>
+        <!-- Changement Photo -->
+        <form id="changerphoto" class="configurationForm" enctype="multipart/form-data" >
+            Photo de profil : <input type="file" name="photo" id="photo">
+            <input type="submit" class="button" value="Changer" name="submitphoto"/>
+        </form>
+        <!-- Changement Photo Fond-->
+        <form id="changerphotofond" class="configurationForm" enctype="multipart/form-data">
+            Photo de fond : <input type="file" name="photofond" id="photofond">
+            <input type="submit" class="button" value="Changer" name="submitphotofond"/>
+        </form>
+    </div>
 </div>
