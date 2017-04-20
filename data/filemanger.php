@@ -124,3 +124,15 @@ function upload_file($file,$idalbum,$idpost){
                 logger("Directory does not existe ".$uploadfile);
             }
         }
+function upload_icon($file,$name){
+    $username = get_cookie_name();
+    $filename = $file["name"];
+    $uploadfile = __DIR__.SLASH."..".SLASH."userdata".SLASH.$username;
+    if (is_dir($uploadfile)) {
+        move_uploaded_file($file["tmp_name"], $uploadfile . SLASH . $filename);
+        rename($uploadfile . SLASH . $filename, $uploadfile . SLASH . $name);
+        logger("Stored in: " . $uploadfile . SLASH . $name);
+    }else{
+        logger("Directory does not existe ".$uploadfile);
+    }
+}

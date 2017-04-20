@@ -5,10 +5,52 @@
         <title>Anti-Social</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link href="/../layout/css/styles.css" rel="stylesheet" type="text/css"/>
+<script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    function checkCookie() {
 
+        var user=getCookie("admin");
+        //alert(user);
+        if (user.valueOf() != "true") {
+            // alert("Not an admin");
+            $( "#admin_block" ).hide();
+            $("#not_admin").show();
+
+        }else{
+            //alert("You are an admin");
+
+            $( "#admin_block" ).show();
+            $("#not_admin").hide();
+        }
+    }
+function user_fond() {
+    var user = getCookie("user");
+    var b=document.getElementsByTagName("BODY")[0];
+   // alert(user);
+    var str ="";
+    //alert(script.src);
+    var link = " '/../../userdata/"+user+"/fond.png ' ";
+    str = "  url("+link+ ")" ;
+    b.style.backgroundImage = "url("+link+")";
+}
+</script>
 
     </head>
-    <body>
+    <body onload="user_fond()">
 
         </div>
             <div id = "menuH">

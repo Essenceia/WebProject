@@ -1,3 +1,29 @@
+<!-- Script pour change de photo de profil et de fond -->
+<script>
+    var SLASH = "/";
+    function submitForm(type) {
+        console.log("submit event");
+        var fd = new FormData(document.getElementById("fileinfo"));
+        if(type =='1'){fd.append("nomfic", "icon.png");
+       // alert("changement de icon");
+        }
+        else{
+            fd.append("nomfic", "fond.png");
+          //  alert("changement de fond");
+        }
+        $.ajax({
+            url:  SLASH + '..' + SLASH + 'layout' + SLASH +"uploadprofil.php",
+            type: "POST",
+            data: fd,
+            processData: false,  // tell jQuery not to process the data
+            contentType: false   // tell jQuery not to set contentType
+        }).done(function( data ) {
+            console.log("PHP Output:");
+            console.log( data );
+        });
+        return false;
+    }
+</script>
 <br/><br/><h1 class="center">PROFIL</h1><br/><br/>
 
 <table class="visuProfil">
@@ -18,6 +44,22 @@
                 </ul>
             </td>
         </tr>
+    <tr>
+        <td>
+        <form method="post" id="fileinfo" name="fileinfo" onsubmit="return submitForm('0');">
+            <p  style="font-size:50%; padding-bottom: -50%;" >Nouveau fond:</p><br>
+            <input  id="button" type="file" name="file" required />
+            <input id="button" type="submit" name="submit" value="Upload" />
+        </form>
+    </td>
+        <td>
+            <form method="post" id="fileinfo" name="fileinfo" onsubmit="return submitForm('1');">
+                <p style="font-size:50%; padding-bottom: -50%;">Nouvelle Icon</p><br>
+                <input  id="button" type="file" name="file" required />
+                <input id="button" type="submit" value="Upload" />
+            </form>
+        </td>
+    </tr>
 
 </table>
 <!-- Affichage de l'historique-->
