@@ -10,6 +10,7 @@ require_once __DIR__.SLASH."..".SLASH."data".SLASH."connection.php";
 function create_post($typepost, $legende,$idalbum,$lieu, $emotion, $activite, $contenu, $pap){
     logger("Have entered into publication");
     $email = get_cookie_name();
+    $return =0;
     //$datepost=date();
     //$date=DATE_FORMAT($datepost,timestamp);
     //$date=strtotime($datepost);
@@ -45,7 +46,10 @@ function create_post($typepost, $legende,$idalbum,$lieu, $emotion, $activite, $c
                                 if(mysqli_fetch_assoc($res2)) {
                                     $row = mysqli_fetch_assoc($res2);
                                     $idpost = $row["idpost"];
+                                    logger("id post :" .$idpost." id album ".$alb);
+                                    $return = $idpost;
                                     upload_file($_FILES['file'],$alb,$idpost);
+                                    logger("file is beeing uploaded");
                                 }
 
                         }  else{
@@ -126,13 +130,16 @@ function create_post($typepost, $legende,$idalbum,$lieu, $emotion, $activite, $c
     }else{
         echo "cookie";
         logger("erreur de cokkie de sesion");}
+        return $return ;
 }
-if($_POST['type']==0){
+if($_POST['type']!=0){
     $contenu = $_FILES["file"];
     logger("file detected");
+    $emotion = '0';
 }else{
     $contenu = $_POST['contenu'];
     logger("text detected");
+    $emotion = $_POST['emotion'];
 }
 create_post($_POST['type'],
     $_POST['legende'],

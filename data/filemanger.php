@@ -139,3 +139,10 @@ function upload_icon($file,$name){
         logger("Directory does not existe ".$uploadfile);
     }
 }
+function move_file($idalbum1,$idalbum2,$idpost1,$idpost2){
+    $email = get_cookie_name();
+    logger("files :".__DIR__.SLASH."..".SLASH."userdata".SLASH.$email.SLASH.$idalbum1.SLASH.$idpost1.".png"." and ". __DIR__.SLASH."..".SLASH.SLASH.$email.SLASH.$idalbum2.SLASH.$idpost2.".png");
+    if (!copy(__DIR__.SLASH."..".SLASH."userdata".SLASH.$email.SLASH.$idalbum1.SLASH.$idpost1.".png", __DIR__.SLASH."..".SLASH.SLASH.$email.SLASH.$idalbum2.SLASH.$idpost2.".png")) {
+        logger("erreur de copie userdata".SLASH.$email.SLASH.$idalbum1.SLASH.$idpost1.".png");
+    }
+}

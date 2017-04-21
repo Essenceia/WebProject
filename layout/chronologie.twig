@@ -1,7 +1,7 @@
 <br/><br/><br/><br/><h1 class="center">Vous êtes dans la chronologie</h1><br/><br/>
 
 <!-- Post -->
-{% for postres in data %}
+{% for postres in data.chrono %}
 <div id="post">
 
     {% set post =  postres.post %}
@@ -25,9 +25,17 @@
                     Your browser does not support the video tag.
                 </video>
             {% endif %}
-            <form class="add to album" id="addToAlbumAction" method="post">
-                Add to album - pour toi marianne<input type="submit" value="Valider"/>
-            </form>
+            <!--<form action="/../layout/addtoalbum.php" class="add to album" id="addToAlbumAction" method="post">
+                <input type="hidden" name="midpost" value="{{ post.idpost }}">
+                Ajout a album:<select name="midalbum">
+
+                <option value="0">Pas d'album</option>
+                {% for alb in data.alb %}
+                    <option value="{{ alb.id }}">{{ alb.nom }}</option>
+                {% endfor %}
+            </select>
+               <input type="submit" id="button" name="submit" value="Valider"/>
+            </form>-->
         {% endif %}
         <div class="post">
             <div class="post-text">
@@ -56,7 +64,7 @@
     <div id="comment">
     {% if postres.comment %}
 {% for com in postres.comment %}
-    {{ com }}
+
 Commentaire de: {{ com.user }} le :{{ com.date }} <br>
   {% if com.type %}
       <img src={{ '/../layout/img/Emotion/'~ post.emotion~'.png'}} name="emotion">

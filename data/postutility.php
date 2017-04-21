@@ -69,22 +69,25 @@ function get_chronologie($pagenum){
     $data = [];
     $num = NUMBER_PER_PAGE;
     $offset = NUMBER_PER_PAGE*$pagenum;
+    logger("In chronologie");
     if($db->ping()){
         if($email){
+            logger("In chronologie");
             //recuperer ta liste d'amie
             $sql = "SELECT post.idpost from webapp.amis, webapp.post 
-            WHERE ((amis.user1 = '$email' AND amis.status=1 AND post.user=amis.user2 AND post.privacy=1) OR (amis.user2 = '$email' AND amis.status=1 AND post.user=amis.user1 AND post.privacy=1))
+            WHERE ((amis.user1 = '$email' OR amis.user2='$email') AND amis.status=1 AND post.privacy=1)
             OR post.privacy = 2
              ORDER BY post.date LIMIT 10 OFFSET 0 ";
             $res = mysqli_query($db,$sql);
             if($res){
+                logger("resultat trouver");
                 if(mysqli_num_rows($res)){
                     for ($i = 0; $i < mysqli_num_rows($res); $i++) {
                         $id = mysqli_fetch_assoc($res);
                         $data[$i]['post'] = get_post_data($id['idpost']);
                         $data[$i]['comment'] = get_comment_from_post($id['idpost']);
-                    }logger("nous avons trouver ".mysqli_num_rows($res)." post pour l'utilisateur ".$email);
-                }
+                    }
+                }logger("nous avons trouver ".mysqli_num_rows($res)." post pour l'utilisateur ".$email);
             }
         }else{
             logger("erreur de cokkie de sesion");

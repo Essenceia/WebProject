@@ -102,12 +102,15 @@ $app->get('/Configuration/', function ($request, $response, $args) {
 });
 $app->get('/Chronologie/', function ($request, $response, $args) {
     $user = get_cookie_name();
-    $data = get_chronologie(0);
+    $data['chrono'] = get_chronologie(0);
+    $data['alb'] = get_album();
     return $this->view->render($response, 'index.twig', ["name" => "chronologie.twig", "data" => $data]);
 });
 $app->get('/Publication/', function ($request, $response, $args) {
     $name = get_cookie_name();
-    $data = get_post_actualiter(0,$name);
+    $data = [];
+    $data['post'] = get_post_actualiter(0,$name);
+    $data['album'] = get_album();
     return $this->view->render($response, 'index.twig', ["name" => "Publication.twig" ,"user_name" =>$name , "data" => $data]);
 });
 $app->get('/Amis/', function ($request, $response, $args) {
